@@ -2,9 +2,13 @@ import React from "react";
 import { allRuns } from "../data";
 
 export default function App() {
+  const runs = allRuns.map(function (run, index) {
+    return <li key={run.id}>{run.label}</li>;
+  });
+
   return (
     <div>
-      <p>Hello world</p>
+      <ul>{runs}</ul>
     </div>
   );
 }
