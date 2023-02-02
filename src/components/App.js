@@ -11,8 +11,8 @@ export default function App() {
   });
 
   // trying to copy allRuns without mutating it
-  let runsSorted = runs.sort((a, b) =>
-    a.date < b.date ? -1 : a.date > b.date ? -1 : 0
+  let runsSorted = [...runs].sort((a, b) =>
+    a.date < b.date ? 1 : a.date > b.date ? -1 : 0
   );
 
   // this works to change the order by date, but it's mutable...
@@ -31,15 +31,14 @@ export default function App() {
 
   // seeing what's passed to the browser
   console.log("allRuns: ", allRuns);
+  console.log("runs: ", runs);
   console.log("runsSorted: ", runsSorted);
-  console.log("runsSorted2: ", runsSorted2);
+  // console.log("runsSorted2: ", runsSorted2);
 
   return (
     <div>
       <ul>{runs}</ul>
       <ol>{runsSorted}</ol>
-      <ul>{testing}</ul>
-      {runsSorted}
     </div>
   );
 }
