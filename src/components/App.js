@@ -1,10 +1,10 @@
 import React from "react";
 import { allRuns } from "../data";
 
-function sortRunsByDate(list, order) {
+function sortRunsByDate(list, order = -1) {
   // list [run, run, run] -- run: { id, label, date }
   const listSorted = [...list].sort((a, b) =>
-    a.date > b.date ? -1 : a.date < b.date ? 1 : 0
+    a.date > b.date ? -1 * order : a.date < b.date ? 1 * order : 0
   );
   return listSorted;
 }
