@@ -32,33 +32,23 @@ export default function App() {
   return (
     <div>
       <ul>{runs}</ul>
-      <ol>
-        {runsSorted.map(function (run, index) {
-          return (
-            <li key={run.id}>
-              {run.label}, {run.date}
-            </li>
-          );
-        })}
-      </ol>
-      <ol>
-        {runsDesc.map(function (run, index) {
-          return (
-            <li key={run.id}>
-              {run.label}, {run.date}
-            </li>
-          );
-        })}
-      </ol>
-      <ol>
-        {runsUnsorted.map(function (run, index) {
-          return (
-            <li key={run.id}>
-              {run.label}, {run.date}
-            </li>
-          );
-        })}
-      </ol>
+      <RunsOrderedList runs={runsDesc} />
+      <RunsOrderedList runs={runsSorted} />
+      <RunsOrderedList runs={runsUnsorted} />
     </div>
+  );
+}
+
+function RunsOrderedList(props) {
+  return (
+    <ol>
+      {props.runs.map(function (run) {
+        return (
+          <li key={run.id}>
+            {run.label}, {run.date}
+          </li>
+        );
+      })}
+    </ol>
   );
 }
