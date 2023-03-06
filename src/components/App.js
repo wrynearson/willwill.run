@@ -43,16 +43,18 @@ function RunsOrderedList(props) {
   return (
     <ol>
       {props.runs.map(function (run) {
-        return <ListRendering run={props.children} />;
+        return <ItemRendering id={run.id} label={run.label} date={run.date} />;
       })}
     </ol>
   );
 }
 
-function ListRendering(props) {
+function ItemRendering(props) {
   return (
     <li key={props.id}>
       {props.label}, {props.date}
     </li>
   );
 }
+
+// Look at the props that you’re passing to ListRendering when you use it (line 46) VS the properties the component expects (Lines 52-58)
