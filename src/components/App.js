@@ -43,12 +43,16 @@ function RunsOrderedList(props) {
   return (
     <ol>
       {props.runs.map(function (run) {
-        return (
-          <li key={run.id}>
-            {run.label}, {run.date}
-          </li>
-        );
+        return <ListRendering run={props.children} />;
       })}
     </ol>
+  );
+}
+
+function ListRendering(props) {
+  return (
+    <li key={props.id}>
+      {props.label}, {props.date}
+    </li>
   );
 }
