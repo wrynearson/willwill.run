@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { allRuns } from "../data";
 
 function sortRunsByDate(list, order = "asc") {
@@ -11,30 +11,26 @@ function sortRunsByDate(list, order = "asc") {
 }
 
 export default function App() {
-  const runs = allRuns.map(function (run, index) {
-    return (
-      <li key={run.id}>
-        {run.label}, {run.date}
-      </li>
-    );
-  });
+  const [order, setOrder] = useState("asc");
+
+  console.log(order);
 
   // trying to copy allRuns without mutating it
-  const runsSorted = sortRunsByDate(allRuns);
-  const runsDesc = sortRunsByDate(allRuns, "desc");
-  const runsUnsorted = sortRunsByDate(allRuns, "Daniel");
-
-  // seeing what's passed to the browser
-  console.log("allRuns: ", allRuns);
-  console.log("runs: ", runs);
-  console.log("runsSorted: ", runsSorted);
+  const runsSorted = sortRunsByDate(allRuns, order);
 
   return (
     <div>
-      <ul>{runs}</ul>
-      <RunsOrderedList runs={runsDesc} />
+      <HeaderComponent title="My list of runs" desc="By Will" />
+      <button
+        onClick={() => {
+          console.log("click");
+          setOrder("desc")
+        }}
+      >
+        Change order
+      </button>
+
       <RunsOrderedList runs={runsSorted} />
-      <RunsOrderedList runs={runsUnsorted} />
     </div>
   );
 }
@@ -43,7 +39,7 @@ function RunsOrderedList(props) {
   return (
     <ol>
       {props.runs.map(function (run) {
-        return <ItemRendering id={run.id} label={run.label} date={run.date} />;
+        return <ItemRendering key={run.id} label={run.label} date={run.date} />;
       })}
     </ol>
   );
@@ -51,10 +47,17 @@ function RunsOrderedList(props) {
 
 function ItemRendering(props) {
   return (
-    <li key={props.id}>
+    <li>
       {props.label}, {props.date}
     </li>
   );
 }
 
-// Look at the props that you’re passing to ListRendering when you use it (line 46) VS the properties the component expects (Lines 52-58)
+function HeaderComponent(props) {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <p>{props.desc}</p>
+    </div>
+  );
+}
