@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { allRuns } from "../data";
 
 function sortRunsByDate(list, order = "asc") {
@@ -13,7 +13,11 @@ function sortRunsByDate(list, order = "asc") {
 export default function App() {
   const [order, setOrder] = useState("asc");
 
-  console.log(order);
+  const orderNew =
+    order === "asc" ? "desc" : order === "desc" ? "asc" : "error";
+
+  console.log("order is: ", order);
+  console.log("orderNew is: ", orderNew);
 
   // trying to copy allRuns without mutating it
   const runsSorted = sortRunsByDate(allRuns, order);
@@ -24,10 +28,10 @@ export default function App() {
       <button
         onClick={() => {
           console.log("click");
-          setOrder("desc")
+          setOrder(orderNew);
         }}
       >
-        Change order
+        Change order to {orderNew}ending
       </button>
 
       <RunsOrderedList runs={runsSorted} />
