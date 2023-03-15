@@ -35,9 +35,6 @@ export default function App() {
         </button>
         <RunsOrderedList runs={runsSorted} />
       </div>
-      <div>
-        <HeaderComponent title="Select a run:" desc="for fun!" />
-      </div>
     </div>
   );
 }
@@ -46,7 +43,7 @@ function RunsOrderedList(props) {
   return (
     <ol>
       {props.runs.map(function (run) {
-        return <ItemRendering key={run.id} label={run.label} date={run.date} />;
+        return <ItemRendering key={run.id} id={run.id} label={run.label} date={run.date} />;
       })}
     </ol>
   );
@@ -55,7 +52,18 @@ function RunsOrderedList(props) {
 function ItemRendering(props) {
   return (
     <li>
-      {props.label}, {props.date}
+      <a
+        href="https://developmentseed.org"
+        onClick={(e) => {
+          e.preventDefault();
+          console.log("clicking a run title");
+          console.log("run ID: ", props.id);
+          // setSelectedRun(props.id)
+        }}
+      >
+        {props.label}
+      </a>
+      , {props.date}
     </li>
   );
 }
