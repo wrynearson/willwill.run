@@ -12,9 +12,9 @@ function sortRunsByDate(list, order = "asc") {
 
 export default function App() {
   const [order, setOrder] = useState("asc");
+  const [selectedRun, setSelectedRun] = useState();
 
-  const orderNew =
-    order === "asc" ? "desc" : order === "desc" ? "asc" : "error";
+  const orderNew = order === "asc" ? "desc" : "asc";
 
   console.log("order is ", order, ", newOrder is ", orderNew);
 
@@ -23,17 +23,21 @@ export default function App() {
 
   return (
     <div>
-      <HeaderComponent title="My list of runs" desc="By Will" />
-      <button
-        onClick={() => {
-          console.log("click");
-          setOrder(orderNew);
-        }}
-      >
-        Change order to {orderNew}ending
-      </button>
-
-      <RunsOrderedList runs={runsSorted} />
+      <div>
+        <HeaderComponent title="My list of runs" desc="By Will" />
+        <button
+          onClick={() => {
+            console.log("click");
+            setOrder(orderNew);
+          }}
+        >
+          Change order to {orderNew}ending
+        </button>
+        <RunsOrderedList runs={runsSorted} />
+      </div>
+      <div>
+        <HeaderComponent title="Select a run:" desc="for fun!" />
+      </div>
     </div>
   );
 }
