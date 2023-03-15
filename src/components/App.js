@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { allRuns } from "../data";
 
 function sortRunsByDate(list, order = "asc") {
-  const order2 = order === "asc" ? 1 : order === "desc" ? -1 : 0;
+  const order2 = order === "asc" ? -1 : order === "desc" ? 1 : 0;
   // list [run, run, run] -- run: { id, label, date }
   const listSorted = [...list].sort((a, b) =>
     a.date > b.date ? -1 * order2 : a.date < b.date ? 1 * order2 : 0
@@ -16,8 +16,7 @@ export default function App() {
   const orderNew =
     order === "asc" ? "desc" : order === "desc" ? "asc" : "error";
 
-  console.log("order is: ", order);
-  console.log("orderNew is: ", orderNew);
+  console.log("order is ", order, ", newOrder is ", orderNew);
 
   // trying to copy allRuns without mutating it
   const runsSorted = sortRunsByDate(allRuns, order);
