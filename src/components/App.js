@@ -12,7 +12,7 @@ function sortRunsByDate(list, order = "asc") {
 
 export default function App() {
   const [order, setOrder] = useState("asc");
-  const [selectedRun, setSelectedRun] = useState();
+  const [selectedRun, setSelectedRun] = useState("no run selected");
 
   const orderNew = order === "asc" ? "desc" : "asc";
 
@@ -33,7 +33,12 @@ export default function App() {
         >
           Change order to {orderNew}ending
         </button>
-        <RunsOrderedList runs={runsSorted} />
+        <RunsOrderedList
+          runs={runsSorted}
+          hello="hello"
+          runSelected={selectedRun}
+          selectRun={setSelectedRun}
+        />
       </div>
     </div>
   );
@@ -41,11 +46,24 @@ export default function App() {
 
 function RunsOrderedList(props) {
   return (
-    <ol>
-      {props.runs.map(function (run) {
-        return <ItemRendering key={run.id} id={run.id} label={run.label} date={run.date} />;
-      })}
-    </ol>
+    <div>
+      <p>Selected run: {props.runSelected}</p>
+      <ol>
+        {props.runs.map(function (run) {
+          return (
+            <ItemRendering
+              key={run.id}
+              id={run.id}
+              label={run.label}
+              date={run.date}
+              hello={props.hello}
+              runSelected={props.runSelected}
+              selectRun={props.selectRun}
+            />
+          );
+        })}
+      </ol>
+    </div>
   );
 }
 
@@ -56,9 +74,11 @@ function ItemRendering(props) {
         href="https://developmentseed.org"
         onClick={(e) => {
           e.preventDefault();
-          console.log("clicking a run title");
-          console.log("run ID: ", props.id);
-          // setSelectedRun(props.id)
+          console.log("testing: ", props.hello);
+          console.log("run selected before clicking: ", props.runSelected);
+          console.log("clicked run ID: ", props.id);
+          props.selectRun(props.id);
+          console.log("newly selected run: ", props.selectRun());
         }}
       >
         {props.label}
