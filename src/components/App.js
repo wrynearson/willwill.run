@@ -13,7 +13,7 @@ function sortRunsByDate(list, order = "asc") {
 export default function App() {
   const [order, setOrder] = useState("asc");
   // set default state
-  const [selectedRun, setSelectedRun] = useState("no run selected");
+  const [selectedRun, setSelectedRun] = useState("blank");
 
   const orderNew = order === "asc" ? "desc" : "asc";
 
@@ -49,7 +49,6 @@ export default function App() {
 function RunsOrderedList(props) {
   return (
     <div>
-      <p>Selected run: {props.runSelected}</p>
       <ol>
         {props.runs.map(function (run) {
           return (
@@ -66,6 +65,9 @@ function RunsOrderedList(props) {
           );
         })}
       </ol>
+      <p>Selected run title: {props.runSelected.label}</p>
+      <p>Selected run: {props.runSelected.date}</p>
+      <p>Selected run id: {props.runSelected.id}</p>
     </div>
   );
 }
@@ -78,10 +80,10 @@ function ItemRendering(props) {
         onClick={(e) => {
           e.preventDefault();
           console.log("testing: ", props.hello);
-          console.log("run selected before clicking: ", props.runSelected);
+          console.log("run selected before clicking: ", props.runSelected.id);
           console.log("clicked run ID: ", props.id);
-          props.selectRun(props.id);
-          // this is undefined for some reason...
+          props.selectRun(props);
+          // this is an array
           console.log("newly selected run: ", props.selectRun);
         }}
       >
