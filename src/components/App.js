@@ -12,6 +12,7 @@ function sortRunsByDate(list, order = "asc") {
 
 export default function App() {
   const [order, setOrder] = useState("asc");
+  // set default state
   const [selectedRun, setSelectedRun] = useState("no run selected");
 
   const orderNew = order === "asc" ? "desc" : "asc";
@@ -35,6 +36,7 @@ export default function App() {
         </button>
         <RunsOrderedList
           runs={runsSorted}
+          // testing passing props around :)
           hello="hello"
           runSelected={selectedRun}
           selectRun={setSelectedRun}
@@ -56,6 +58,7 @@ function RunsOrderedList(props) {
               id={run.id}
               label={run.label}
               date={run.date}
+              // testing this again :)
               hello={props.hello}
               runSelected={props.runSelected}
               selectRun={props.selectRun}
@@ -78,7 +81,8 @@ function ItemRendering(props) {
           console.log("run selected before clicking: ", props.runSelected);
           console.log("clicked run ID: ", props.id);
           props.selectRun(props.id);
-          console.log("newly selected run: ", props.selectRun());
+          // this is undefined for some reason...
+          console.log("newly selected run: ", props.selectRun);
         }}
       >
         {props.label}
