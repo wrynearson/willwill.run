@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { allRuns } from "../data";
 
 function sortRunsByDate(list, order = "asc") {
@@ -13,7 +13,8 @@ function sortRunsByDate(list, order = "asc") {
 export default function App() {
   const [order, setOrder] = useState("asc");
   // set default state
-  const [selectedRun, setSelectedRun] = useState("blank");
+  const [selectedRunId, setSelectedRunId] = useState();
+  console.log("🚀 ~ file: App.js:17 ~ App ~ selectedRunId:", selectedRunId);
 
   const orderNew = order === "asc" ? "desc" : "asc";
 
@@ -21,6 +22,10 @@ export default function App() {
 
   // trying to copy allRuns without mutating it
   const runsSorted = sortRunsByDate(allRuns, order);
+
+  const selectedRun = runsSorted.find(function (run) {
+    return run.id === selectedRunId;
+  });
 
   return (
     <div>
@@ -38,9 +43,19 @@ export default function App() {
           runs={runsSorted}
           // testing passing props around :)
           hello="hello"
-          runSelected={selectedRun}
-          selectRun={setSelectedRun}
+          runSelected={selectedRunId}
+          selectRun={setSelectedRunId}
         />
+        {selectedRunId ? (
+          <div>
+            <p>Selected run id: {selectedRunId}</p>
+            {/* <p>Selected run title: {selectedRunId.label}</p>
+            <p>Selected run: {selectedRunId.date}</p>
+            <p>Selected run id: {selectedRunId.id}</p> */}
+          </div>
+        ) : (
+          <p>no run selected</p>
+        )}
       </div>
     </div>
   );
@@ -48,27 +63,22 @@ export default function App() {
 
 function RunsOrderedList(props) {
   return (
-    <div>
-      <ol>
-        {props.runs.map(function (run) {
-          return (
-            <ItemRendering
-              key={run.id}
-              id={run.id}
-              label={run.label}
-              date={run.date}
-              // testing this again :)
-              hello={props.hello}
-              runSelected={props.runSelected}
-              selectRun={props.selectRun}
-            />
-          );
-        })}
-      </ol>
-      <p>Selected run title: {props.runSelected.label}</p>
-      <p>Selected run: {props.runSelected.date}</p>
-      <p>Selected run id: {props.runSelected.id}</p>
-    </div>
+    <ol>
+      {props.runs.map(function (run) {
+        return (
+          <ItemRendering
+            key={run.id}
+            id={run.id}
+            label={run.label}
+            date={run.date}
+            // testing this again :)
+            hello={props.hello}
+            runSelected={props.runSelected}
+            selectRun={props.selectRun}
+          />
+        );
+      })}
+    </ol>
   );
 }
 
@@ -80,9 +90,9 @@ function ItemRendering(props) {
         onClick={(e) => {
           e.preventDefault();
           console.log("testing: ", props.hello);
-          console.log("run selected before clicking: ", props.runSelected.id);
+          // console.log("run selected before clicking: ", props.runSelected.id);
           console.log("clicked run ID: ", props.id);
-          props.selectRun(props);
+          props.selectRun(props.id);
           // this is an array
           console.log("newly selected run: ", props.selectRun);
         }}
