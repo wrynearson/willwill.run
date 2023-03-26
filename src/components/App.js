@@ -27,6 +27,18 @@ export default function App() {
     return run.id === selectedRunId;
   });
 
+  const notSelectedRuns = runsSorted.filter(function (notRuns) {
+    return notRuns.id !== selectedRunId;
+  });
+
+  const notSelectedRun2 = notSelectedRuns.map(function (notRun) {
+    return notRun.id;
+  });
+
+  console.log("selectedRun is:", selectedRun);
+  console.log("non-selected runs are", notSelectedRuns);
+  console.log("Non-selected run: ", notSelectedRun2);
+
   return (
     <div>
       <div>
@@ -48,10 +60,9 @@ export default function App() {
         />
         {selectedRunId ? (
           <div>
-            <p>Selected run id: {selectedRunId}</p>
-            {/* <p>Selected run title: {selectedRunId.label}</p>
-            <p>Selected run: {selectedRunId.date}</p>
-            <p>Selected run id: {selectedRunId.id}</p> */}
+            <p>Selected run title: {selectedRun.label}</p>
+            <p>Selected run id: {selectedRun.id}</p>
+            <p>Selected run date: {selectedRun.date}</p>
           </div>
         ) : (
           <p>no run selected</p>
@@ -102,6 +113,10 @@ function ItemRendering(props) {
       , {props.date}
     </li>
   );
+}
+
+function NotSelectedRunRendering(props) {
+  return <li>{props.label}</li>;
 }
 
 function HeaderComponent(props) {
