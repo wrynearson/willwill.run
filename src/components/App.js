@@ -31,13 +31,8 @@ export default function App() {
     return notRuns.id !== selectedRunId;
   });
 
-  const notSelectedRun2 = notSelectedRuns.map(function (notRun) {
-    return notRun.id;
-  });
-
   console.log("selectedRun is:", selectedRun);
   console.log("non-selected runs are", notSelectedRuns);
-  console.log("Non-selected run: ", notSelectedRun2);
 
   return (
     <div>
@@ -53,8 +48,6 @@ export default function App() {
         </button>
         <RunsOrderedList
           runs={runsSorted}
-          // testing passing props around :)
-          hello="hello"
           runSelected={selectedRunId}
           selectRun={setSelectedRunId}
         />
@@ -67,14 +60,16 @@ export default function App() {
         ) : (
           <p>no run selected</p>
         )}
-        <div>
-          <p>The following runs are not selected:</p>
-          {notSelectedRuns.map((banana) => (
-            <ul>
-              <li>{banana.label}</li>
-            </ul>
-          ))}
-        </div>
+        {selectedRunId ? (
+          <div>
+            <h4>The following runs are not selected:</h4>
+            {notSelectedRuns.map((notSelectedRun) => (
+              <ul key={notSelectedRun.id}>
+                <li>{notSelectedRun.label}</li>
+              </ul>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   );
@@ -90,8 +85,6 @@ function RunsOrderedList(props) {
             id={run.id}
             label={run.label}
             date={run.date}
-            // testing this again :)
-            hello={props.hello}
             runSelected={props.runSelected}
             selectRun={props.selectRun}
           />
@@ -108,11 +101,9 @@ function ItemRendering(props) {
         href="https://developmentseed.org"
         onClick={(e) => {
           e.preventDefault();
-          console.log("testing: ", props.hello);
           // console.log("run selected before clicking: ", props.runSelected.id);
           console.log("clicked run ID: ", props.id);
           props.selectRun(props.id);
-          // this is an array
           console.log("newly selected run: ", props.selectRun);
         }}
       >
@@ -121,10 +112,6 @@ function ItemRendering(props) {
       , {props.date}
     </li>
   );
-}
-
-function NotSelectedRunRendering(props) {
-  return <li>{props.label}</li>;
 }
 
 function HeaderComponent(props) {
