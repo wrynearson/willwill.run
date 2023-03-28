@@ -67,6 +67,14 @@ export default function App() {
         ) : (
           <p>no run selected</p>
         )}
+        <div>
+          <p>The following runs are not selected:</p>
+          {notSelectedRuns.map((banana) => (
+            <ul>
+              <li>{banana.label}</li>
+            </ul>
+          ))}
+        </div>
       </div>
     </div>
   );
