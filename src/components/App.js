@@ -63,11 +63,11 @@ export default function App() {
         {selectedRunId ? (
           <div>
             <h4>The following runs are not selected:</h4>
-            {notSelectedRuns.map((notSelectedRun) => (
-              <ul key={notSelectedRun.id}>
-                <li>{notSelectedRun.label}</li>
-              </ul>
-            ))}
+            <ul>
+              {notSelectedRuns.map((notSelectedRun) => (
+                <li key={notSelectedRun.id}>{notSelectedRun.label}</li>
+              ))}
+            </ul>
           </div>
         ) : null}
       </div>
