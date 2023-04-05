@@ -39,6 +39,7 @@ export default function App() {
       <div>
         <HeaderComponent title="My list of runs" desc="By Will" />
         <button
+          className="button-primary"
           onClick={() => {
             console.log("click");
             setOrder(orderNew);
