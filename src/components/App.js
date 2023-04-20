@@ -35,9 +35,13 @@ export default function App() {
   console.log("non-selected runs are", notSelectedRuns);
 
   return (
-    <div>
+    <div className="background-box">
       <div>
-        <HeaderComponent title="My list of runs" desc="By Will" />
+        <HeaderComponent
+          className="title-subtitle"
+          title="MY LIST OF RUNS"
+          desc="BY WILL"
+        />
         <button
           className="button-primary"
           onClick={() => {
@@ -53,7 +57,7 @@ export default function App() {
           selectRun={setSelectedRunId}
         />
         {selectedRunId ? (
-          <div>
+          <div className="selected-run-separator">
             <p>Selected run title: {selectedRun.label}</p>
             <p>Selected run id: {selectedRun.id}</p>
             <p>Selected run date: {selectedRun.date}</p>
@@ -97,8 +101,9 @@ function RunsOrderedList(props) {
 
 function ItemRendering(props) {
   return (
-    <li>
+    <li className="run-list">
       <a
+        className="run-link"
         href="https://developmentseed.org"
         onClick={(e) => {
           e.preventDefault();
@@ -118,8 +123,8 @@ function ItemRendering(props) {
 function HeaderComponent(props) {
   return (
     <div>
-      <h1>{props.title}</h1>
-      <p>{props.desc}</p>
+      <h1 className="site-title">{props.title}</h1>
+      <p className="site-subtitle">{props.desc}</p>
     </div>
   );
 }
