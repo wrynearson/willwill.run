@@ -37,11 +37,7 @@ export default function App() {
   return (
     <div className="background-box">
       <div>
-        <HeaderComponent
-          className="title-subtitle"
-          title="MY LIST OF RUNS"
-          desc="BY WILL"
-        />
+        <HeaderComponent title="My list of runs" desc="By Will" />
         <button
           className="button-primary"
           onClick={() => {
@@ -57,7 +53,7 @@ export default function App() {
           selectRun={setSelectedRunId}
         />
         {selectedRunId ? (
-          <div className="selected-run-separator">
+          <div className="selected-runs-section">
             <p>Selected run title: {selectedRun.label}</p>
             <p>Selected run id: {selectedRun.id}</p>
             <p>Selected run date: {selectedRun.date}</p>

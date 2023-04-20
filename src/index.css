@@ -35,16 +35,22 @@ code {
 
 .site-title {
   margin: 16px 0 0 0;
+  text-transform: uppercase;
 }
 
 .site-subtitle {
   color: grey;
   margin: 0px 0 16px 0;
+  text-transform: uppercase;
 }
 
-.selected-run-separator {
+.selected-runs-section {
   border-top: 1px dashed;
   border-color: grey;
+}
+
+.selected-runs-section p {
+  margin: 8px 0px;
 }
 
 .run-list {
@@ -54,7 +60,7 @@ code {
 .run-link {
   background-color: #1e7f8f;
   border-radius: 2px;
-  padding: 1px;
+  padding: 0px 4px;
   color: white;
   text-decoration: none;
 }
