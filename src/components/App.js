@@ -35,44 +35,49 @@ export default function App() {
   console.log("non-selected runs are", notSelectedRuns);
 
   return (
-    <div className="background-box">
-      <div>
-        <HeaderComponent title="My list of runs" desc="By Will" />
-        <button
-          className="button-primary"
-          onClick={() => {
-            console.log("click");
-            setOrder(orderNew);
-          }}
-        >
-          Change order to {orderNew}ending
-        </button>
-        <RunsOrderedList
-          runs={runsSorted}
-          runSelected={selectedRunId}
-          selectRun={setSelectedRunId}
-        />
-        {selectedRunId ? (
-          <div className="selected-runs-section">
-            <p>Selected run title: {selectedRun.label}</p>
-            <p>Selected run id: {selectedRun.id}</p>
-            <p>Selected run date: {selectedRun.date}</p>
-          </div>
-        ) : (
-          <p>no run selected</p>
-        )}
-        {selectedRunId ? (
-          <div>
-            <h4>The following runs are not selected:</h4>
-            <ul>
-              {notSelectedRuns.map((notSelectedRun) => (
-                <li key={notSelectedRun.id}>{notSelectedRun.label}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
+    <>
+      <HeaderComponent title="Will will run" menu1="runs" menu2="about" />
+      <div className="background-box">
+        <div>
+          <button
+            className="button-primary"
+            onClick={() => {
+              console.log("click");
+              setOrder(orderNew);
+            }}
+          >
+            Change order to {orderNew}ending
+          </button>
+          <RunsOrderedList
+            runs={runsSorted}
+            runSelected={selectedRunId}
+            selectRun={setSelectedRunId}
+          />
+          {selectedRunId ? (
+            <div className="selected-runs-section">
+              <p>Selected run title: {selectedRun.label}</p>
+              <p>Selected run id: {selectedRun.id}</p>
+              <p>Selected run date: {selectedRun.date}</p>
+            </div>
+          ) : (
+            <p>no run selected</p>
+          )}
+          {selectedRunId ? (
+            <div>
+              <h4>The following runs are not selected:</h4>
+              <ul>
+                {notSelectedRuns.map((notSelectedRun) => (
+                  <li key={notSelectedRun.id}>{notSelectedRun.label}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
       </div>
-    </div>
+      <div className="footer">
+        <FooterComponent className="footer" copyright="Some copyright 2023" />
+      </div>
+    </>
   );
 }
 
@@ -118,9 +123,20 @@ function ItemRendering(props) {
 
 function HeaderComponent(props) {
   return (
-    <div>
+    <header className="header">
       <h1 className="site-title">{props.title}</h1>
-      <p className="site-subtitle">{props.desc}</p>
-    </div>
+      <nav class="navigation">
+        <a className="nav-item" href="/">
+          {props.menu1}
+        </a>
+        <a className="nav-item" href="/">
+          {props.menu2}
+        </a>
+      </nav>
+    </header>
   );
+}
+
+function FooterComponent(props) {
+  return <p className="copyright">{props.copyright}</p>;
 }
