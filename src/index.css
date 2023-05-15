@@ -2,7 +2,7 @@ html {
   height: 100%;
 }
 
-h1 {
+h1 h2 {
   padding: 0px;
   margin: 0px;
 }
@@ -57,10 +57,45 @@ code {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
+  border-radius: 4px;
 }
 
 .nav-item:hover {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.body {
+  display: flex;
+  height: 400px;
+  background-color: rgb(239, 223, 50);
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.runs-block {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  background-color: rgb(202, 246, 90);
+}
+
+.run-filters {
+  display: flex;
+  background-color: orange;
+}
+
+.run-cards {
+  display: flex;
+  background-color: purple;
+  margin: 1rem;
+  background-color: #f3f1f1;
+}
+
+.map-block {
+  width: 66%;
+  height: 100%;
+  background-color: beige;
+  align-self: center;
 }
 
 .background-box {

@@ -37,6 +37,19 @@ export default function App() {
   return (
     <>
       <HeaderComponent title="Will will run" menu1="runs" menu2="about" />
+      <div className="body">
+        <div className="runs-block">
+          <RunSelector title="Past Runs" />
+          <div className="run-filters">
+            <p>Sort By</p>
+            <p>Sort Order</p>
+          </div>
+          <RunCard title="Run Title" />
+          <RunCard title="Run Title 2" />
+          <RunCard title="Run Title 3" />
+        </div>
+        <p className="map-block">Map will go here!</p>
+      </div>
       <div className="background-box">
         <div>
           <button
@@ -137,6 +150,22 @@ function HeaderComponent(props) {
   );
 }
 
+function RunCard(props) {
+  return (
+    <div className="run-cards">
+      <p>{props.title}</p>
+    </div>
+  );
+}
+
 function FooterComponent(props) {
   return <p className="copyright">{props.copyright}</p>;
+}
+
+function RunSelector(props) {
+  return (
+    <>
+      <h2>{props.title}</h2>
+    </>
+  );
 }
