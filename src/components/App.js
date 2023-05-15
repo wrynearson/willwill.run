@@ -42,11 +42,19 @@ export default function App() {
           <RunSelector title="Past Runs" />
           <div className="run-filters">
             <p>Sort By</p>
+            <select name="by">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
             <p>Sort Order</p>
+            <select>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
           </div>
-          <RunCard title="Run Title" />
-          <RunCard title="Run Title 2" />
-          <RunCard title="Run Title 3" />
+          <RunCard title="Run Title" date="2023-1-2" distance="1" />
+          <RunCard title="Run Title 2" date="2022-2-3" distance="10" />
+          <RunCard title="Run Title 3" date="2021-1-2" distance="100" />
         </div>
         <p className="map-block">Map will go here!</p>
       </div>
@@ -152,9 +160,20 @@ function HeaderComponent(props) {
 
 function RunCard(props) {
   return (
-    <div className="run-cards">
-      <p>{props.title}</p>
-    </div>
+    <a href="/" className="run-cards">
+      <img
+        className="run-thumbnail"
+        src="https://placehold.co/100x75"
+        alt="Placeholder"
+        width="100"
+        height="75"
+      ></img>
+      <div className="run-attributes">
+        <h3 class="run-name">{props.title}</h3>
+        <h4 class="run-date">on {props.date}</h4>
+      </div>
+      <div className="run-distance">{props.distance}K</div>
+    </a>
   );
 }
 
@@ -163,9 +182,5 @@ function FooterComponent(props) {
 }
 
 function RunSelector(props) {
-  return (
-    <>
-      <h2>{props.title}</h2>
-    </>
-  );
+  return <h2 className="runs-block-title">{props.title}</h2>;
 }
