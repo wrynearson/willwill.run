@@ -2,14 +2,17 @@ html {
   height: 100%;
 }
 
-h1 h2 h3 h4 h5 h6 {
-  padding: 0px;
-  margin: 0px;
+h1 h2 h3 h4 h5 h6 p div {
+  padding: 0rem;
+  margin: 0rem;
 }
 
 body {
   height: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -64,10 +67,9 @@ code {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.body {
+.body-content {
   display: flex;
-  height: 400px;
-  background-color: rgb(83, 156, 252);
+  height: 100%;
   flex-direction: row;
   justify-content: flex-end;
 }
@@ -78,53 +80,56 @@ code {
   width: 33%;
   margin: 1rem;
   gap: 1rem;
-  background-color: rgb(213, 255, 107);
 }
 
 .runs-block-title {
-  background-color: rgb(215, 189, 140);
   margin: 0;
 }
 
 .run-filters {
   display: flex;
-  background-color: orange;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* this part isn't great on small screens */
+  justify-content: center;
+  gap: 0rem 1rem;
+  width: 15rem;
+  height: 3rem;
+}
+
+.run-filters p {
+  margin: 0;
 }
 
 .run-cards {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #ffc4c4;
+  position: relative;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   text-decoration: none;
 }
 
 .run-thumbnail {
-  width: 30%;
-  background-color: aqua;
-  border-radius: 1rem;
+  width: 100px;
+  border-radius: 0.5rem;
 }
 
 .run-attributes {
   display: flex;
   flex-direction: column;
-  flex-shrink: 2;
   width: 50%;
   margin: 0 0 0 1rem;
-  background-color: aquamarine;
 }
 
 .run-attributes .run-name {
   color: black;
   margin: 0rem;
-  background-color: #67d27e;
 }
 
 .run-attributes .run-date {
-  color: grey;
-  background-color: yellow;
+  color: rgb(150, 150, 150);
   margin: 0rem;
 }
 
@@ -132,9 +137,11 @@ code {
   background-color: red;
   align-self: flex-end;
   /* I couldn't get position:absolute to be relative to the flex container */
-  margin-left: auto;
+  /* margin-left: auto;
   margin-right: 0;
   /* */
+  position: absolute;
+  right: 0px;
   padding: 0.25rem;
   border-radius: 0.5rem 0 0.5rem 0;
   color: white;
@@ -178,9 +185,10 @@ code {
 
 .footer {
   background-color: rgb(5, 101, 27);
+  padding: 1rem;
+  color: white;
 }
 
 .copyright {
-  padding: 16px;
-  color: white;
+  margin: 0rem;
 }

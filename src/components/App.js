@@ -37,19 +37,20 @@ export default function App() {
   return (
     <>
       <HeaderComponent title="Will will run" menu1="runs" menu2="about" />
-      <div className="body">
+      <div className="body-content">
         <div className="runs-block">
           <RunSelector title="Past Runs" />
           <div className="run-filters">
             <p>Sort By</p>
-            <select name="by">
-              <option value="1">1</option>
-              <option value="2">2</option>
+            <select className="sort-by-select" name="by">
+              <option value="1">Name</option>
+              <option value="2">Date</option>
+              <option value="3">Distance</option>
             </select>
-            <p>Sort Order</p>
-            <select>
-              <option value="1">1</option>
-              <option value="2">2</option>
+            <p>Sort Order </p>
+            <select className="sort-order-select">
+              <option value="1">Ascending</option>
+              <option value="2">Descending</option>
             </select>
           </div>
           <RunCard title="Run Title" date="2023-1-2" distance="1" />
@@ -57,6 +58,9 @@ export default function App() {
           <RunCard title="Run Title 3" date="2021-1-2" distance="100" />
         </div>
         <p className="map-block">Map will go here!</p>
+      </div>
+      <div className="footer">
+        <FooterComponent className="footer" copyright="Some copyright 2023" />
       </div>
       <div className="background-box">
         <div>
@@ -94,9 +98,6 @@ export default function App() {
             </div>
           ) : null}
         </div>
-      </div>
-      <div className="footer">
-        <FooterComponent className="footer" copyright="Some copyright 2023" />
       </div>
     </>
   );
