@@ -35,33 +35,36 @@ export default function App() {
   console.log("non-selected runs are", notSelectedRuns);
 
   return (
-    <body>
-      <HeaderComponent title="Will will run" menu1="runs" menu2="about" />
-      <div className="body-content">
-        <div className="runs-block">
-          <RunSelector title="Past Runs" />
-          <div className="run-filters">
-            <p>Sort By</p>
-            <select className="sort-by-select" name="by">
-              <option value="1">Name</option>
-              <option value="2">Date</option>
-              <option value="3">Distance</option>
-            </select>
-            <p>Sort Order </p>
-            <select className="sort-order-select">
-              <option value="1">Ascending</option>
-              <option value="2">Descending</option>
-            </select>
+    <>
+      <body>
+        <HeaderComponent title="Will will run" menu1="runs" menu2="about" />
+        <div className="body-content">
+          <div className="runs-block">
+            <RunSelector title="Past Runs" />
+            <div className="run-filters">
+              <p>Sort By</p>
+              <select className="sort-by-select" name="by">
+                <option value="1">Name</option>
+                <option value="2">Date</option>
+                <option value="3">Distance</option>
+              </select>
+              <p>Sort Order </p>
+              <select className="sort-order-select">
+                <option value="1">Ascending</option>
+                <option value="2">Descending</option>
+              </select>
+            </div>
+            <RunCard title="Run Title" date="2023-1-2" distance="1" />
+            <RunCard title="Run Title 2" date="2022-2-3" distance="10" />
+            <RunCard title="Run Title 3" date="2021-1-2" distance="100" />
+            <RunCard title="Run Title 4" date="2020-1-2" distance="1000" />
           </div>
-          <RunCard title="Run Title" date="2023-1-2" distance="1" />
-          <RunCard title="Run Title 2" date="2022-2-3" distance="10" />
-          <RunCard title="Run Title 3" date="2021-1-2" distance="100" />
+          <p className="map-block">Map will go here!</p>
         </div>
-        <p className="map-block">Map will go here!</p>
-      </div>
-      <div>
-        <p className="copyright">Some copyright 2023</p>
-      </div>
+        <div>
+          <p className="copyright">Some copyright 2023</p>
+        </div>
+      </body>
       <div className="background-box">
         <div>
           <button
@@ -99,7 +102,7 @@ export default function App() {
           ) : null}
         </div>
       </div>
-    </body>
+    </>
   );
 }
 

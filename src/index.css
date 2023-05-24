@@ -37,7 +37,6 @@ code {
 .header {
   display: flex;
   flex-direction: row;
-  flex-wrap: no-wrap;
   justify-content: space-between;
   align-items: center;
   height: 6rem;
@@ -45,13 +44,13 @@ code {
 }
 
 .site-title {
-  margin: 0 0 0 1rem;
+  margin: 0 1rem;
   color: white;
 }
 
 .nav-item {
   margin: 0 1rem;
-  padding: 0.25rem;
+  padding: 0 0.25rem;
   border-radius: 2px;
   color: white;
   text-decoration: none;
@@ -91,10 +90,7 @@ code {
   gap: 0rem 1rem;
   width: 15rem;
   height: 3rem;
-}
-
-.run-filters p {
-  margin: 0;
+  text-transform: uppercase;
 }
 
 .run-cards {
@@ -104,6 +100,7 @@ code {
   position: relative;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
   text-decoration: none;
 }
 
@@ -132,10 +129,6 @@ code {
 .run-distance {
   background-color: red;
   align-self: flex-end;
-  /* I couldn't get position:absolute to be relative to the flex container */
-  /* margin-left: auto;
-  margin-right: 0;
-  /* */
   position: absolute;
   right: 0px;
   padding: 0.25rem;
@@ -147,7 +140,7 @@ code {
   display: flex;
   width: 66%;
   height: 100%;
-  background-color: beige;
+  background-color: rgb(246, 246, 201);
   justify-content: space-around;
   align-items: center;
 }
