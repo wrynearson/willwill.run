@@ -6,14 +6,19 @@
 body {
   height: 100vh;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* child of body, from /Users/will/DevSeed/Personal/gpx_viz/public/index.html*/
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 code {
@@ -50,12 +55,11 @@ code {
 
 .nav-item {
   margin: 0 1rem;
-  padding: 0 0.25rem;
-  border-radius: 2px;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
   color: white;
   text-decoration: none;
   text-transform: uppercase;
-  border-radius: 4px;
 }
 
 .nav-item:hover {
@@ -93,6 +97,12 @@ code {
   text-transform: uppercase;
 }
 
+.run-filters select {
+  border-radius: 0.25rem;
+  padding: 0.1rem;
+  border-width: 2px;
+}
+
 .run-cards {
   display: flex;
   flex-direction: row;
@@ -107,6 +117,7 @@ code {
 .run-thumbnail {
   width: 100px;
   border-radius: 0.5rem;
+  margin: 0.5rem;
 }
 
 .run-attributes {
