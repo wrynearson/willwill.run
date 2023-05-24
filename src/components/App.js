@@ -35,7 +35,7 @@ export default function App() {
   console.log("non-selected runs are", notSelectedRuns);
 
   return (
-    <>
+    <body>
       <HeaderComponent title="Will will run" menu1="runs" menu2="about" />
       <div className="body-content">
         <div className="runs-block">
@@ -59,8 +59,8 @@ export default function App() {
         </div>
         <p className="map-block">Map will go here!</p>
       </div>
-      <div className="footer">
-        <FooterComponent className="footer" copyright="Some copyright 2023" />
+      <div>
+        <p className="copyright">Some copyright 2023</p>
       </div>
       <div className="background-box">
         <div>
@@ -99,7 +99,7 @@ export default function App() {
           ) : null}
         </div>
       </div>
-    </>
+    </body>
   );
 }
 
@@ -176,10 +176,6 @@ function RunCard(props) {
       <div className="run-distance">{props.distance}K</div>
     </a>
   );
-}
-
-function FooterComponent(props) {
-  return <p className="copyright">{props.copyright}</p>;
 }
 
 function RunSelector(props) {
