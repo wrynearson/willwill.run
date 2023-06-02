@@ -36,7 +36,7 @@ export default function App() {
 
   return (
     <>
-      <HeaderComponent title="Will will run" menu1="runs" menu2="about" />
+      <HeaderComponent title="Will will run" />
       <div className="body-content">
         <div className="runs-block">
           <RunSelector title="Past Runs" />
@@ -146,17 +146,19 @@ function ItemRendering(props) {
 
 function HeaderComponent(props) {
   return (
-    <header className="header">
+    <div className="header">
       <h1 className="site-title">{props.title}</h1>
       <nav class="navigation">
-        <a className="nav-item" href="#runs">
-          {props.menu1}
-        </a>
-        <a className="nav-item" href="#about">
-          {props.menu2}
-        </a>
+        <ol>
+          <a className="nav-item" href="#runs">
+            Runs
+          </a>
+          <a className="nav-item" href="#about">
+            About
+          </a>
+        </ol>
       </nav>
-    </header>
+    </div>
   );
 }
 
@@ -172,7 +174,7 @@ function RunCard(props) {
       ></img>
       <div className="run-attributes">
         <h3 class="run-name">{props.title}</h3>
-        <h4 class="run-date">on {props.date}</h4>
+        <date class="run-date">on {props.date}</date>
       </div>
       <div className="run-distance">{props.distance}K</div>
     </a>
