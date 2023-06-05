@@ -148,8 +148,8 @@ function HeaderComponent(props) {
   return (
     <div className="header">
       <h1 className="site-title">{props.title}</h1>
-      <nav class="navigation">
-        <ol>
+      <nav>
+        <ol class="navigation">
           <li>
             <a className="nav-item" href="#runs">
               Runs

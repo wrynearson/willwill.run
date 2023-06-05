@@ -61,12 +61,10 @@ code {
 .navigation {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: baseline;
+  flex-wrap: no-wrap;
 }
 
 .nav-item {
-  display: flex;
   margin: 0 1rem;
   padding: 0.5rem;
   border-radius: 0.25rem;
