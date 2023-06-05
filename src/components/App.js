@@ -53,10 +53,10 @@ export default function App() {
               <option value="2">Descending</option>
             </select>
           </div>
-          <RunCard title="Run Title" date="2023-1-2" distance="1" />
-          <RunCard title="Run Title 2" date="2022-2-3" distance="10" />
-          <RunCard title="Run Title 3" date="2021-1-2" distance="100" />
-          <RunCard title="Run Title 4" date="2020-1-2" distance="1000" />
+          <RunCard title="Run Title" date="2023-1-2" distance={1} />
+          <RunCard title="Run Title 2" date="2022-2-3" distance={10} />
+          <RunCard title="Run Title 3" date="2021-1-2" distance={100} />
+          <RunCard title="Run Title 4" date="2020-1-2" distance={1000} />
         </div>
         <p className="map-block">Map will go here!</p>
       </div>
@@ -180,7 +180,19 @@ function RunCard(props) {
         <h3 class="run-name">{props.title}</h3>
         <date class="run-date">on {props.date}</date>
       </div>
-      <div className="run-distance">{props.distance}K</div>
+      <div className="run-distance">
+        <div
+          className={
+            props.distance < 10
+              ? "short"
+              : props.distance <= 20
+              ? "medium"
+              : "long"
+          }
+        >
+          {props.distance}K
+        </div>
+      </div>
     </a>
   );
 }

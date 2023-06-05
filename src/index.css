@@ -148,14 +148,31 @@ code {
   margin: 0rem;
 }
 
+/* I don't know how to do a "conditional class" (if that's a thing) so I had to repeat padding and border radius values */
+
 .run-distance {
-  background-color: red;
   align-self: flex-end;
   position: absolute;
   right: 0px;
-  padding: 0.25rem;
-  border-radius: 0.5rem 0 0.5rem 0;
   color: white;
+}
+
+.run-distance .short {
+  background-color: green;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0 0.5rem 0;
+}
+
+.run-distance .medium {
+  background-color: orange;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0 0.5rem 0;
+}
+
+.run-distance .long {
+  background-color: darkred;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0 0.5rem 0;
 }
 
 .map-block {
