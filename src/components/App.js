@@ -150,12 +150,16 @@ function HeaderComponent(props) {
       <h1 className="site-title">{props.title}</h1>
       <nav class="navigation">
         <ol>
-          <a className="nav-item" href="#runs">
-            Runs
-          </a>
-          <a className="nav-item" href="#about">
-            About
-          </a>
+          <li>
+            <a className="nav-item" href="#runs">
+              Runs
+            </a>
+          </li>
+          <li>
+            <a className="nav-item" href="#about">
+              About
+            </a>
+          </li>
         </ol>
       </nav>
     </div>

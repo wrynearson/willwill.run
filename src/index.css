@@ -3,6 +3,11 @@
   margin: 0rem;
 }
 
+ol li {
+  list-style-type: none;
+  padding: 0px;
+}
+
 body {
   height: 100vh;
   margin: 0;
@@ -53,7 +58,15 @@ code {
   color: white;
 }
 
+.navigation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: baseline;
+}
+
 .nav-item {
+  display: flex;
   margin: 0 1rem;
   padding: 0.5rem;
   border-radius: 0.25rem;
