@@ -3,7 +3,8 @@
   margin: 0rem;
 }
 
-ol li {
+ol,
+ul {
   list-style-type: none;
   padding: 0px;
 }
@@ -153,26 +154,23 @@ code {
 .run-distance {
   align-self: flex-end;
   position: absolute;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0 0.5rem 0;
   right: 0px;
   color: white;
 }
 
-.run-distance .short {
+/* the space between defines a parent-child relationship */
+.run-distance.short {
   background-color: green;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem 0 0.5rem 0;
 }
 
-.run-distance .medium {
+.run-distance.medium {
   background-color: orange;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem 0 0.5rem 0;
 }
 
-.run-distance .long {
+.run-distance.long {
   background-color: darkred;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem 0 0.5rem 0;
 }
 
 .map-block {

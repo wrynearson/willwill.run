@@ -41,22 +41,33 @@ export default function App() {
         <div className="runs-block">
           <RunSelector title="Past Runs" />
           <div className="run-filters">
-            <p>Sort By</p>
-            <select className="sort-by-select" name="by">
+            <label htmlFor="sort-by-select">Sort By</label>
+            <select id="sort-by-order" className="sort-by-select" name="by">
               <option value="1">Name</option>
               <option value="2">Date</option>
               <option value="3">Distance</option>
             </select>
-            <p>Sort Order </p>
-            <select className="sort-order-select">
+            <label htmlFor="sort-order-select">Sort Order </label>
+            <select id="sort-order-select" className="sort-order-select">
               <option value="1">Ascending</option>
               <option value="2">Descending</option>
             </select>
           </div>
-          <RunCard title="Run Title" date="2023-1-2" distance={1} />
-          <RunCard title="Run Title 2" date="2022-2-3" distance={10} />
-          <RunCard title="Run Title 3" date="2021-1-2" distance={100} />
-          <RunCard title="Run Title 4" date="2020-1-2" distance={1000} />
+          <ol>
+            <li>
+              <RunCard title="Run Title" date="2023-1-2" distance={1} />
+            </li>
+
+            <li>
+              <RunCard title="Run Title 2" date="2022-2-3" distance={10} />
+            </li>
+            <li>
+              <RunCard title="Run Title 3" date="2021-1-2" distance={100} />
+            </li>
+            <li>
+              <RunCard title="Run Title 4" date="2020-1-2" distance={1000} />
+            </li>
+          </ol>
         </div>
         <p className="map-block">Map will go here!</p>
       </div>
@@ -146,10 +157,10 @@ function ItemRendering(props) {
 
 function HeaderComponent(props) {
   return (
-    <div className="header">
+    <header className="header">
       <h1 className="site-title">{props.title}</h1>
       <nav>
-        <ol class="navigation">
+        <ul class="navigation">
           <li>
             <a className="nav-item" href="#runs">
               Runs
@@ -160,13 +171,16 @@ function HeaderComponent(props) {
               About
             </a>
           </li>
-        </ol>
+        </ul>
       </nav>
-    </div>
+    </header>
   );
 }
 
 function RunCard(props) {
+  const distanceClass =
+    props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
+
   return (
     <a href="/" className="run-cards">
       <img
@@ -180,19 +194,7 @@ function RunCard(props) {
         <h3 class="run-name">{props.title}</h3>
         <date class="run-date">on {props.date}</date>
       </div>
-      <div className="run-distance">
-        <div
-          className={
-            props.distance < 10
-              ? "short"
-              : props.distance <= 20
-              ? "medium"
-              : "long"
-          }
-        >
-          {props.distance}K
-        </div>
-      </div>
+      <div className={`run-distance ${distanceClass}`}>{props.distance}K</div>
     </a>
   );
 }
