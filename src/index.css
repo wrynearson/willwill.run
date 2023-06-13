@@ -120,6 +120,7 @@ code {
   flex-direction: row;
   align-items: center;
   position: relative;
+  margin: 1rem 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: white;

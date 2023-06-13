@@ -53,11 +53,29 @@ export default function App() {
               <option value="2">Descending</option>
             </select>
           </div>
+          {/* adding a 2nd list with real runs to experiment */}
+          <ol>
+            <RunsOrderedList
+              runs={runsSorted}
+              runSelected={selectedRunId}
+              selectRun={setSelectedRunId}
+            />
+          </ol>
+          <h2>real data</h2>
+          <ol>
+            {notSelectedRuns.map((notSelectedRun) => (
+              <RunCard
+                key={notSelectedRun.id}
+                title={notSelectedRun.label}
+                date={notSelectedRun.date}
+              ></RunCard>
+            ))}
+          </ol>
+          <h2>placeholder data</h2>
           <ol>
             <li>
               <RunCard title="Run Title" date="2023-1-2" distance={1} />
             </li>
-
             <li>
               <RunCard title="Run Title 2" date="2022-2-3" distance={10} />
             </li>
@@ -74,6 +92,7 @@ export default function App() {
       <div>
         <p className="copyright">Some copyright 2023</p>
       </div>
+      {/* comment out here */}
       {/* <div className="background-box">
         <div>
           <button
@@ -110,7 +129,8 @@ export default function App() {
             </div>
           ) : null}
         </div>
-      </div> */}
+      </div>{" "} */}
+      {/* comment out here */}
     </>
   );
 }
@@ -182,7 +202,14 @@ function RunCard(props) {
     props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
 
   return (
-    <a href="/" className="run-cards">
+    <a
+      href="https://www.developmentseed.org"
+      className="run-cards"
+      onClick={(e) => {
+        e.preventDefault();
+        console.log("clicked run card title: ", props.title);
+      }}
+    >
       <img
         className="run-thumbnail"
         src="https://placehold.co/100x75"
