@@ -53,21 +53,13 @@ export default function App() {
               <option value="2">Descending</option>
             </select>
           </div>
-          {/* adding a 2nd list with real runs to experiment */}
-          <ol>
-            <RunsOrderedList
-              runs={runsSorted}
-              runSelected={selectedRunId}
-              selectRun={setSelectedRunId}
-            />
-          </ol>
           <h2>real data</h2>
           <ol>
-            {notSelectedRuns.map((notSelectedRun) => (
+            {runsSorted.map((runsSorted) => (
               <RunCard
-                key={notSelectedRun.id}
-                title={notSelectedRun.label}
-                date={notSelectedRun.date}
+                title={runsSorted.label}
+                date={runsSorted.date}
+                key={runsSorted.id}
               ></RunCard>
             ))}
           </ol>
