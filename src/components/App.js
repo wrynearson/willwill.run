@@ -199,7 +199,12 @@ function RunCard(props) {
       className="run-cards"
       onClick={(e) => {
         e.preventDefault();
-        console.log("clicked run card title: ", props.title);
+        console.log(
+          "clicked run – card title:",
+          props.title,
+          ", date:",
+          props.date
+        );
       }}
     >
       <img
