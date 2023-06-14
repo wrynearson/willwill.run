@@ -59,11 +59,11 @@ export default function App() {
               onChange={() => {
                 console.log("Changing sort order!");
                 sortOrder();
-                setOrder(orderNew);
+                setOrder(sortOrder);
               }}
             >
-              <option value="ASC">Ascending</option>
-              <option value="DESC">Descending</option>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
             </select>
           </div>
           <h2>real data</h2>
