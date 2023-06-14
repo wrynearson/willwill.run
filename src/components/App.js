@@ -10,14 +10,10 @@ function sortRunsByDate(list, order = "asc") {
   return listSorted;
 }
 
-function sortOrder() {
-  var sel = document.getElementById("sort-order-select").value;
-  console.log("selected value:", sel);
-}
-
 export default function App() {
   const [order, setOrder] = useState("asc");
-  // set default state
+  // set sort field
+  const [sortBy, setSortBy] = useState("date");
   const [selectedRunId, setSelectedRunId] = useState();
   console.log("🚀 ~ file: App.js:17 ~ App ~ selectedRunId:", selectedRunId);
 
@@ -47,19 +43,28 @@ export default function App() {
           <RunSelector title="Past Runs" />
           <div className="run-filters">
             <label htmlFor="sort-by-select">Sort By</label>
-            <select id="sort-by-order" className="sort-by-select" name="by">
-              <option value="1">Name</option>
-              <option value="2">Date</option>
-              <option value="3">Distance</option>
+            <select
+              id="sort-by-order"
+              value={sortBy}
+              className="sort-by-select"
+              name="by"
+              onChange={(e) => {
+                console.log("Sort by:", e.target.value);
+                setSortBy(e.target.value);
+              }}
+            >
+              <option value="name">Name</option>
+              <option value="date">Date</option>
+              {/* <option value="distance">Distance</option> */}
             </select>
             <label htmlFor="sort-order-select">Sort Order </label>
             <select
               id="sort-order-select"
+              value={order}
               className="sort-order-select"
-              onChange={() => {
-                console.log("Changing sort order!");
-                sortOrder();
-                setOrder(sortOrder);
+              onChange={(e) => {
+                console.log("Changing sort order!", e.target.value);
+                setOrder(e.target.value);
               }}
             >
               <option value="asc">Ascending</option>
@@ -182,7 +187,7 @@ function HeaderComponent(props) {
     <header className="header">
       <h1 className="site-title">{props.title}</h1>
       <nav>
-        <ul class="navigation">
+        <ul className="navigation">
           <li>
             <a className="nav-item" href="#runs">
               Runs
@@ -225,8 +230,8 @@ function RunCard(props) {
         height="75"
       ></img>
       <div className="run-attributes">
-        <h3 class="run-name">{props.title}</h3>
-        <date class="run-date">on {props.date}</date>
+        <h3 className="run-name">{props.title}</h3>
+        <time className="run-date">on {props.date}</time>
       </div>
       <div className={`run-distance ${distanceClass}`}>{props.distance}K</div>
     </a>
