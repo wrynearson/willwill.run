@@ -113,6 +113,7 @@ code {
   border-radius: 0.25rem;
   padding: 0.1rem;
   border-width: 2px;
+  background-color: white;
 }
 
 .run-cards {

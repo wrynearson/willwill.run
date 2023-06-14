@@ -10,6 +10,11 @@ function sortRunsByDate(list, order = "asc") {
   return listSorted;
 }
 
+function sortOrder() {
+  var sel = document.getElementById("sort-order-select").value;
+  console.log("selected value:", sel);
+}
+
 export default function App() {
   const [order, setOrder] = useState("asc");
   // set default state
@@ -48,9 +53,17 @@ export default function App() {
               <option value="3">Distance</option>
             </select>
             <label htmlFor="sort-order-select">Sort Order </label>
-            <select id="sort-order-select" className="sort-order-select">
-              <option value="1">Ascending</option>
-              <option value="2">Descending</option>
+            <select
+              id="sort-order-select"
+              className="sort-order-select"
+              onChange={() => {
+                console.log("Changing sort order!");
+                sortOrder();
+                setOrder(orderNew);
+              }}
+            >
+              <option value="ASC">Ascending</option>
+              <option value="DESC">Descending</option>
             </select>
           </div>
           <h2>real data</h2>
@@ -73,9 +86,6 @@ export default function App() {
             </li>
             <li>
               <RunCard title="Run Title 3" date="2021-1-2" distance={100} />
-            </li>
-            <li>
-              <RunCard title="Run Title 4" date="2020-1-2" distance={1000} />
             </li>
           </ol>
         </div>
