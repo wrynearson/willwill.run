@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { allRuns } from "../data";
 
-function sortRunsByDate(list, order = "asc") {
-  const orderDate = order === "asc" ? -1 : order === "desc" ? 1 : 0;
+function sortRunsByDate(list, order = "asc", sortBy = "date") {
+  const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
   // list [run, run, run] -- run: { id, label, date }
-  const listSorted = [...list].sort((a, b) =>
-    a.date > b.date ? -1 * orderDate : a.date < b.date ? 1 * orderDate : 0
+  const listSortedDate = [...list].sort((a, b) =>
+    a.date > b.date ? -1 * ordered : a.date < b.date ? 1 * ordered : 0
   );
-  return listSorted;
+  return listSortedDate;
 }
 
 function sortRunsByName(list, order = "asc") {
@@ -16,7 +16,6 @@ function sortRunsByName(list, order = "asc") {
   const listSortedName = [...list].sort((a, b) =>
     a.label > b.label ? -1 * orderName : a.label < b.label ? 1 * orderName : 0
   );
-  console.log("sortRunsByName: ", listSortedName);
   return listSortedName;
 }
 
@@ -32,7 +31,7 @@ export default function App() {
   console.log("order is ", order, ", newOrder is ", orderNew);
 
   // trying to copy allRuns without mutating it
-  const runsSorted = sortRunsByDate(allRuns, order);
+  const runsSorted = sortRunsByDate(allRuns, order, sortBy);
   const runsSortedName = sortRunsByName(allRuns, order);
 
   const selectedRun = runsSorted.find(function (run) {
@@ -82,27 +81,24 @@ export default function App() {
               <option value="desc">Descending</option>
             </select>
           </div>
-          <h2>real data - name</h2>
           <ol>
-            {runsSortedName.map((runsSortedName) => (
-              <RunCard
-                title={runsSortedName.label}
-                date={runsSortedName.date}
-                key={runsSortedName.id}
-              ></RunCard>
-            ))}
+            {sortBy === "date"
+              ? runsSorted.map((runsSorted) => (
+                  <RunCard
+                    title={runsSorted.label}
+                    date={runsSorted.date}
+                    key={runsSorted.id}
+                  ></RunCard>
+                ))
+              : runsSortedName.map((runsSorted) => (
+                  <RunCard
+                    title={runsSorted.label}
+                    date={runsSorted.date}
+                    key={runsSorted.id}
+                  ></RunCard>
+                ))}
           </ol>
-          <h2>real data-date</h2>
-          <ol>
-            {runsSorted.map((runsSorted) => (
-              <RunCard
-                title={runsSorted.label}
-                date={runsSorted.date}
-                key={runsSorted.id}
-              ></RunCard>
-            ))}
-          </ol>
-          <h2>placeholder data</h2>
+          {/* <h2>placeholder data</h2>
           <ol>
             <li>
               <RunCard title="Run Title" date="2023-1-2" distance={1} />
@@ -113,7 +109,7 @@ export default function App() {
             <li>
               <RunCard title="Run Title 3" date="2021-1-2" distance={100} />
             </li>
-          </ol>
+          </ol> */}
         </div>
         <p className="map-block">Map will go here!</p>
       </div>
