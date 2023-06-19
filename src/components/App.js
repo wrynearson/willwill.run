@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import { allRuns } from "../data";
 
 function sortRunsByDate(list, order = "asc") {
-  const order2 = order === "asc" ? -1 : order === "desc" ? 1 : 0;
+  const orderDate = order === "asc" ? -1 : order === "desc" ? 1 : 0;
   // list [run, run, run] -- run: { id, label, date }
   const listSorted = [...list].sort((a, b) =>
-    a.date > b.date ? -1 * order2 : a.date < b.date ? 1 * order2 : 0
+    a.date > b.date ? -1 * orderDate : a.date < b.date ? 1 * orderDate : 0
   );
   return listSorted;
+}
+
+function sortRunsByName(list, order = "asc") {
+  const orderName = order === "asc" ? -1 : order === "desc" ? 1 : 0;
+  // list [run, run, run] -- run: { id, label, date }
+  const listSortedName = [...list].sort((a, b) =>
+    a.label > b.label ? -1 * orderName : a.label < b.label ? 1 * orderName : 0
+  );
+  console.log("sortRunsByName: ", listSortedName);
+  return listSortedName;
 }
 
 export default function App() {
@@ -23,6 +33,7 @@ export default function App() {
 
   // trying to copy allRuns without mutating it
   const runsSorted = sortRunsByDate(allRuns, order);
+  const runsSortedName = sortRunsByName(allRuns, order);
 
   const selectedRun = runsSorted.find(function (run) {
     return run.id === selectedRunId;
@@ -71,7 +82,17 @@ export default function App() {
               <option value="desc">Descending</option>
             </select>
           </div>
-          <h2>real data</h2>
+          <h2>real data - name</h2>
+          <ol>
+            {runsSortedName.map((runsSortedName) => (
+              <RunCard
+                title={runsSortedName.label}
+                date={runsSortedName.date}
+                key={runsSortedName.id}
+              ></RunCard>
+            ))}
+          </ol>
+          <h2>real data-date</h2>
           <ol>
             {runsSorted.map((runsSorted) => (
               <RunCard
