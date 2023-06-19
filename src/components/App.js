@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { allRuns } from "../data";
 
-function sortRunsByDate(list, order = "asc", sortBy = "date") {
+function sortRunsByDate(list, order = "asc") {
   const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
   // list [run, run, run] -- run: { id, label, date }
   const listSortedDate = [...list].sort((a, b) =>
@@ -11,39 +11,19 @@ function sortRunsByDate(list, order = "asc", sortBy = "date") {
 }
 
 function sortRunsByName(list, order = "asc") {
-  const orderName = order === "asc" ? -1 : order === "desc" ? 1 : 0;
-  // list [run, run, run] -- run: { id, label, date }
+  const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
   const listSortedName = [...list].sort((a, b) =>
-    a.label > b.label ? -1 * orderName : a.label < b.label ? 1 * orderName : 0
+    a.label > b.label ? -1 * ordered : a.label < b.label ? 1 * ordered : 0
   );
   return listSortedName;
 }
 
 export default function App() {
-  const [order, setOrder] = useState("asc");
-  // set sort field
+  const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
-  const [selectedRunId, setSelectedRunId] = useState();
-  console.log("🚀 ~ file: App.js:17 ~ App ~ selectedRunId:", selectedRunId);
 
-  const orderNew = order === "asc" ? "desc" : "asc";
-
-  console.log("order is ", order, ", newOrder is ", orderNew);
-
-  // trying to copy allRuns without mutating it
-  const runsSorted = sortRunsByDate(allRuns, order, sortBy);
+  const runsSorted = sortRunsByDate(allRuns, order);
   const runsSortedName = sortRunsByName(allRuns, order);
-
-  const selectedRun = runsSorted.find(function (run) {
-    return run.id === selectedRunId;
-  });
-
-  const notSelectedRuns = runsSorted.filter(function (notRuns) {
-    return notRuns.id !== selectedRunId;
-  });
-
-  console.log("selectedRun is:", selectedRun);
-  console.log("non-selected runs are", notSelectedRuns);
 
   return (
     <>
@@ -59,7 +39,7 @@ export default function App() {
               className="sort-by-select"
               name="by"
               onChange={(e) => {
-                console.log("Sort by:", e.target.value);
+                console.log("Now sorting by:", e.target.value);
                 setSortBy(e.target.value);
               }}
             >
@@ -73,7 +53,7 @@ export default function App() {
               value={order}
               className="sort-order-select"
               onChange={(e) => {
-                console.log("Changing sort order!", e.target.value);
+                console.log("New sort order: ", e.target.value);
                 setOrder(e.target.value);
               }}
             >
@@ -116,86 +96,7 @@ export default function App() {
       <div>
         <p className="copyright">Some copyright 2023</p>
       </div>
-      {/* comment out here */}
-      {/* <div className="background-box">
-        <div>
-          <button
-            className="button-primary"
-            onClick={() => {
-              console.log("click");
-              setOrder(orderNew);
-            }}
-          >
-            Change order to {orderNew}ending
-          </button>
-          <RunsOrderedList
-            runs={runsSorted}
-            runSelected={selectedRunId}
-            selectRun={setSelectedRunId}
-          />
-          {selectedRunId ? (
-            <div className="selected-runs-section">
-              <p>Selected run title: {selectedRun.label}</p>
-              <p>Selected run id: {selectedRun.id}</p>
-              <p>Selected run date: {selectedRun.date}</p>
-            </div>
-          ) : (
-            <p>no run selected</p>
-          )}
-          {selectedRunId ? (
-            <div>
-              <h4>The following runs are not selected:</h4>
-              <ul>
-                {notSelectedRuns.map((notSelectedRun) => (
-                  <li key={notSelectedRun.id}>{notSelectedRun.label}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-        </div>
-      </div>{" "} */}
-      {/* comment out here */}
     </>
-  );
-}
-
-function RunsOrderedList(props) {
-  return (
-    <ol>
-      {props.runs.map(function (run) {
-        return (
-          <ItemRendering
-            key={run.id}
-            id={run.id}
-            label={run.label}
-            date={run.date}
-            runSelected={props.runSelected}
-            selectRun={props.selectRun}
-          />
-        );
-      })}
-    </ol>
-  );
-}
-
-function ItemRendering(props) {
-  return (
-    <li className="run-list">
-      <a
-        className="run-link"
-        href="https://developmentseed.org"
-        onClick={(e) => {
-          e.preventDefault();
-          // console.log("run selected before clicking: ", props.runSelected.id);
-          console.log("clicked run ID: ", props.id);
-          props.selectRun(props.id);
-          console.log("newly selected run: ", props.selectRun);
-        }}
-      >
-        {props.label}
-      </a>
-      , {props.date}
-    </li>
   );
 }
 

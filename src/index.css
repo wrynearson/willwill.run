@@ -151,8 +151,6 @@ code {
   margin: 0rem;
 }
 
-/* I don't know how to do a "conditional class" (if that's a thing) so I had to repeat padding and border radius values */
-
 .run-distance {
   align-self: flex-end;
   position: absolute;
