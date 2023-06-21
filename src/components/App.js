@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 import { allRuns } from "../data";
 
-function sortRunsByDate(list, order = "asc") {
+function sortRunsByField(list, sortBy, order = "asc") {
   const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
-  // list [run, run, run] -- run: { id, label, date }
-  const listSortedDate = [...list].sort((a, b) =>
-    a.date > b.date ? -1 * ordered : a.date < b.date ? 1 * ordered : 0
+  const listSorted = [...list].sort((a, b) =>
+    sortBy === "name"
+      ? a.label > b.label
+        ? -1 * ordered
+        : a.label < b.label
+        ? 1 * ordered
+        : 0
+      : a.date > b.date
+      ? -1 * ordered
+      : a.date < b.date
+      ? 1 * ordered
+      : 0
   );
-  return listSortedDate;
-}
-
-function sortRunsByName(list, order = "asc") {
-  const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
-  const listSortedName = [...list].sort((a, b) =>
-    a.label > b.label ? -1 * ordered : a.label < b.label ? 1 * ordered : 0
-  );
-  return listSortedName;
+  return listSorted;
 }
 
 export default function App() {
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
+  const [selectedRun, setSelectedRun] = useState();
 
-  const runsSorted = sortRunsByDate(allRuns, order);
-  const runsSortedName = sortRunsByName(allRuns, order);
+  const runsSorted = sortRunsByField(allRuns, sortBy, order);
 
   return (
     <>
@@ -62,34 +63,17 @@ export default function App() {
             </select>
           </div>
           <ol>
-            {sortBy === "date"
-              ? runsSorted.map((runsSorted) => (
-                  <RunCard
-                    title={runsSorted.label}
-                    date={runsSorted.date}
-                    key={runsSorted.id}
-                  ></RunCard>
-                ))
-              : runsSortedName.map((runsSorted) => (
-                  <RunCard
-                    title={runsSorted.label}
-                    date={runsSorted.date}
-                    key={runsSorted.id}
-                  ></RunCard>
-                ))}
+            {runsSorted.map((runsSorted) => (
+              <li key={runsSorted.id}>
+                <RunCard
+                  title={runsSorted.label}
+                  date={runsSorted.date}
+                  id={runsSorted.id}
+                  setSelectedRun={setSelectedRun}
+                />
+              </li>
+            ))}
           </ol>
-          {/* <h2>placeholder data</h2>
-          <ol>
-            <li>
-              <RunCard title="Run Title" date="2023-1-2" distance={1} />
-            </li>
-            <li>
-              <RunCard title="Run Title 2" date="2022-2-3" distance={10} />
-            </li>
-            <li>
-              <RunCard title="Run Title 3" date="2021-1-2" distance={100} />
-            </li>
-          </ol> */}
         </div>
         <p className="map-block">Map will go here!</p>
       </div>
@@ -138,6 +122,7 @@ function RunCard(props) {
           ", date:",
           props.date
         );
+        props.setSelectedRun(props.id);
       }}
     >
       <img
@@ -146,7 +131,7 @@ function RunCard(props) {
         alt="Placeholder"
         width="100"
         height="75"
-      ></img>
+      />
       <div className="run-attributes">
         <h3 className="run-name">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
