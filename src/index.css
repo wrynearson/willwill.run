@@ -124,11 +124,13 @@ code {
   margin: 1rem 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
   text-decoration: none;
 }
 
 .run-card.selected {
   background-color: #05661c;
+  transition: 150ms;
 }
 
 .run-card.selected .run-name {
