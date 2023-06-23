@@ -127,8 +127,16 @@ code {
   text-decoration: none;
 }
 
-.run.card.selected {
-  background-color: blue;
+.run-card.selected {
+  background-color: #05661c;
+}
+
+.run-card.selected .run-name {
+  color: white;
+}
+
+.run-card.selected .run-date {
+  color: rgb(200, 200, 200);
 }
 
 .run-card .run-thumbnail {
@@ -220,7 +228,7 @@ code {
   flex-wrap: no-wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(5, 101, 27);
+  background-color: #05661c;
   height: 4rem;
   padding: 0 0 0 1rem;
   color: white;
