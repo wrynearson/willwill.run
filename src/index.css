@@ -116,7 +116,7 @@ code {
   background-color: white;
 }
 
-.run-cards {
+.run-card {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -124,11 +124,14 @@ code {
   margin: 1rem 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background-color: white;
   text-decoration: none;
 }
 
-.run-thumbnail {
+.run.card.selected {
+  background-color: blue;
+}
+
+.run-card .run-thumbnail {
   width: 100px;
   border-radius: 0.5rem;
   margin: 0.5rem;

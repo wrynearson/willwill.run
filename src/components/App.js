@@ -23,6 +23,7 @@ export default function App() {
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
   const [selectedRun, setSelectedRun] = useState();
+  console.log("selectedRun:", selectedRun);
 
   const runsSorted = sortRunsByField(allRuns, sortBy, order);
 
@@ -70,6 +71,7 @@ export default function App() {
                   date={runsSorted.date}
                   id={runsSorted.id}
                   setSelectedRun={setSelectedRun}
+                  selectedRun={selectedRun}
                 />
               </li>
             ))}
@@ -109,11 +111,12 @@ function HeaderComponent(props) {
 function RunCard(props) {
   const distanceClass =
     props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
+  const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
 
   return (
     <a
       href="https://www.developmentseed.org"
-      className="run-cards"
+      className={`run-card ${selectedRunClass}`}
       onClick={(e) => {
         e.preventDefault();
         console.log(
