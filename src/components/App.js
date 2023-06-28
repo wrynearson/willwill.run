@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { allRuns } from "../data";
 
 function sortRunsByField(list, sortBy, order = "asc") {
@@ -24,6 +24,37 @@ export default function App() {
   const [sortBy, setSortBy] = useState("date");
   const [selectedRun, setSelectedRun] = useState();
   console.log("selectedRun:", selectedRun);
+
+  useEffect(() => {
+    if (!selectedRun) return;
+    console.log("request run data for:", selectedRun);
+
+    // const r = fetch(`/data/${selectedRun}.gpx`)
+    //   .then((result) => {
+    //     console.log('result', result);
+    //   })
+
+    // console.log('promised', r);
+
+    async function loader() {
+      try {
+        // toast is loading
+
+        const result = await fetch(
+          `/data/${selectedRun}.gpx`
+        );
+
+        // toast success
+
+        console.log("result", result);
+      } catch (error) {
+        // toast error try again
+        console.log("request errored", error);
+      }
+    }
+
+    loader();
+  }, [selectedRun]);
 
   const runsSorted = sortRunsByField(allRuns, sortBy, order);
 
