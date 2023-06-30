@@ -23,7 +23,10 @@ export default function App() {
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
   const [selectedRun, setSelectedRun] = useState();
+  const [fetchedRun, setFetchedRun] = useState();
+
   console.log("selectedRun:", selectedRun);
+  console.log("current fetched run:", fetchedRun);
 
   useEffect(() => {
     if (!selectedRun) return;
@@ -40,13 +43,12 @@ export default function App() {
       try {
         // toast is loading
 
-        const result = await fetch(
-          `/data/${selectedRun}.gpx`
-        );
+        const result = await fetch(`/data/${selectedRun}.gpx`);
 
         // toast success
 
         console.log("result", result);
+        setFetchedRun(result);
       } catch (error) {
         // toast error try again
         console.log("request errored", error);
