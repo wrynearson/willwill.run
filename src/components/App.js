@@ -28,23 +28,25 @@ export default function App() {
   console.log("selectedRun:", selectedRun);
   console.log("current fetched run:", fetchedRun);
 
+  // {
+  //   status: 'idle' | 'loading' | 'succeeded' | 'failed'
+  // }
+
   useEffect(() => {
     if (!selectedRun) return;
     console.log("request run data for:", selectedRun);
-
-    // const r = fetch(`/data/${selectedRun}.gpx`)
-    //   .then((result) => {
-    //     console.log('result', result);
-    //   })
-
-    // console.log('promised', r);
-
     async function loader() {
       try {
         // toast is loading
 
-        const result = await fetch(`/data/${selectedRun}.gpx`);
+        const response = await fetch(`/data/${selectedRun}.gpx`);
 
+        if (response.status >= 400) {
+          // wrong response. show error.
+        }
+
+        const result = await response.text(); 
+        
         // toast success
 
         console.log("result", result);
