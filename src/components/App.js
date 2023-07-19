@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import gpxParser from "gpxparser";
 import { allRuns } from "../data";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -75,8 +76,16 @@ export default function App() {
           theme: "light",
         });
 
-        console.log("result", result);
-        setFetchedRun(result);
+        const gpx = new gpxParser();
+        gpx.parse(result);
+
+        const run = {
+          distance: gpx.tracks[0].distance.total,
+          elevation: gpx.tracks[0].elevation,
+          feature: gpx.toGeoJSON().features[0],
+        };
+
+        setFetchedRun(run);
       } catch (error) {
         // toast error try again
         toast.error("Please try again", {
