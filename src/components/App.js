@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { allRuns } from "../data";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function sortRunsByField(list, sortBy, order = "asc") {
   const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
   const listSorted = [...list].sort((a, b) =>
@@ -25,6 +28,8 @@ export default function App() {
   const [selectedRun, setSelectedRun] = useState();
   const [fetchedRun, setFetchedRun] = useState();
 
+  const notify = () => toast("Wow so easy!");
+
   console.log("selectedRun:", selectedRun);
   console.log("current fetched run:", fetchedRun);
 
@@ -35,9 +40,19 @@ export default function App() {
   useEffect(() => {
     if (!selectedRun) return;
     console.log("request run data for:", selectedRun);
+
     async function loader() {
       try {
         // toast is loading
+        toast.info("Loading selected run", {
+          position: "bottom-right",
+          closeButton: false,
+          autoClose: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "light",
+        });
 
         const response = await fetch(`/data/${selectedRun}.gpx`);
 
@@ -45,14 +60,35 @@ export default function App() {
           // wrong response. show error.
         }
 
-        const result = await response.text(); 
-        
+        const result = await response.text();
+
         // toast success
+        toast.success("Selected run loaded", {
+          delay: 500,
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
 
         console.log("result", result);
         setFetchedRun(result);
       } catch (error) {
         // toast error try again
+        toast.error("Please try again", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
         console.log("request errored", error);
       }
     }
@@ -116,6 +152,10 @@ export default function App() {
       </div>
       <div>
         <p className="copyright">Some copyright 2023</p>
+      </div>
+      <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
       </div>
     </>
   );
