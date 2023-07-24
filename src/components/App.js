@@ -208,8 +208,6 @@ function HeaderComponent(props) {
   );
 }
 
-// function RunDistance(props) {}
-
 function RunCard(props) {
   const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
   const runDistance =
@@ -244,7 +242,13 @@ function RunCard(props) {
         <h3 className="run-name">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
       </div>
-      <div className={`run-distance ${distanceClass}`}>{runDistance}K</div>
+      <div>
+        {props.selectedRun === props.fetchedRun ? (
+          ""
+        ) : (
+          <div className={`run-distance ${distanceClass}`}>{runDistance}K</div>
+        )}
+      </div>
     </a>
   );
 }
