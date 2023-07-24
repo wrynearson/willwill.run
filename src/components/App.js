@@ -29,8 +29,6 @@ export default function App() {
   const [selectedRun, setSelectedRun] = useState();
   const [fetchedRun, setFetchedRun] = useState();
 
-  const notify = () => toast("Wow so easy!");
-
   console.log("selectedRun:", selectedRun);
   console.log("current fetched run:", fetchedRun);
 
@@ -170,6 +168,8 @@ export default function App() {
                   id={runsSorted.id}
                   setSelectedRun={setSelectedRun}
                   selectedRun={selectedRun}
+                  distance="~"
+                  runDistance={fetchedRun}
                 />
               </li>
             ))}
@@ -181,7 +181,6 @@ export default function App() {
         <p className="copyright">Some copyright 2023</p>
       </div>
       <div>
-        <button onClick={notify}>Notify!</button>
         <ToastContainer />
       </div>
     </>
@@ -214,7 +213,9 @@ function RunCard(props) {
   const distanceClass =
     props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
   const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
-
+  const runDistance =
+    props.runDistance !== undefined ? props.runDistance.distance / 1000 : "123";
+  console.log("runDistance: ", runDistance);
   return (
     <a
       href="https://www.developmentseed.org"
