@@ -1,6 +1,14 @@
+@import "react-toastify/dist/ReactToastify.css";
+
 * {
   padding: 0rem;
   margin: 0rem;
+}
+
+:root {
+  --toastify-color-success: #05651b;
+  --toastify-color-warning: orange;
+  --toastify-color-error: darkred;
 }
 
 ol,
@@ -51,7 +59,7 @@ code {
   justify-content: space-between;
   align-items: center;
   height: 6rem;
-  background-color: rgb(5, 101, 27);
+  background-color: #05651b;
 }
 
 .site-title {

@@ -43,37 +43,54 @@ export default function App() {
     console.log("request run data for:", selectedRun);
 
     async function loader() {
+      // toast is loading
+      const toastRun = toast.loading(<div>Loading run: {selectedRun}</div>, {
+        position: "bottom-right",
+        autoClose: false,
+      });
       try {
-        // toast is loading
-        toast.info("Loading selected run", {
-          position: "bottom-right",
-          closeButton: false,
-          autoClose: false,
-          closeOnClick: false,
-          pauseOnHover: false,
-          draggable: false,
-          theme: "light",
-        });
-
         const response = await fetch(`/data/${selectedRun}.gpx`);
 
         if (response.status >= 400) {
           // wrong response. show error.
+
+          toast.update(toastRun, {
+            type: "error",
+            render: (
+              <>
+                <div>{selectedRun} not loaded successfully.</div>
+                <div>
+                  {"("}
+                  {response.status}
+                  {")"}
+                </div>
+              </>
+            ),
+            delay: 1000,
+            autoClose: 3000,
+            isLoading: false,
+          });
         }
 
         const result = await response.text();
 
         // toast success
-        toast.success("Selected run loaded", {
-          delay: 500,
-          position: "bottom-right",
+
+        toast.update(toastRun, {
+          render: (
+            <>
+              <div>{selectedRun} loaded successfully.</div>
+              <div>
+                {"("}
+                {response.status}
+                {")"}
+              </div>
+            </>
+          ),
+          type: "success",
+          delay: 1000,
           autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
+          isLoading: false,
         });
 
         const gpx = new gpxParser();
@@ -88,17 +105,18 @@ export default function App() {
         setFetchedRun(run);
       } catch (error) {
         // toast error try again
-        toast.error("Please try again", {
-          position: "bottom-right",
+        console.log("caught error: ", error);
+        toast.update(toastRun, {
+          type: "error",
+          render: (
+            <>
+              <div>{selectedRun} not loaded successfully. Please try again</div>
+            </>
+          ),
+          delay: 1000,
           autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
+          isLoading: false,
         });
-        console.log("request errored", error);
       }
     }
 
