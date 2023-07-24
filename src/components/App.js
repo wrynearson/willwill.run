@@ -168,8 +168,7 @@ export default function App() {
                   id={runsSorted.id}
                   setSelectedRun={setSelectedRun}
                   selectedRun={selectedRun}
-                  distance={fetchedRun.distance}
-                  runDistance={fetchedRun}
+                  fetchedRun={fetchedRun}
                 />
               </li>
             ))}
@@ -209,18 +208,16 @@ function HeaderComponent(props) {
   );
 }
 
+// function RunDistance(props) {}
+
 function RunCard(props) {
   const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
   const runDistance =
-    props.runDistance !== undefined
-      ? (props.runDistance.distance / 1000).toFixed(2)
-      : "no distance defined";
+    props.fetchedRun !== undefined
+      ? parseFloat((props.fetchedRun.distance / 1000).toFixed(2))
+      : "";
   const distanceClass =
-    props.runDistance < 10
-      ? "short"
-      : props.runDistance <= 20
-      ? "medium"
-      : "long";
+    runDistance < 10 ? "short" : runDistance <= 20 ? "medium" : "long";
   return (
     <a
       href="https://www.developmentseed.org"

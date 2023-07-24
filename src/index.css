@@ -1,15 +1,14 @@
-/* @import "react-toastify/dist/ReactToastify.css"; */
-
-* {
+@import "react-toastify/dist/ReactToastify.css";
+*/ * {
   padding: 0rem;
   margin: 0rem;
 }
 
-/* :root {
+:root {
   --toastify-color-success: #05651b;
   --toastify-color-warning: orange;
   --toastify-color-error: darkred;
-} */
+}
 
 ol,
 ul {
