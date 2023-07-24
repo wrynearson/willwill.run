@@ -168,7 +168,7 @@ export default function App() {
                   id={runsSorted.id}
                   setSelectedRun={setSelectedRun}
                   selectedRun={selectedRun}
-                  distance="~"
+                  distance={fetchedRun.distance}
                   runDistance={fetchedRun}
                 />
               </li>
@@ -210,12 +210,17 @@ function HeaderComponent(props) {
 }
 
 function RunCard(props) {
-  const distanceClass =
-    props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
   const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
   const runDistance =
-    props.runDistance !== undefined ? props.runDistance.distance / 1000 : "123";
-  console.log("runDistance: ", runDistance);
+    props.runDistance !== undefined
+      ? (props.runDistance.distance / 1000).toFixed(2)
+      : "no distance defined";
+  const distanceClass =
+    props.runDistance < 10
+      ? "short"
+      : props.runDistance <= 20
+      ? "medium"
+      : "long";
   return (
     <a
       href="https://www.developmentseed.org"
@@ -242,7 +247,7 @@ function RunCard(props) {
         <h3 className="run-name">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
       </div>
-      <div className={`run-distance ${distanceClass}`}>{props.distance}K</div>
+      <div className={`run-distance ${distanceClass}`}>{runDistance}K</div>
     </a>
   );
 }
