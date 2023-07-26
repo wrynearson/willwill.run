@@ -5,6 +5,7 @@ import Map from "react-map-gl";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 function sortRunsByField(list, sortBy, order = "asc") {
   const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
@@ -34,12 +35,13 @@ export default function App() {
   console.log("selectedRun:", selectedRun);
   console.log("current fetched run:", fetchedRun);
 
+  console.log("current run promise status: ", loadRunStatus);
+
   // {
   //   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   // }
 
   useEffect(() => {
-    console.log("current run promise status: ", loadRunStatus);
     if (!selectedRun) return;
     console.log("request run data for:", selectedRun);
 
@@ -50,7 +52,6 @@ export default function App() {
         autoClose: false,
       });
       setLoadRunStatus("loading");
-      console.log("current run promise status: ", loadRunStatus);
       try {
         const response = await fetch(`/data/${selectedRun}.gpx`);
 
@@ -58,18 +59,13 @@ export default function App() {
           // wrong response. show error.
 
           setLoadRunStatus(response.status);
-          console.log("current run promise status: ", loadRunStatus);
 
           toast.update(toastRun, {
             type: "error",
             render: (
               <>
                 <div>{selectedRun} not loaded successfully.</div>
-                <div>
-                  {"("}
-                  {response.status}
-                  {")"}
-                </div>
+                <div>{`(${response.status})`}</div>
               </>
             ),
             delay: 1000,
@@ -83,17 +79,12 @@ export default function App() {
         // toast success
 
         setLoadRunStatus(response.status);
-        console.log("current run promise status: ", loadRunStatus);
 
         toast.update(toastRun, {
           render: (
             <>
               <div>{selectedRun} loaded successfully.</div>
-              <div>
-                {"("}
-                {response.status}
-                {")"}
-              </div>
+              <div>{`(${response.status})`}</div>
             </>
           ),
           type: "success",
@@ -115,7 +106,6 @@ export default function App() {
       } catch (error) {
         // toast error try again
         setLoadRunStatus("error");
-        console.log("current run promise status: ", loadRunStatus);
 
         console.log("caught error: ", error);
         toast.update(toastRun, {
@@ -191,7 +181,7 @@ export default function App() {
 
         <Map
           className="map-block"
-          mapboxAccessToken="token"
+          mapboxAccessToken=""
           initialViewState={{
             longitude: 6.96,
             latitude: 47.02,
@@ -201,9 +191,9 @@ export default function App() {
           mapStyle="mapbox://styles/mapbox/outdoors-v11"
         />
       </div>
-      <div>
+      <footer>
         <p className="copyright">Some copyright 2023</p>
-      </div>
+      </footer>
       <div>
         <ToastContainer />
       </div>
@@ -266,13 +256,9 @@ function RunCard(props) {
       <div className="run-attributes">
         <h3 className="run-name">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
-      </div>
-      <div>
-        {props.selectedRun === props.fetchedRun ? (
-          ""
-        ) : (
+        {props.selectedRun === props.id ? (
           <div className={`run-distance ${distanceClass}`}>{runDistance}K</div>
-        )}
+        ) : null}
       </div>
     </a>
   );

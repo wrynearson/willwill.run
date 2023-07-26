@@ -177,6 +177,7 @@ code {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem 0 0.5rem 0;
   right: 0px;
+  bottom: 0;
   color: white;
 }
 
@@ -240,5 +241,6 @@ code {
   background-color: #05661c;
   height: 4rem;
   padding: 0 0 0 1rem;
+  margin: 0;
   color: white;
 }
