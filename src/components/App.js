@@ -28,6 +28,7 @@ export default function App() {
   const [sortBy, setSortBy] = useState("date");
   const [selectedRun, setSelectedRun] = useState();
   const [fetchedRun, setFetchedRun] = useState();
+  const [loadRunStatus, setLoadRunStatus] = useState("idle");
 
   console.log("selectedRun:", selectedRun);
   console.log("current fetched run:", fetchedRun);
@@ -37,6 +38,7 @@ export default function App() {
   // }
 
   useEffect(() => {
+    console.log("current run promise status: ", loadRunStatus);
     if (!selectedRun) return;
     console.log("request run data for:", selectedRun);
 
@@ -46,11 +48,16 @@ export default function App() {
         position: "bottom-right",
         autoClose: false,
       });
+      setLoadRunStatus("loading");
+      console.log("current run promise status: ", loadRunStatus);
       try {
         const response = await fetch(`/data/${selectedRun}.gpx`);
 
         if (response.status >= 400) {
           // wrong response. show error.
+
+          setLoadRunStatus(response.status);
+          console.log("current run promise status: ", loadRunStatus);
 
           toast.update(toastRun, {
             type: "error",
@@ -73,6 +80,9 @@ export default function App() {
         const result = await response.text();
 
         // toast success
+
+        setLoadRunStatus(response.status);
+        console.log("current run promise status: ", loadRunStatus);
 
         toast.update(toastRun, {
           render: (
@@ -103,6 +113,9 @@ export default function App() {
         setFetchedRun(run);
       } catch (error) {
         // toast error try again
+        setLoadRunStatus("error");
+        console.log("current run promise status: ", loadRunStatus);
+
         console.log("caught error: ", error);
         toast.update(toastRun, {
           type: "error",
