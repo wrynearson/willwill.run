@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import gpxParser from "gpxparser";
 import { allRuns } from "../data";
+import Map from "react-map-gl";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -187,7 +188,18 @@ export default function App() {
             ))}
           </ol>
         </div>
-        <p className="map-block">Map will go here!</p>
+
+        <Map
+          className="map-block"
+          mapboxAccessToken="token"
+          initialViewState={{
+            longitude: 6.96,
+            latitude: 47.02,
+            zoom: 4,
+          }}
+          // style={{ width: 600, height: 400 }}
+          mapStyle="mapbox://styles/mapbox/outdoors-v11"
+        />
       </div>
       <div>
         <p className="copyright">Some copyright 2023</p>
