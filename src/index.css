@@ -208,7 +208,7 @@ code {
   flex-direction: row;
   align-items: center;
   position: fixed;
-  top: 50px;
+  top: 75px;
   margin: 1rem 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
@@ -223,7 +223,7 @@ code {
 }
 
 .metadata-field {
-  background-color: #82ff9f;
+  color: #05651b;
   margin: 0.5rem;
 }
 

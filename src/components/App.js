@@ -95,6 +95,7 @@ export default function App() {
 
         const gpx = new gpxParser();
         gpx.parse(result);
+        console.log(gpx);
 
         const run = {
           distance: gpx.tracks[0].distance.total,
@@ -190,10 +191,22 @@ export default function App() {
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
           />
           <Metadata
-            name="Name"
+            name={
+              fetchedRun !== undefined
+                ? fetchedRun.feature.properties.name
+                : "Distance"
+            }
             time="Time"
-            distance="Distance"
-            elevationGain="Elevation Gain"
+            distance={
+              fetchedRun !== undefined
+                ? parseFloat((fetchedRun.distance / 1000).toFixed(2)) + "km"
+                : "Distance"
+            }
+            elevationGain={
+              fetchedRun !== undefined
+                ? parseFloat(fetchedRun.elevation.pos.toFixed(2)) + "m"
+                : "Elevation Gain"
+            }
             pace="Pace"
           />
         </div>
