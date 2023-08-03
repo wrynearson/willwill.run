@@ -216,9 +216,15 @@ code {
   text-decoration: none;
 }
 
+.metadata-field-title {
+  size: 5px;
+  color: rgb(185, 184, 184);
+  margin: 0.5rem;
+}
+
 .metadata-field {
   background-color: #82ff9f;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 
 .background-box {

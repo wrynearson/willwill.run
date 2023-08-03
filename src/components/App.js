@@ -191,6 +191,7 @@ export default function App() {
           />
           <Metadata
             name="Name"
+            time="Time"
             distance="Distance"
             elevationGain="Elevation Gain"
             pace="Pace"
@@ -273,10 +274,26 @@ function RunCard(props) {
 function Metadata(props) {
   return (
     <div className="metadata-box">
-      <h3 className="metadata-field">{props.name}</h3>
-      <h3 className="metadata-field">{props.distance}</h3>
-      <h3 className="metadata-field">{props.elevationGain}</h3>
-      <h3 className="metadata-field">{props.pace}</h3>
+      <div>
+        <h5 className="metadata-field-title">Name:</h5>
+        <h2 className="metadata-field">{props.name}</h2>
+      </div>
+      <div>
+        <h5 className="metadata-field-title">Time:</h5>
+        <h2 className="metadata-field">{props.time}</h2>
+      </div>
+      <div>
+        <h5 className="metadata-field-title">Distance:</h5>
+        <h2 className="metadata-field">{props.distance}</h2>
+      </div>
+      <div>
+        <h5 className="metadata-field-title">Pace:</h5>
+        <h2 className="metadata-field">{props.pace}</h2>
+      </div>
+      <div>
+        <h5 className="metadata-field-title">Elevation gain:</h5>
+        <h2 className="metadata-field">{props.elevationGain}</h2>
+      </div>
     </div>
   );
 }
