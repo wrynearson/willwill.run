@@ -190,25 +190,27 @@ export default function App() {
             // style={{ width: 600, height: 400 }}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
           />
-          <Metadata
-            name={
-              fetchedRun !== undefined
-                ? fetchedRun.feature.properties.name
-                : "Distance"
-            }
-            time="Time"
-            distance={
-              fetchedRun !== undefined
-                ? parseFloat((fetchedRun.distance / 1000).toFixed(2)) + "km"
-                : "Distance"
-            }
-            elevationGain={
-              fetchedRun !== undefined
-                ? parseFloat(fetchedRun.elevation.pos.toFixed(2)) + "m"
-                : "Elevation Gain"
-            }
-            pace="Pace"
-          />
+          {fetchedRun !== undefined ? (
+            <Metadata
+              name={
+                fetchedRun !== undefined
+                  ? fetchedRun.feature.properties.name
+                  : "Distance"
+              }
+              time="Time"
+              distance={
+                fetchedRun !== undefined
+                  ? parseFloat((fetchedRun.distance / 1000).toFixed(2)) + "km"
+                  : "Distance"
+              }
+              elevationGain={
+                fetchedRun !== undefined
+                  ? parseFloat(fetchedRun.elevation.pos.toFixed(2)) + "m"
+                  : "Elevation Gain"
+              }
+              pace="Pace"
+            />
+          ) : null}
         </div>
       </div>
       <footer>
