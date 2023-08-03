@@ -178,18 +178,24 @@ export default function App() {
             ))}
           </ol>
         </div>
-
-        <Map
-          className="map-block"
-          mapboxAccessToken=""
-          initialViewState={{
-            longitude: 6.96,
-            latitude: 47.02,
-            zoom: 4,
-          }}
-          // style={{ width: 600, height: 400 }}
-          mapStyle="mapbox://styles/mapbox/outdoors-v11"
-        />
+        <div className="map-block">
+          <Map
+            mapboxAccessToken="pk.eyJ1Ijoid3J5bmVhcnNvbiIsImEiOiJjbGtqaDdnMWIwYTZwM2VuNnVjd2Q3amUwIn0.5a0G49nfwDZQjPCVcolOLQ"
+            initialViewState={{
+              longitude: 6.96,
+              latitude: 47.02,
+              zoom: 4,
+            }}
+            // style={{ width: 600, height: 400 }}
+            mapStyle="mapbox://styles/mapbox/outdoors-v11"
+          />
+          <Metadata
+            name="Name"
+            distance="Distance"
+            elevationGain="Elevation Gain"
+            pace="Pace"
+          />
+        </div>
       </div>
       <footer>
         <p className="copyright">Some copyright 2023</p>
@@ -264,6 +270,16 @@ function RunCard(props) {
   );
 }
 
+function Metadata(props) {
+  return (
+    <div className="metadata-box">
+      <h3 className="metadata-field">{props.name}</h3>
+      <h3 className="metadata-field">{props.distance}</h3>
+      <h3 className="metadata-field">{props.elevationGain}</h3>
+      <h3 className="metadata-field">{props.pace}</h3>
+    </div>
+  );
+}
 function RunSelector(props) {
   return <h2 className="runs-block-title">{props.title}</h2>;
 }

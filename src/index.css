@@ -203,6 +203,24 @@ code {
   align-items: center;
 }
 
+.metadata-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  top: 50px;
+  margin: 1rem 0rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  text-decoration: none;
+}
+
+.metadata-field {
+  background-color: #82ff9f;
+  margin: 1rem;
+}
+
 .background-box {
   width: 400px;
   margin: 32px 0px 0px 32px;
