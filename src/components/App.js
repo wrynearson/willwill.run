@@ -113,7 +113,7 @@ export default function App() {
         setViewport({
           longitude: run.feature.geometry.coordinates[0][0],
           latitude: run.feature.geometry.coordinates[0][1],
-          zoom: 11,
+          zoom: 12,
         });
       } catch (error) {
         // toast error try again
@@ -202,7 +202,9 @@ export default function App() {
         <div className="map-block">
           <Map
             mapboxAccessToken="pk.eyJ1Ijoid3J5bmVhcnNvbiIsImEiOiJjbGtqaDdnMWIwYTZwM2VuNnVjd2Q3amUwIn0.5a0G49nfwDZQjPCVcolOLQ"
+            {...viewport}
             initialViewState={viewport}
+            onMove={(evt) => setViewport(evt.viewport)}
             // style={{ width: 600, height: 400 }}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
           >
