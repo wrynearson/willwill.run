@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import gpxParser from "gpxparser";
 import { allRuns } from "../data";
-import Map from "react-map-gl";
+import Map, { Source, Layer } from "react-map-gl";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -128,6 +128,15 @@ export default function App() {
 
   const runsSorted = sortRunsByField(allRuns, sortBy, order);
 
+  const layerStyle = {
+    id: "route",
+    type: "line",
+    paint: {
+      "line-width": 6,
+      "line-color": "#05651b",
+    },
+  };
+
   return (
     <>
       <HeaderComponent title="Will will run" />
@@ -189,7 +198,15 @@ export default function App() {
             }}
             // style={{ width: 600, height: 400 }}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
-          />
+          >
+            {fetchedRun !== undefined ? (
+              <Source id="my-data" type="geojson" data={fetchedRun.feature}>
+                <Layer {...layerStyle} />
+              </Source>
+            ) : (
+              ""
+            )}
+          </Map>
           {fetchedRun !== undefined ? (
             <Metadata
               name={
