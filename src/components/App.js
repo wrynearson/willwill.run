@@ -32,6 +32,12 @@ export default function App() {
   const [fetchedRun, setFetchedRun] = useState();
   const [loadRunStatus, setLoadRunStatus] = useState("idle");
 
+  const [viewport, setViewport] = useState({
+    longitude: 6.96,
+    latitude: 47.02,
+    zoom: 4,
+  });
+
   console.log("selectedRun:", selectedRun);
   console.log("current fetched run:", fetchedRun);
 
@@ -104,6 +110,11 @@ export default function App() {
         };
 
         setFetchedRun(run);
+        setViewport({
+          longitude: run.feature.geometry.coordinates[0][0],
+          latitude: run.feature.geometry.coordinates[0][1],
+          zoom: 11,
+        });
       } catch (error) {
         // toast error try again
         setLoadRunStatus("error");
@@ -191,11 +202,7 @@ export default function App() {
         <div className="map-block">
           <Map
             mapboxAccessToken="pk.eyJ1Ijoid3J5bmVhcnNvbiIsImEiOiJjbGtqaDdnMWIwYTZwM2VuNnVjd2Q3amUwIn0.5a0G49nfwDZQjPCVcolOLQ"
-            initialViewState={{
-              longitude: 6.96,
-              latitude: 47.02,
-              zoom: 4,
-            }}
+            initialViewState={viewport}
             // style={{ width: 600, height: 400 }}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
           >
