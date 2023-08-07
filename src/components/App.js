@@ -168,7 +168,6 @@ export default function App() {
             >
               <option value="name">Name</option>
               <option value="date">Date</option>
-              {/* <option value="distance">Distance</option> */}
             </select>
             <label htmlFor="sort-order-select">Sort Order </label>
             <select
@@ -226,7 +225,7 @@ export default function App() {
               time="Time"
               distance={
                 fetchedRun !== undefined
-                  ? parseFloat((fetchedRun.distance / 1000).toFixed(2)) + "km"
+                  ? parseFloat((fetchedRun.distance / 1000).toFixed(2))
                   : "Distance"
               }
               elevationGain={
@@ -273,12 +272,6 @@ function HeaderComponent(props) {
 
 function RunCard(props) {
   const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
-  const runDistance =
-    props.fetchedRun !== undefined
-      ? parseFloat((props.fetchedRun.distance / 1000).toFixed(2))
-      : "";
-  const distanceClass =
-    runDistance < 10 ? "short" : runDistance <= 20 ? "medium" : "long";
   return (
     <a
       href="https://www.developmentseed.org"
@@ -304,15 +297,15 @@ function RunCard(props) {
       <div className="run-attributes">
         <h3 className="run-name">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
-        {props.selectedRun === props.id ? (
-          <div className={`run-distance ${distanceClass}`}>{runDistance}K</div>
-        ) : null}
       </div>
     </a>
   );
 }
 
 function Metadata(props) {
+  const distanceClassM =
+    props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
+  console.log("props.distance", props.distance);
   return (
     <div className="metadata-box">
       <div>
@@ -325,7 +318,9 @@ function Metadata(props) {
       </div>
       <div>
         <h5 className="metadata-field-title">Distance:</h5>
-        <h2 className="metadata-field">{props.distance}</h2>
+        <h2 className={`metadata-field ${distanceClassM}`}>
+          {props.distance}km
+        </h2>
       </div>
       <div>
         <h5 className="metadata-field-title">Pace:</h5>

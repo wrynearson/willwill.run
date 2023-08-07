@@ -227,6 +227,18 @@ code {
   margin: 0.5rem;
 }
 
+.metadata-field.short {
+  color: #05651b;
+}
+
+.metadata-field.medium {
+  color: orange;
+}
+
+.metadata-field.long {
+  color: darkred;
+}
+
 .background-box {
   width: 400px;
   margin: 32px 0px 0px 32px;
