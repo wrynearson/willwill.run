@@ -71,10 +71,10 @@ export default function App() {
             render: (
               <>
                 <div>{selectedRun} not loaded successfully.</div>
-                <div>{`(${response.status})`}</div>
+                <div>Error code: {`(${response.status})`}</div>
               </>
             ),
-            delay: 1000,
+            delay: 750,
             autoClose: 3000,
             isLoading: false,
           });
@@ -90,11 +90,11 @@ export default function App() {
           render: (
             <>
               <div>{selectedRun} loaded successfully.</div>
-              <div>{`(${response.status})`}</div>
+              <div>Success code: {`(${response.status})`}</div>
             </>
           ),
           type: "success",
-          delay: 1000,
+          delay: 750,
           autoClose: 3000,
           isLoading: false,
         });
@@ -114,20 +114,18 @@ export default function App() {
           longitude: run.feature.geometry.coordinates[0][0],
           latitude: run.feature.geometry.coordinates[0][1],
           zoom: 12,
+          pitch: 30,
         });
       } catch (error) {
         // toast error try again
-        setLoadRunStatus("error");
-
+        setLoadRunStatus(error);
         console.log("caught error: ", error);
         toast.update(toastRun, {
           type: "error",
           render: (
-            <>
-              <div>{selectedRun} not loaded successfully. Please try again</div>
-            </>
+            <div>{selectedRun} not loaded successfully. Please try again</div>
           ),
-          delay: 1000,
+          delay: 750,
           autoClose: 3000,
           isLoading: false,
         });
@@ -203,9 +201,22 @@ export default function App() {
             mapboxAccessToken="pk.eyJ1Ijoid3J5bmVhcnNvbiIsImEiOiJjbGtqaDdnMWIwYTZwM2VuNnVjd2Q3amUwIn0.5a0G49nfwDZQjPCVcolOLQ"
             {...viewport}
             initialViewState={viewport}
+            onLoad={(map) => {
+              map.target.addSource("mapbox-dem", {
+                type: "raster-dem",
+                url: "mapbox://mapbox.mapbox-terrain-dem-v1",
+                maxzoom: 14,
+              });
+              // add the DEM source as a terrain layer with exaggerated height
+              map.target.setTerrain({
+                source: "mapbox-dem",
+                exaggeration: 1,
+              });
+            }}
             onMove={(evt) => setViewport(evt.viewport)}
             // style={{ width: 600, height: 400 }}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
+            setTerrain={{ source: "mapbox-dem", exaggeration: 1.5 }}
           >
             {fetchedRun !== undefined ? (
               <Source id="my-data" type="geojson" data={fetchedRun.feature}>
@@ -305,7 +316,6 @@ function RunCard(props) {
 function Metadata(props) {
   const distanceClassM =
     props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
-  console.log("props.distance", props.distance);
   return (
     <div className="metadata-box">
       <div>
