@@ -98,7 +98,7 @@ export default function App() {
           ),
           type: "success",
           delay: 750,
-          autoClose: 3000,
+          autoClose: 1000,
           isLoading: false,
         });
 
@@ -203,7 +203,7 @@ export default function App() {
         </div>
         <div className="map-block">
           <Map
-            mapboxAccessToken="pk.eyJ1Ijoid3J5bmVhcnNvbiIsImEiOiJjbGtqaDdnMWIwYTZwM2VuNnVjd2Q3amUwIn0.5a0G49nfwDZQjPCVcolOLQ"
+            mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             {...viewport}
             initialViewState={viewport}
             onLoad={(map) => {
@@ -322,30 +322,30 @@ function Metadata(props) {
   const distanceClassM =
     props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
   return (
-    <div className="metadata-box">
-      <div>
-        <h5 className="metadata-field-title">Name:</h5>
-        <h2 className="metadata-field">{props.name}</h2>
-      </div>
-      <div>
-        <h5 className="metadata-field-title">Time:</h5>
-        <h2 className="metadata-field">{props.time}</h2>
-      </div>
-      <div>
-        <h5 className="metadata-field-title">Distance:</h5>
-        <h2 className={`metadata-field ${distanceClassM}`}>
+    <ol className="metadata-box">
+      <li>
+        <h2 className="metadata-field-title">Name:</h2>
+        <h3 className="metadata-field">{props.name}</h3>
+      </li>
+      <li>
+        <h2 className="metadata-field-title">Time:</h2>
+        <h3 className="metadata-field">{props.time}</h3>
+      </li>
+      <li>
+        <h2 className="metadata-field-title">Distance:</h2>
+        <h3 className={`metadata-field ${distanceClassM}`}>
           {props.distance}km
-        </h2>
-      </div>
-      <div>
-        <h5 className="metadata-field-title">Pace:</h5>
-        <h2 className="metadata-field">{props.pace}</h2>
-      </div>
-      <div>
-        <h5 className="metadata-field-title">Elevation gain:</h5>
-        <h2 className="metadata-field">{props.elevationGain}</h2>
-      </div>
-    </div>
+        </h3>
+      </li>
+      <li>
+        <h2 className="metadata-field-title">Pace:</h2>
+        <h3 className="metadata-field">{props.pace}</h3>
+      </li>
+      <li>
+        <h2 className="metadata-field-title">Elevation gain:</h2>
+        <h3 className="metadata-field">{props.elevationGain}</h3>
+      </li>
+    </ol>
   );
 }
 function RunSelector(props) {

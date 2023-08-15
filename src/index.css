@@ -218,12 +218,13 @@ code {
 }
 
 .metadata-field-title {
-  size: 5px;
+  font-size: 1rem;
   color: rgb(185, 184, 184);
   margin: 0.5rem;
 }
 
 .metadata-field {
+  font-size: 1.5rem;
   color: #05651b;
   margin: 0.5rem;
 }
