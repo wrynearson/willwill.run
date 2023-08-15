@@ -196,6 +196,7 @@ code {
 
 .map-block {
   display: flex;
+  position: relative;
   width: 66%;
   height: 100%;
   background-color: rgb(246, 246, 201);
@@ -207,8 +208,8 @@ code {
   display: flex;
   flex-direction: row;
   align-items: center;
-  position: fixed;
-  top: 75px;
+  position: absolute;
+  top: 1rem;
   margin: 1rem 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);

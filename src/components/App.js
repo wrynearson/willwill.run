@@ -6,6 +6,7 @@ import Map, { Source, Layer } from "react-map-gl";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { point } from "leaflet";
 
 function sortRunsByField(list, sortBy, order = "asc") {
   const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
@@ -36,6 +37,8 @@ export default function App() {
     longitude: 6.96,
     latitude: 47.02,
     zoom: 4,
+    pitch: 0,
+    bearing: 0,
   });
 
   console.log("selectedRun:", selectedRun);
@@ -101,11 +104,12 @@ export default function App() {
 
         const gpx = new gpxParser();
         gpx.parse(result);
-        console.log(gpx);
+        console.log("GPX: ", gpx);
 
         const run = {
           distance: gpx.tracks[0].distance.total,
           elevation: gpx.tracks[0].elevation,
+          points: gpx.tracks[0].points.length,
           feature: gpx.toGeoJSON().features[0],
         };
 
@@ -115,6 +119,7 @@ export default function App() {
           latitude: run.feature.geometry.coordinates[0][1],
           zoom: 12,
           pitch: 30,
+          bearing: 0,
         });
       } catch (error) {
         // toast error try again
