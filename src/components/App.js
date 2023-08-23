@@ -6,25 +6,12 @@ import Map, { Source, Layer } from "react-map-gl";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { point } from "leaflet";
 
-function sortRunsByField(list, sortBy, order = "asc") {
-  const ordered = order === "asc" ? -1 : order === "desc" ? 1 : 0;
-  const listSorted = [...list].sort((a, b) =>
-    sortBy === "name"
-      ? a.label > b.label
-        ? -1 * ordered
-        : a.label < b.label
-        ? 1 * ordered
-        : 0
-      : a.date > b.date
-      ? -1 * ordered
-      : a.date < b.date
-      ? 1 * ordered
-      : 0
-  );
-  return listSorted;
-}
+import sortRunsByField from "./utils/sortRunsByField.js";
+
+import layerStyle from "./map/layerStyle";
+
+import Metadata from "./gpx/metadata";
 
 export default function App() {
   const [order, setOrder] = useState("desc");
@@ -37,8 +24,6 @@ export default function App() {
     longitude: 6.96,
     latitude: 47.02,
     zoom: 4,
-    pitch: 0,
-    bearing: 0,
   });
 
   console.log("selectedRun:", selectedRun);
@@ -104,12 +89,11 @@ export default function App() {
 
         const gpx = new gpxParser();
         gpx.parse(result);
-        console.log("GPX: ", gpx);
+        console.log(gpx);
 
         const run = {
           distance: gpx.tracks[0].distance.total,
           elevation: gpx.tracks[0].elevation,
-          points: gpx.tracks[0].points.length,
           feature: gpx.toGeoJSON().features[0],
         };
 
@@ -119,7 +103,6 @@ export default function App() {
           latitude: run.feature.geometry.coordinates[0][1],
           zoom: 12,
           pitch: 30,
-          bearing: 0,
         });
       } catch (error) {
         // toast error try again
@@ -141,15 +124,6 @@ export default function App() {
   }, [selectedRun]);
 
   const runsSorted = sortRunsByField(allRuns, sortBy, order);
-
-  const layerStyle = {
-    id: "route",
-    type: "line",
-    paint: {
-      "line-width": 6,
-      "line-color": "#05651b",
-    },
-  };
 
   return (
     <>
@@ -318,36 +292,6 @@ function RunCard(props) {
   );
 }
 
-function Metadata(props) {
-  const distanceClassM =
-    props.distance < 10 ? "short" : props.distance <= 20 ? "medium" : "long";
-  return (
-    <ol className="metadata-box">
-      <li>
-        <h2 className="metadata-field-title">Name:</h2>
-        <h3 className="metadata-field">{props.name}</h3>
-      </li>
-      <li>
-        <h2 className="metadata-field-title">Time:</h2>
-        <h3 className="metadata-field">{props.time}</h3>
-      </li>
-      <li>
-        <h2 className="metadata-field-title">Distance:</h2>
-        <h3 className={`metadata-field ${distanceClassM}`}>
-          {props.distance}km
-        </h3>
-      </li>
-      <li>
-        <h2 className="metadata-field-title">Pace:</h2>
-        <h3 className="metadata-field">{props.pace}</h3>
-      </li>
-      <li>
-        <h2 className="metadata-field-title">Elevation gain:</h2>
-        <h3 className="metadata-field">{props.elevationGain}</h3>
-      </li>
-    </ol>
-  );
-}
 function RunSelector(props) {
   return <h2 className="runs-block-title">{props.title}</h2>;
 }
