@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+
 import gpxParser from "gpxparser";
 import { allRuns } from "../data";
 import Map, { Source, Layer } from "react-map-gl";
