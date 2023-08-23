@@ -7,10 +7,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+import HeaderComponent from "./site/header";
 import sortRunsByField from "./utils/sortRunsByField.js";
+import RunSelector from "./site/runSorting";
 
 import layerStyle from "./map/layerStyle";
 
+import RunCard from "./gpx/runCard";
 import Metadata from "./gpx/metadata";
 
 export default function App() {
@@ -236,62 +239,4 @@ export default function App() {
       </div>
     </>
   );
-}
-
-function HeaderComponent(props) {
-  return (
-    <header className="header">
-      <h1 className="site-title">{props.title}</h1>
-      <nav>
-        <ul className="navigation">
-          <li>
-            <a className="nav-item" href="#runs">
-              Runs
-            </a>
-          </li>
-          <li>
-            <a className="nav-item" href="#about">
-              About
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
-}
-
-function RunCard(props) {
-  const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
-  return (
-    <a
-      href="https://www.developmentseed.org"
-      className={`run-card ${selectedRunClass}`}
-      onClick={(e) => {
-        e.preventDefault();
-        console.log(
-          "clicked run – card title:",
-          props.title,
-          ", date:",
-          props.date
-        );
-        props.setSelectedRun(props.id);
-      }}
-    >
-      <img
-        className="run-thumbnail"
-        src="https://placehold.co/100x75"
-        alt="Placeholder"
-        width="100"
-        height="75"
-      />
-      <div className="run-attributes">
-        <h3 className="run-name">{props.title}</h3>
-        <time className="run-date">on {props.date}</time>
-      </div>
-    </a>
-  );
-}
-
-function RunSelector(props) {
-  return <h2 className="runs-block-title">{props.title}</h2>;
 }
