@@ -10,7 +10,7 @@ function HeaderComponent(props) {
             </a>
           </li>
           <li>
-            <a className="nav-item" href="#about">
+            <a className="nav-item" href="about">
               About
             </a>
           </li>

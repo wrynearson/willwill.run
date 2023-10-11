@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "./components/App";
 import "./index.css";
+import About from "./pages/About/About";
+import NotFound from "./pages/NotFound/NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,7 +17,8 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         {/* * should be the last path in the list */}
-        <Route path="*" element={<App />} />
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
