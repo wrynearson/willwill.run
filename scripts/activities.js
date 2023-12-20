@@ -30,18 +30,15 @@ async function getActivities() {
   } catch (error) {
     console.log(error);
   }
-
-  //   const activities = await strava.athlete.listActivities({
-  //     access_token: credentials.access_token,
-  //     id: 7675829,
-  //   });
-  //   console.log(activities);
+  try {
+    const activities = await strava.athlete.listActivities({
+      access_token: credentials.access_token,
+      id: credentials.athlete.id,
+    });
+    console.log(activities);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 getActivities();
-
-// strava.athletes.get({ id: 767582 }, function (err, payload, limits) {
-//   console.log("Payload:", payload);
-//   console.log("Error:", err);
-//   console.log("Limit:", limits);
-// });
