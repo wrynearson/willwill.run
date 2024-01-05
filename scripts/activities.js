@@ -31,17 +31,45 @@ async function getActivities() {
     console.log(error);
   }
   try {
-    const activities = await strava.athlete.listActivities({
-      access_token: credentials.access_token,
-      id: credentials.athlete.id,
-      per_page: 200,
-    });
+    // handles pagination. For each pageNum, we get 200 activities, then check the next page until no activities are returned (page.length = 0)
+
+    const fetchPage = async (page) => {
+      const response = await strava.athlete.listActivities({
+        access_token: credentials.access_token,
+        id: credentials.athlete.id,
+        per_page: 200,
+        page: page,
+      });
+      return response;
+    };
+
+    let pageNum = 1;
+    let page = await fetchPage(pageNum);
+
+    let activities = page;
+
+    while (page.length > 0) {
+      pageNum += 1;
+      console.log(`Fetching Strava page ${pageNum}`);
+      page = await fetchPage(pageNum);
+      activities = activities.concat(page);
+    }
+
+    // while (activity.length > 0) {
+    //   page+= 1;
+
+    console.log(
+      "Current Strava rate limite (0-1, 1=exceeded)",
+      strava.rateLimiting.fractionReached()
+    );
+
+    console.log("page length is:", activities.length);
 
     fs.writeFileSync(
       `${__dirname}/../data-prep/activities.json`,
       JSON.stringify(activities)
     );
-    return activities;
+
     // temporarily hardcode individual activity ID
 
     // const activity = await strava.streams.activity({
@@ -64,6 +92,10 @@ async function getActivities() {
     //   `${__dirname}/../data-prep/10379242967.json`,
     //   JSON.stringify(activity)
     // );
+
+    //
+
+    return activities;
   } catch (error) {
     console.log(error);
   }
