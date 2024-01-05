@@ -63,37 +63,12 @@ async function getActivities() {
       strava.rateLimiting.fractionReached()
     );
 
-    console.log("page length is:", activities.length);
+    console.log("total activities:", activities.length);
 
     fs.writeFileSync(
       `${__dirname}/../data-prep/activities.json`,
       JSON.stringify(activities)
     );
-
-    // temporarily hardcode individual activity ID
-
-    // const activity = await strava.streams.activity({
-    //   access_token: credentials.access_token,
-    //   id: 10379242967,
-    //   types: [
-    //     "distance",
-    //     "altitude",
-    //     "latlng",
-    //     "time",
-    //     "heartrate",
-    //     "velocity_smooth",
-    //     "watts",
-    //     "temp",
-    //     "cadence",
-    //   ],
-    // });
-
-    // fs.writeFileSync(
-    //   `${__dirname}/../data-prep/10379242967.json`,
-    //   JSON.stringify(activity)
-    // );
-
-    //
 
     return activities;
   } catch (error) {
