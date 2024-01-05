@@ -38,10 +38,11 @@ async function transform() {
 
     activityGeoJSON["country"] = activities[12].location_country;
     // "only me" = private, "followers_only" means semi-private, "everyone" = public
-    activityGeoJSON["privacy"] = activities[12].visibility;
+    activityGeoJSON["visibility"] = activities[12].visibility;
 
     activityGeoJSON["type"] = "FeatureCollection";
     activityGeoJSON["features"] = [];
+
     for (let i = 0; i < length; i++) {
       var newFeature = {
         type: "Feature",
