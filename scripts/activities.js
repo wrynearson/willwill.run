@@ -34,6 +34,7 @@ async function getActivities() {
     const activities = await strava.athlete.listActivities({
       access_token: credentials.access_token,
       id: credentials.athlete.id,
+      per_page: 200,
     });
     //console.log(activities);
 
@@ -42,9 +43,11 @@ async function getActivities() {
       JSON.stringify(activities)
     );
 
+    // temporarily hardcode individual activity ID
+
     const activity = await strava.streams.activity({
       access_token: credentials.access_token,
-      id: 10394935893,
+      id: 10379242967,
       types: [
         "distance",
         "altitude",
@@ -59,6 +62,11 @@ async function getActivities() {
     });
 
     console.log(activity);
+
+    fs.writeFileSync(
+      `${__dirname}/../data-prep/10379242967.json`,
+      JSON.stringify(activity)
+    );
   } catch (error) {
     console.log(error);
   }
