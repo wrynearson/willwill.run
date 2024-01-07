@@ -7,7 +7,7 @@
   "timezone": "(GMT+01:00) Europe/Zurich",
   "utc_offset": 3600,
   "country": "Switzerland",
-  "privacy": "everyone",
+  "visibility": "everyone",
   "type": "FeatureCollection",
   "features": [
     {

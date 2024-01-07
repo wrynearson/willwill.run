@@ -1,3 +1,5 @@
+// get an overview of all activities
+
 const strava = require("strava-v3");
 
 const fs = require("fs");
@@ -58,12 +60,7 @@ async function getActivities() {
     // while (activity.length > 0) {
     //   page+= 1;
 
-    console.log(
-      "Current Strava rate limite (0-1, 1=exceeded)",
-      strava.rateLimiting.fractionReached()
-    );
-
-    console.log("total activities:", activities.length);
+    console.log("Total activities:", activities.length);
 
     fs.writeFileSync(
       `${__dirname}/../data-prep/activities.json`,

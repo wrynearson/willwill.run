@@ -1,3 +1,5 @@
+// Stream individual activity (but can loop over them)
+
 const strava = require("strava-v3");
 
 const fs = require("fs");
@@ -15,6 +17,7 @@ async function streamActivity() {
       var activity = await strava.streams.activity({
         access_token: credentials.access_token,
         id: activities[i].id,
+        // Try as many "types" (fields of information) as possible
         types: [
           "distance",
           "altitude",

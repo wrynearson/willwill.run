@@ -1,48 +1,53 @@
 const fs = require("fs");
 
 // Testing this code with one activity. Later, load by id / filename
-const activity = require(`${__dirname}/../data-prep/10379242967.json`);
+const activity = require(`${__dirname}/../data-prep/activities/10379242967.json`);
 
 // Get info from all activities.
 const activities = require(`${__dirname}/../data-prep/activities.json`);
-console.log(activities.length);
+console.log("There are a total of", activities.length, "in activities.json");
 // console.log(activity);
-
-// hardcoded for now
-const actID = 10379242967;
-for (var i = 0; i < activities.length; i++) {
-  // look for the entry with a matching `code` value
-  if (activities[i].id == actID) {
-    // we found it
-    // obj[i].name is the matched result
-    console.log(
-      "nice, the correct activity ID has been found. The increment in activities.json is",
-      i
-    );
-  }
-}
 
 async function transform() {
   try {
-    const length = activity[0].original_size;
-    var activityGeoJSON = {};
-    activityGeoJSON["id"] = activities[12].id;
-    activityGeoJSON["name"] = activities[12].name;
-    // run could be a street run or trail run. Could be useful to group all runs (street and trail together)
-    activityGeoJSON["activity_theme"] = activities[12].type;
-    // trail run is specified
-    activityGeoJSON["activity_type"] = activities[12].sport_type;
-    activityGeoJSON["start_time"] = activities[12].start_date_local;
-    activityGeoJSON["timezone"] = activities[12].timezone;
-    activityGeoJSON["utc_offset"] = activities[12].utc_offset;
+    // load activity ID actID, find the related information in activities.json
+    // hardcoded for now
+    const actID = 10379242967;
+    for (var i = 0; i < activities.length; i++) {
+      // look for the entry with a matching `code` value
+      if (activities[i].id === actID) {
+        // we found it
+        // obj[i].name is the matched result
+        console.log(
+          "Nice, the correct activity ID has been found in activities.json. The increment in activities.json is",
+          i
+        );
+        var incr = i;
+      }
+    }
 
-    activityGeoJSON["country"] = activities[12].location_country;
+    const length = activity[0].original_size;
+    console.log("Length of", actID, "is", activity[0].original_size);
+    var activityGeoJSON = {};
+
+    activityGeoJSON["id"] = activities[incr].id;
+    activityGeoJSON["name"] = activities[incr].name;
+    // run could be a street run or trail run. Could be useful to group all runs (street and trail together)
+    activityGeoJSON["activity_theme"] = activities[incr].type;
+    // trail run is specified
+    activityGeoJSON["activity_type"] = activities[incr].sport_type;
+    activityGeoJSON["start_time"] = activities[incr].start_date_local;
+    activityGeoJSON["timezone"] = activities[incr].timezone;
+    activityGeoJSON["utc_offset"] = activities[incr].utc_offset;
+
+    activityGeoJSON["country"] = activities[incr].location_country;
     // "only me" = private, "followers_only" means semi-private, "everyone" = public
-    activityGeoJSON["visibility"] = activities[12].visibility;
+    activityGeoJSON["visibility"] = activities[incr].visibility;
 
     activityGeoJSON["type"] = "FeatureCollection";
     activityGeoJSON["features"] = [];
 
+    // Loop through activity to restructure all properties into one feature
     for (let i = 0; i < length; i++) {
       var newFeature = {
         type: "Feature",
@@ -69,21 +74,8 @@ async function transform() {
       activityGeoJSON["features"].push(newFeature);
     }
 
-    //   activityGeoJSON.push({
-    //     watts: activity[0].data[i],
-    //     latlng: activity[1].data[i],
-    //     velocity: activity[2].data[i],
-    //     cadence: activity[3].data[i],
-    //     distance: activity[4].data[i],
-    //     altitude: activity[5].data[i],
-    //     heartrate: activity[6].data[i],
-    //     time: activity[7].data[i],
-    //   });
-    // }
-    // console.log(activityGeoJSON);
-
     fs.writeFileSync(
-      `${__dirname}/../data-prep/10379242967_transformed.json`,
+      `${__dirname}/../data-prep/activities/transformed/${actID}_t.json`,
       JSON.stringify(activityGeoJSON)
     );
   } catch (error) {
