@@ -50,40 +50,41 @@ async function transform() {
         }
         // Loop through activity to restructure all properties into one feature
         try {
+          console.log("Activity type length is", activity.length);
           for (let i = 0; i < length; i++) {
             let newFeature = {
               type: "Feature",
-              geometry: {
-                type: "Point",
-                // swap lat and lon (to test on geojson.io)
-                coordinates: [activity[1].data[i][1], activity[1].data[i][0]],
-              },
+              // geometry: {
+              //   type: "Point",
+              //   // swap lat and lon (to test on geojson.io)
+              //   coordinates: [activity[1].data[i][1], activity[1].data[i][0]],
+              // },
 
               properties: {
-                // Use the "type" field to name the key for the new activityGeoJson
-                [activity[0].type]: activity[0].data[i],
-                //   [activity[1].type]: activity[1].data[i],
-                [activity[2].type]: activity[2].data[i],
-                [activity[3].type]: activity[3].data[i],
-                [activity[4].type]: activity[4].data[i],
-                [activity[5].type]: activity[5].data[i],
-                [activity[6].type]: activity[6].data[i],
-                // time
-                [activity[7].type]:
-                  Date.parse(activityGeoJSON["start_time"]) +
-                  activity[7].data[i] * 1000,
+                //   Use the "type" field to name the key for the new activityGeoJson
+                //   [activity[0].type]: activity[0].data[i],
+                //     [activity[1].type]: activity[1].data[i],
+                //   [activity[2].type]: activity[2].data[i],
+                //   [activity[3].type]: activity[3].data[i],
+                //   [activity[4].type]: activity[4].data[i],
+                //   [activity[5].type]: activity[5].data[i],
+                //   [activity[6].type]: activity[6].data[i],
+                //   // time
+                //   [activity[7].type]:
+                //     Date.parse(activityGeoJSON["start_time"]) +
+                //     activity[7].data[i] * 1000,
               },
-
-              // };
-              // console.log("activity length is", activity.length);
-              // for (let j = 0; j < activity.length; i++) {
-              //   if (
-              //     newFeature["properties"][j].type != null
-              //       ? activity[j].data[i]
-              //       : "SKIP"
-              //   );
-              // }
             };
+            for (let j = 0; j < activity.length; j++) {
+              if (activity[j].type != null) {
+                // ? (newFeature["properties"][j] = activity[j].data[i])
+                // console.log(activity[j].type)
+                newFeature["properties"][activity[j].type] = {
+                  [j + "hi"]: [activity[j].data[i]],
+                };
+              } else {
+              }
+            }
             activityGeoJSON["features"].push(newFeature);
           }
         } catch (error) {
