@@ -49,30 +49,45 @@ async function transform() {
           console.log(error);
         }
         // Loop through activity to restructure all properties into one feature
-        for (let i = 0; i < length; i++) {
-          var newFeature = {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              // swap lat and lon (to test on geojson.io)
-              coordinates: [activity[1].data[i][1], activity[1].data[i][0]],
-            },
-            properties: {
-              // Use the "type" field to name the key for the new activityGeoJson
-              [activity[0].type]: activity[0].data[i],
-              //   [activity[1].type]: activity[1].data[i],
-              [activity[2].type]: activity[2].data[i],
-              [activity[3].type]: activity[3].data[i],
-              [activity[4].type]: activity[4].data[i],
-              [activity[5].type]: activity[5].data[i],
-              [activity[6].type]: activity[6].data[i],
-              // time
-              [activity[7].type]:
-                Date.parse(activityGeoJSON["start_time"]) +
-                activity[7].data[i] * 1000,
-            },
-          };
-          activityGeoJSON["features"].push(newFeature);
+        try {
+          for (let i = 0; i < length; i++) {
+            let newFeature = {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                // swap lat and lon (to test on geojson.io)
+                coordinates: [activity[1].data[i][1], activity[1].data[i][0]],
+              },
+
+              properties: {
+                // Use the "type" field to name the key for the new activityGeoJson
+                [activity[0].type]: activity[0].data[i],
+                //   [activity[1].type]: activity[1].data[i],
+                [activity[2].type]: activity[2].data[i],
+                [activity[3].type]: activity[3].data[i],
+                [activity[4].type]: activity[4].data[i],
+                [activity[5].type]: activity[5].data[i],
+                [activity[6].type]: activity[6].data[i],
+                // time
+                [activity[7].type]:
+                  Date.parse(activityGeoJSON["start_time"]) +
+                  activity[7].data[i] * 1000,
+              },
+
+              // };
+              // console.log("activity length is", activity.length);
+              // for (let j = 0; j < activity.length; i++) {
+              //   if (
+              //     newFeature["properties"][j].type != null
+              //       ? activity[j].data[i]
+              //       : "SKIP"
+              //   );
+              // }
+            };
+            activityGeoJSON["features"].push(newFeature);
+          }
+        } catch (error) {
+          console.log(error);
         }
 
         console.log(`Writing ${actID}_t to the folder "transformed"`);
