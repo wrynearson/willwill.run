@@ -57,11 +57,11 @@ async function transform() {
           for (let i = 0; i < length; i++) {
             let newFeature = {
               type: "Feature",
-              // geometry: {
-              //   type: "Point",
-              //   // swap lat and lon (to test on geojson.io)
-              //   coordinates: [activity[1].data[i][1], activity[1].data[i][0]],
-              // },
+              geometry: {
+                type: "Point",
+                //   // swap lat and lon (to test on geojson.io)
+                //   coordinates: [activity[1].data[i][1], activity[1].data[i][0]],
+              },
 
               properties: {
                 //   Use the "type" field to name the key for the new activityGeoJson
@@ -79,12 +79,11 @@ async function transform() {
               },
             };
             for (let j = 0; j < activity.length; j++) {
-              if (activity[j].type != null) {
-                // ? (newFeature["properties"][j] = activity[j].data[i])
-                // console.log(activity[j].type)
-                newFeature["properties"][activity[j].type] = [
-                  activity[j].data[i],
-                ];
+              if (activity[j].type === "latlng") {
+                newFeature["geometry"][activity[j].type] = activity[j].data[i];
+              } else if (activity[j].type != null) {
+                newFeature["properties"][activity[j].type] =
+                  activity[j].data[i];
               } else {
                 newFeature["properties"][activity[j].type] = null;
               }
