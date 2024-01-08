@@ -50,7 +50,10 @@ async function transform() {
         }
         // Loop through activity to restructure all properties into one feature
         try {
-          console.log("Activity type length is", activity.length);
+          console.log(
+            "Activity type length (number of different properties) is",
+            activity.length
+          );
           for (let i = 0; i < length; i++) {
             let newFeature = {
               type: "Feature",
@@ -79,12 +82,14 @@ async function transform() {
               if (activity[j].type != null) {
                 // ? (newFeature["properties"][j] = activity[j].data[i])
                 // console.log(activity[j].type)
-                newFeature["properties"][activity[j].type] = {
-                  [j + "hi"]: [activity[j].data[i]],
-                };
+                newFeature["properties"][activity[j].type] = [
+                  activity[j].data[i],
+                ];
               } else {
+                newFeature["properties"][activity[j].type] = null;
               }
             }
+
             activityGeoJSON["features"].push(newFeature);
           }
         } catch (error) {
