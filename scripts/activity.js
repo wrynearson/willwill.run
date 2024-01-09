@@ -3,6 +3,7 @@
 const strava = require("strava-v3");
 
 const fs = require("fs");
+// const path = require("path");
 
 const credentials = require(`${__dirname}/../credentials.json`);
 
@@ -12,29 +13,41 @@ async function streamActivity() {
   // temporarily hardcode individual activity ID
 
   try {
-    // change to i < activity.length when ready to stream all activities
-    for (let i = 0; i < 5; i++) {
-      var activity = await strava.streams.activity({
-        access_token: credentials.access_token,
-        id: activities[i].id,
-        // Try as many "types" (fields of information) as possible
-        types: [
-          "distance",
-          "altitude",
-          "latlng",
-          "time",
-          "heartrate",
-          "velocity_smooth",
-          "watts",
-          "temp",
-          "cadence",
-        ],
-      });
-      console.log("Fetching activity", activities[i].id);
-      fs.writeFileSync(
-        `${__dirname}/../data-prep/activities/streamed/${activities[i].id}.json`,
-        JSON.stringify(activity)
+    // change to i < activities.length when ready to stream all activities, or i < 5 to just stream a few
+    for (let i = 200; i < activities.length; i++) {
+      let actID = activities[i].id;
+      let fileExists = fs.existsSync(
+        `${__dirname}/../data-prep/activities/streamed/${actID}.json`
       );
+      console.log(actID, "fileExists", fileExists);
+      if (fileExists === false) {
+        console.log("Fetching activity", actID);
+        var activity = await strava.streams.activity({
+          access_token: credentials.access_token,
+          id: activities[i].id,
+          // Try as many "types" (fields of information) as possible
+          types: [
+            "distance",
+            "altitude",
+            "latlng",
+            "time",
+            "heartrate",
+            "velocity_smooth",
+            "watts",
+            "temp",
+            "cadence",
+          ],
+        });
+        console.log("Saving activity", actID);
+        fs.writeFileSync(
+          `${__dirname}/../data-prep/activities/streamed/${actID}.json`,
+          JSON.stringify(activity)
+        );
+      } else if (fileExists === true) {
+        console.log(`${actID} already found in streamed folder`);
+      } else {
+        console.log("Something went wrong...");
+      }
     }
   } catch (error) {
     console.log(error);
