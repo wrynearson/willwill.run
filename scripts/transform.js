@@ -26,7 +26,7 @@ async function transform() {
           console.log("There are", files.length, "in the streamed folder");
           files.forEach((file) => {
             let fileID = path.parse(file).name;
-            console.log("Loaded activity", fileID);
+            console.log("\nLoaded activity", fileID);
             let actID = parseInt(fileID);
             let activity = require(`${__dirname}/../data-prep/activities/streamed/${actID}.json`);
 
