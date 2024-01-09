@@ -14,7 +14,7 @@ async function streamActivity() {
 
   try {
     // change to i < activities.length when ready to stream all activities, or i < 5 to just stream a few
-    for (let i = 200; i < activities.length; i++) {
+    for (let i = 0; i < activities.length; i++) {
       let actID = activities[i].id;
       let fileExists = fs.existsSync(
         `${__dirname}/../data-prep/activities/streamed/${actID}.json`
@@ -22,27 +22,40 @@ async function streamActivity() {
       console.log(actID, "fileExists", fileExists);
       if (fileExists === false) {
         console.log("Fetching activity", actID);
-        var activity = await strava.streams.activity({
-          access_token: credentials.access_token,
-          id: activities[i].id,
-          // Try as many "types" (fields of information) as possible
-          types: [
-            "distance",
-            "altitude",
-            "latlng",
-            "time",
-            "heartrate",
-            "velocity_smooth",
-            "watts",
-            "temp",
-            "cadence",
-          ],
-        });
+        try {
+          var activity = await strava.streams.activity({
+            access_token: credentials.access_token,
+            id: activities[i].id,
+
+            // Try as many "types" (fields of information) as possible
+            types: [
+              "distance",
+              "altitude",
+              "latlng",
+              "time",
+              "heartrate",
+              "velocity_smooth",
+              "watts",
+              "temp",
+              "cadence",
+            ],
+          });
+        } catch (error) {
+          console.log(
+            "an error occurred with fetching the activity stream:",
+            error.error
+          );
+          process.exit(1);
+        }
         console.log("Saving activity", actID);
-        fs.writeFileSync(
-          `${__dirname}/../data-prep/activities/streamed/${actID}.json`,
-          JSON.stringify(activity)
-        );
+        try {
+          fs.writeFileSync(
+            `${__dirname}/../data-prep/activities/streamed/${actID}.json`,
+            JSON.stringify(activity)
+          );
+        } catch (error) {
+          console.log("an error occurred when writing the file:", error);
+        }
       } else if (fileExists === true) {
         console.log(`${actID} already found in streamed folder`);
       } else {
