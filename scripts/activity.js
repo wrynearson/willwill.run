@@ -13,7 +13,7 @@ async function streamActivity() {
 
   try {
     // change to i < activity.length when ready to stream all activities
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       var activity = await strava.streams.activity({
         access_token: credentials.access_token,
         id: activities[i].id,
@@ -30,15 +30,19 @@ async function streamActivity() {
           "cadence",
         ],
       });
-      console.log(activities[i].id);
+      console.log("Fetching activity", activities[i].id);
       fs.writeFileSync(
-        `${__dirname}/../data-prep/activities/${activities[i].id}.json`,
+        `${__dirname}/../data-prep/activities/streamed/${activities[i].id}.json`,
         JSON.stringify(activity)
       );
     }
   } catch (error) {
     console.log(error);
   }
+  console.log(
+    "Current Strava rate limit (0-1, 1=exceeded)",
+    strava.rateLimiting.fractionReached()
+  );
 }
 
 streamActivity();

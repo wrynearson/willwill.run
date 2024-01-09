@@ -24,4 +24,6 @@ yarn-error.log*
 
 activities.json
 
+data-prep/activities/
+
 credentials.json
