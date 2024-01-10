@@ -18,6 +18,13 @@ console.log("There are a total of", activities.length, "in activities.json");
 // console.log(activity);
 
 async function transform() {
+  fs.readdir(path, (err, files) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+  });
+
   try {
     fs.readdir(
       `${__dirname}/../data-prep/activities/streamed/`,
