@@ -2,7 +2,7 @@
 
 const strava = require("strava-v3");
 
-const fs = require("fs");
+const fs = require("fs-extra");
 // const path = require("path");
 
 const credentials = require(`${__dirname}/../credentials.json`);
@@ -13,7 +13,7 @@ async function streamActivity() {
   try {
     // change to i < activities.length when ready to stream all activities, or i < 5 to just stream a few
     console.log(
-      "Attempting to stream each activity from Strava that isn't already saved in the stremed folder."
+      "Attempting to stream each activity from Strava that isn't already saved in the streamed folder."
     );
     for (let i = 0; i < activities.length; i++) {
       const actID = activities[i].id;
