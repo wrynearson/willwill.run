@@ -60,7 +60,11 @@ async function getActivities() {
     // while (activity.length > 0) {
     //   page+= 1;
 
-    console.log("Total activities:", activities.length);
+    console.log(
+      "Fetching activities complete. There are a total of",
+      activities.length,
+      "activities."
+    );
 
     fs.writeFileSync(
       `${__dirname}/../data-prep/activities.json`,

@@ -1,23 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 
-// fs.readdirSync(`${__dirname}/../data-prep/activities/streamed/`).forEach(
-//   (file) => {
-//     console.log(file);
-//   }
-// );
-
-// hardcoded for now;
-// const actID = 10456598855;
-
-// Testing this code with one activity. Later, load by id / filename
-
 // Get info from all activities.
 const activities = require(`${__dirname}/../data-prep/activities.json`);
 console.log("There are a total of", activities.length, "in activities.json");
 // console.log(activity);
 
-async function transform() {
+async function transformActivity() {
   fs.readdir(path, (err, files) => {
     if (err) {
       console.log(err);
@@ -168,4 +157,4 @@ async function transform() {
   }
 }
 
-transform();
+module.exports = transformActivity;

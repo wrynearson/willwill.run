@@ -12,6 +12,9 @@ const activities = require(`${__dirname}/../data-prep/activities.json`);
 async function streamActivity() {
   try {
     // change to i < activities.length when ready to stream all activities, or i < 5 to just stream a few
+    console.log(
+      "Attempting to stream each activity from Strava that isn't already saved in the stremed folder."
+    );
     for (let i = 0; i < activities.length; i++) {
       const actID = activities[i].id;
       const fileExists = fs.existsSync(
@@ -76,4 +79,4 @@ async function streamActivity() {
   );
 }
 
-streamActivity();
+module.exports = streamActivity;
