@@ -49,6 +49,7 @@ async function main() {
     try {
       console.log("\n Now transforming all activities in the streamed folder");
       const transform = await transformActivity();
+      console.log("\n Streamed activities tranformation complete");
     } catch (error) {
       console.log(error);
     }
@@ -56,6 +57,7 @@ async function main() {
     try {
       console.log("\n Only transforming activities in streamed folder");
       const transform = await transformActivity();
+      console.log("\n Streamed activities tranformation complete");
     } catch (error) {
       console.log(error);
     }
