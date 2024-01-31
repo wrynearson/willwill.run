@@ -2,8 +2,7 @@ const fs = require("fs-extra");
 const path = require("path");
 
 // Get info from all activities.
-const activities = require(`${__dirname}/../data-prep/activities.json`);
-console.log("There are a total of", activities.length, "in activities.json");
+const getActivities = require(`./activities`);
 // console.log(activity);
 
 async function transformActivity() {
@@ -14,6 +13,8 @@ async function transformActivity() {
   //   }
   // });
 
+  const activities = await getActivities;
+  console.log("There are a total of", activities.length, "in activities.json");
   try {
     fs.readdir(
       `${__dirname}/../data-prep/activities/streamed/`,

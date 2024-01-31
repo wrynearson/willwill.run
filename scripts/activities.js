@@ -68,10 +68,7 @@ async function getActivities() {
     "activities."
   );
 
-  fs.writeFileSync(
-    `${__dirname}/../data-prep/activities.json`,
-    JSON.stringify(activities)
-  );
+  await fs.writeJSON(`${__dirname}/../data-prep/activities.json`, activities);
 
   return activities;
 }
