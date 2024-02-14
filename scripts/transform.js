@@ -1,4 +1,4 @@
-async function transformActivity(activityMeta, activityDetails) {
+function transformActivity(activityMeta, activityDetails) {
   const transformedActivity = {
     id: activityMeta.id,
     name: activityMeta.name,
@@ -21,8 +21,8 @@ async function transformActivity(activityMeta, activityDetails) {
       .filter((obj) => {
         return obj.type === "latlng" ? false : true;
       })
-      .map((banana) => {
-        return { type: banana.type, data: banana.data };
+      .map((obj) => {
+        return { type: obj.type, data: obj.data };
       }),
   };
 
