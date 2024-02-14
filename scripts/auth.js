@@ -10,8 +10,8 @@ async function getCredentials() {
     // );
 
     if (credentials.expires_at * 1000 <= Date.now()) {
-      console.log("Token expired. Fetching new refresh token...");
-      console.log(`Current refresh token: ${credentials.refresh_token}`);
+      // console.log("Token expired. Fetching new refresh token...");
+      // console.log(`Current refresh token: ${credentials.refresh_token}`);
 
       const response = await fetch(
         `https://www.strava.com/oauth/token?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&grant_type=refresh_token&refresh_token=${credentials.refresh_token}`,
@@ -38,7 +38,7 @@ async function getCredentials() {
         // ms to minutes = 1000 * 60 = 60000
         (credentials.expires_at * 1000 - Date.now()) / 60000
       );
-      console.log(`Token expires in ${min_to_expire} minutes`);
+      // console.log(`Token expires in ${min_to_expire} minutes`);
       return credentials;
     }
   } catch (error) {

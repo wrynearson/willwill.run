@@ -51,17 +51,6 @@ async function getActivities() {
     pageNum += 1;
   } while (pageContent.length > 0);
 
-  // let pageNum = 1;
-  // let pageContent = await fetchPage(pageNum);
-  // let activities = pageContent;
-
-  // while (pageContent.length > 0) {
-  //   pageNum += 1;
-  //   console.log(`Fetching Strava page ${pageNum}`);
-  //   pageContent = await fetchPage(pageNum);
-  //   activities = activities.concat(pageContent);
-  // }
-
   console.log(
     "Fetching activities complete. There are a total of",
     activities.length,
