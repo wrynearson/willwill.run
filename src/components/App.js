@@ -207,7 +207,7 @@ export default function App() {
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
           >
             {fetchedRun !== undefined ? (
-              <Source id="my-data" type="geojson" data={fetchedRun}>
+              <Source id="my-data" type="geojson" data={fetchedRun.feature}>
                 <Layer {...layerStyle} />
               </Source>
             ) : (
