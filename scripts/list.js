@@ -13,22 +13,31 @@ async function lookupFilesInDirectory(directoryPath) {
       const fileName = parseInt(path.parse(file).name);
       const foundActivity = activities.find((dict) => dict.id === fileName);
       if (foundActivity) {
-        console.log("Found streamed activity:", foundActivity.name);
-        listActivities.push({
-          id: foundActivity.id,
-          name: foundActivity.name,
-          type: foundActivity.type,
-          distance: foundActivity.distance,
-          polyline: foundActivity.map.summary_polyline,
-        });
+        if (
+          foundActivity.distance > 0 &&
+          foundActivity.visibility === "everyone" &&
+          foundActivity.type === "Run"
+        ) {
+          console.log(
+            `${foundActivity.name} is a public run with a distance > 0`
+          );
+          listActivities.push({
+            id: foundActivity.id,
+            date: foundActivity.start_date,
+            name: foundActivity.name,
+            type: foundActivity.type,
+            sport_type: foundActivity.sport_type,
+            distance: foundActivity.distance,
+          });
+        }
       } else {
         console.log(`No activity found for file: ${fileName}`);
       }
     }
 
-    fs.writeFileSync(
-      `${__dirname}/../data-prep/activityList.json`,
-      JSON.stringify(listActivities)
+    await fs.writeJSON(
+      `${__dirname}/../data-prep/activity_list.json`,
+      listActivities.sort((a, b) => new Date(b.date) - new Date(a.date))
     );
   } catch (error) {
     console.log(error);

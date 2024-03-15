@@ -15,7 +15,7 @@ async function streamActivity(activities) {
   for (let i = 0; i < activities.length; i++) {
     const actID = activities[i].id;
     const fileExists = fs.existsSync(
-      `${__dirname}/../data-prep/activities/streamed/${actID}.json`
+      `${__dirname}/../data-prep/activities/transformed/${actID}.json`
     );
 
     if (fileExists) {

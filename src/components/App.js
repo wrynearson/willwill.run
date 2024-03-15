@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import gpxParser from "gpxparser";
-import { allRuns } from "../data";
+import allRuns from "../data/activity_list.json";
 import Map, { Source, Layer } from "react-map-gl";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -169,7 +169,7 @@ export default function App() {
             {runsSorted.map((runsSorted) => (
               <li key={runsSorted.id}>
                 <RunCard
-                  title={runsSorted.label}
+                  title={runsSorted.name}
                   date={runsSorted.date}
                   id={runsSorted.id}
                   setSelectedRun={setSelectedRun}
