@@ -44,6 +44,7 @@ async function streamActivity(activities) {
         ],
       });
 
+      console.log(activity);
       const transformedActivity = transformActivity(activities[i], activity);
 
       console.log("Saving activity", actID);

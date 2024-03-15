@@ -31,10 +31,10 @@ export default function App() {
     zoom: 4,
   });
 
-  console.log("selectedRun:", selectedRun);
-  console.log("current fetched run:", fetchedRun);
+  // console.log("selectedRun:", selectedRun);
+  // console.log("current fetched run:", fetchedRun);
 
-  console.log("current run promise status: ", loadRunStatus);
+  // console.log("current run promise status: ", loadRunStatus);
 
   // {
   //   status: 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -52,7 +52,7 @@ export default function App() {
       });
       setLoadRunStatus("loading");
       try {
-        const response = await fetch(`/data/${selectedRun}.gpx`);
+        const response = await fetch(`data/${selectedRun}.json`);
 
         if (response.status >= 400) {
           // wrong response. show error.
@@ -73,7 +73,7 @@ export default function App() {
           });
         }
 
-        const result = await response.text();
+        const result = await response.json();
 
         // toast success
 
@@ -92,20 +92,27 @@ export default function App() {
           isLoading: false,
         });
 
-        const gpx = new gpxParser();
-        gpx.parse(result);
-        console.log(gpx);
+        console.log("THIS IS THE RESULT distance", result.name);
 
         const run = {
-          distance: gpx.tracks[0].distance.total,
-          elevation: gpx.tracks[0].elevation,
-          feature: gpx.toGeoJSON().features[0],
+          name: result.name,
+          distance: result.distance,
+          elevation: result.distance,
+          feature: result.point_data,
         };
 
+        console.log(
+          "run distance, elevation, feature:",
+          run.distance,
+          run.elevation,
+          run.feature
+        );
+
         setFetchedRun(run);
+        console.log("FETCHED RUN:", fetchedRun);
         setViewport({
-          longitude: run.feature.geometry.coordinates[0][0],
-          latitude: run.feature.geometry.coordinates[0][1],
+          longitude: run.feature[2].data[0][1],
+          latitude: run.feature[2].data[0][0],
           zoom: 12,
           pitch: 30,
         });
@@ -200,7 +207,7 @@ export default function App() {
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
           >
             {fetchedRun !== undefined ? (
-              <Source id="my-data" type="geojson" data={fetchedRun.feature}>
+              <Source id="my-data" type="geojson" data={fetchedRun}>
                 <Layer {...layerStyle} />
               </Source>
             ) : (
@@ -209,11 +216,7 @@ export default function App() {
           </Map>
           {fetchedRun !== undefined ? (
             <Metadata
-              name={
-                fetchedRun !== undefined
-                  ? fetchedRun.feature.properties.name
-                  : "Distance"
-              }
+              name={fetchedRun !== undefined ? fetchedRun.name : "Distance"}
               time="Time"
               distance={
                 fetchedRun !== undefined
@@ -222,7 +225,7 @@ export default function App() {
               }
               elevationGain={
                 fetchedRun !== undefined
-                  ? parseFloat(fetchedRun.elevation.pos.toFixed(2)) + "m"
+                  ? parseFloat(fetchedRun.elevation) + "m"
                   : "Elevation Gain"
               }
               pace="Pace"
