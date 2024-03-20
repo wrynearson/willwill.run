@@ -87,7 +87,7 @@ code {
 
 .body-content {
   display: flex;
-  height: 100%;
+  height: 80%;
   flex-direction: row;
   justify-content: flex-end;
 }
@@ -96,8 +96,9 @@ code {
   display: flex;
   flex-direction: column;
   width: 33%;
-  margin: 1rem;
+  margin: 0 1rem;
   gap: 1rem;
+  height: auto;
 }
 
 .runs-block-title {
@@ -123,12 +124,21 @@ code {
   background-color: white;
 }
 
+.runCardContainer {
+  max-height: auto;
+  overflow-y: auto;
+  padding: 0 0.5rem;
+  /* Optional: Add these for better cross-browser appearance */
+  scrollbar-width: thin;
+  scrollbar-color: darkgrey lightgrey;
+}
+
 .run-card {
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-  margin: 1rem 0rem;
+  margin: 1em 0rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: white;

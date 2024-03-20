@@ -195,21 +195,22 @@ export default function App() {
               <option value="desc">Descending</option>
             </select>
           </div>
-          <ol>
-            {runsSorted.map((runsSorted) => (
-              <li key={runsSorted.id}>
-                <RunCard
-                  title={runsSorted.name}
-                  date={runsSorted.date}
-                  id={runsSorted.id}
-                  setSelectedRun={setSelectedRun}
-                  selectedRun={selectedRun}
-                  fetchedRun={fetchedRun}
-                />
-              </li>
-            ))}
-          </ol>
-          <div></div>
+          <div className="runCardContainer">
+            <ol>
+              {runsSorted.map((runsSorted) => (
+                <li key={runsSorted.id}>
+                  <RunCard
+                    title={runsSorted.name}
+                    date={runsSorted.date}
+                    id={runsSorted.id}
+                    setSelectedRun={setSelectedRun}
+                    selectedRun={selectedRun}
+                    fetchedRun={fetchedRun}
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
         <div className="map-block">
           <Map
