@@ -100,15 +100,18 @@ export default function App() {
 
         const run = {
           name: result.features[0].properties.name,
+          moving_time: result.features[0].properties.moving_time,
+          elapsed_time: result.features[0].properties.elapsed_time,
           distance: result.features[0].properties.distance,
-          elevation: result.features[0].properties.distance,
+          elevation: result.features[0].properties.total_elevation_gain,
           feature: result.features[0],
         };
 
         console.log(
-          "run distance, elevation, feature:",
+          "run distance, elevation, time:",
           run.distance,
-          run.elevation
+          run.elevation,
+          run.elapsed_time
         );
 
         setFetchedRun(run);
@@ -139,6 +142,22 @@ export default function App() {
   }, [selectedRun]);
 
   const runsSorted = sortRunsByField(allRuns, sortBy, order);
+
+  // convert seconds into H:MM:SS
+  function secondsToTime(e) {
+    const h = Math.floor(e / 3600)
+        .toString()
+        .padStart(0, "0"),
+      m = Math.floor((e % 3600) / 60)
+        .toString()
+        .padStart(2, "0"),
+      s = Math.floor(e % 60)
+        .toString()
+        .padStart(2, "0");
+
+    return h < 1 ? m + ":" + s : h + ":" + m + ":" + s;
+    //return `${h}:${m}:${s}`;
+  }
 
   return (
     <>
@@ -219,8 +238,12 @@ export default function App() {
           </Map>
           {fetchedRun !== undefined ? (
             <Metadata
-              name={fetchedRun !== undefined ? fetchedRun.name : "Distance"}
-              time="Time"
+              name={fetchedRun !== undefined ? fetchedRun.name : "Name"}
+              time={
+                fetchedRun !== undefined
+                  ? secondsToTime(fetchedRun.elapsed_time)
+                  : "Time"
+              }
               distance={
                 fetchedRun !== undefined
                   ? parseFloat((fetchedRun.distance / 1000).toFixed(2))
@@ -228,10 +251,16 @@ export default function App() {
               }
               elevationGain={
                 fetchedRun !== undefined
-                  ? parseFloat(fetchedRun.elevation) + "m"
+                  ? parseFloat(Math.round(fetchedRun.elevation)) + "m"
                   : "Elevation Gain"
               }
-              pace="Pace"
+              pace={
+                fetchedRun !== undefined
+                  ? secondsToTime(
+                      fetchedRun.elapsed_time / (fetchedRun.distance / 1000)
+                    ) + "/km"
+                  : "Pace"
+              }
             />
           ) : null}
         </div>
