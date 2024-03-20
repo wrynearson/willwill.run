@@ -100,6 +100,7 @@ export default function App() {
 
         const run = {
           name: result.features[0].properties.name,
+          type: result.features[0].properties.activity_sport_type,
           moving_time: result.features[0].properties.moving_time,
           elapsed_time: result.features[0].properties.elapsed_time,
           distance: result.features[0].properties.distance,
@@ -260,6 +261,13 @@ export default function App() {
                       fetchedRun.elapsed_time / (fetchedRun.distance / 1000)
                     ) + "/km"
                   : "Pace"
+              }
+              type={
+                fetchedRun !== undefined
+                  ? fetchedRun.type === "TrailRun"
+                    ? "🏔️"
+                    : "👟"
+                  : "Type"
               }
             />
           ) : null}

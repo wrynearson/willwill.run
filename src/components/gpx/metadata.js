@@ -8,6 +8,10 @@ function Metadata(props) {
         <h3 className="metadata-field">{props.name}</h3>
       </li>
       <li>
+        <h2 className="metadata-field-title">Type:</h2>
+        <h3 className="metadata-field">{props.type}</h3>
+      </li>
+      <li>
         <h2 className="metadata-field-title">Time:</h2>
         <h3 className="metadata-field">{props.time}</h3>
       </li>
