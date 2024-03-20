@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { decode, encode } from "@googlemaps/polyline-codec";
-
 import allRuns from "../data/activity_list.json";
 import Map, { Source, Layer } from "react-map-gl";
 
@@ -53,7 +51,9 @@ export default function App() {
       });
       setLoadRunStatus("loading");
       try {
-        const response = await fetch(`data/${selectedRun}.json`);
+        const response = await fetch(
+          `/data/activities/transformed/${selectedRun}.json`
+        );
 
         if (response.status >= 400) {
           // wrong response. show error.
