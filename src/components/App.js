@@ -120,7 +120,7 @@ export default function App() {
         setViewport({
           longitude: run.feature.geometry.coordinates[0][0],
           latitude: run.feature.geometry.coordinates[0][1],
-          zoom: 12,
+          zoom: 13,
           pitch: 30,
         });
       } catch (error) {
@@ -209,6 +209,7 @@ export default function App() {
               </li>
             ))}
           </ol>
+          <div></div>
         </div>
         <div className="map-block">
           <Map
