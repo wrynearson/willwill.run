@@ -35,9 +35,12 @@ function transformActivity(activityMeta, activityDetails) {
         },
         geometry: {
           type: "LineString",
-          coordinates: latlng.data.map((coor) => {
-            return [coor[1], coor[0]];
-          }),
+          coordinates:
+            latlng !== undefined
+              ? latlng.data.map((coor) => {
+                  return [coor[1], coor[0]];
+                })
+              : null,
         },
       },
     ],

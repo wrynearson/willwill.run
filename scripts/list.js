@@ -36,7 +36,7 @@ async function lookupFilesInDirectory(directoryPath) {
     }
 
     await fs.writeJSON(
-      `${__dirname}/../data-prep/activity_list.json`,
+      `${__dirname}/../src/data/activity_list.json`,
       listActivities.sort((a, b) => new Date(b.date) - new Date(a.date))
     );
   } catch (error) {
@@ -44,4 +44,4 @@ async function lookupFilesInDirectory(directoryPath) {
   }
 }
 
-lookupFilesInDirectory(`${__dirname}/../data-prep/activities/transformed`);
+lookupFilesInDirectory(`${__dirname}/../public/data/activities/transformed/`);

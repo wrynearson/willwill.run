@@ -15,7 +15,7 @@ async function streamActivity(activities) {
   for (let i = 0; i < activities.length; i++) {
     const actID = activities[i].id;
     const fileExists = fs.existsSync(
-      `${__dirname}/../data-prep/activities/transformed/${actID}.json`
+      `${__dirname}/../public/data/activities/transformed/${actID}.json`
     );
 
     if (fileExists) {
@@ -50,13 +50,13 @@ async function streamActivity(activities) {
       console.log("Saving activity", actID);
 
       await fs.writeJSON(
-        `${__dirname}/../data-prep/activities/transformed/${actID}.json`,
+        `${__dirname}/../public/data/activities/transformed/${actID}.json`,
         transformedActivity
       );
     } catch (error) {
       console.log(
         "An error occurred with fetching the activity stream:",
-        error.error.message,
+        error,
         "| Status code:",
         error.statusCode
       );
@@ -65,12 +65,7 @@ async function streamActivity(activities) {
       if (error.statusCode === 404) {
         continue;
       } else {
-        console.log(
-          "Exiting with an error code of",
-          error.statusCode,
-          ": ",
-          error.error.message
-        );
+        console.log("Exiting with an error code of", error.statusCode);
         process.exit(1);
       }
     }
