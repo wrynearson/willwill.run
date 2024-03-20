@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import gpxParser from "gpxparser";
+import { decode, encode } from "@googlemaps/polyline-codec";
+
 import allRuns from "../data/activity_list.json";
 import Map, { Source, Layer } from "react-map-gl";
 
@@ -74,7 +75,7 @@ export default function App() {
         }
 
         const result = await response.json();
-
+        console.log("result", result);
         // toast success
 
         setLoadRunStatus(response.status);
@@ -92,27 +93,29 @@ export default function App() {
           isLoading: false,
         });
 
-        console.log("THIS IS THE RESULT distance", result.name);
+        console.log(
+          "THIS IS THE RESULT distance",
+          result.features[0].properties.distance
+        );
 
         const run = {
-          name: result.name,
-          distance: result.distance,
-          elevation: result.distance,
-          feature: result.point_data,
+          name: result.features[0].properties.name,
+          distance: result.features[0].properties.distance,
+          elevation: result.features[0].properties.distance,
+          feature: result.features[0],
         };
 
         console.log(
           "run distance, elevation, feature:",
           run.distance,
-          run.elevation,
-          run.feature
+          run.elevation
         );
 
         setFetchedRun(run);
-        console.log("FETCHED RUN:", fetchedRun);
+        console.log("FETCHED RUN feature:", run.feature);
         setViewport({
-          longitude: run.feature[2].data[0][1],
-          latitude: run.feature[2].data[0][0],
+          longitude: run.feature.geometry.coordinates[0][0],
+          latitude: run.feature.geometry.coordinates[0][1],
           zoom: 12,
           pitch: 30,
         });

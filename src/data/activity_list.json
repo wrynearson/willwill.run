@@ -1,5 +1,13 @@
 [
   {
+    "id": 10959316153,
+    "date": "2024-03-14T15:24:04Z",
+    "name": "Afternoon Trail Run",
+    "type": "Run",
+    "sport_type": "TrailRun",
+    "distance": 4654.8
+  },
+  {
     "id": 10935577519,
     "date": "2024-03-11T10:36:41Z",
     "name": "Lunch Run",
