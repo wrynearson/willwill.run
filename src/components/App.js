@@ -275,7 +275,7 @@ export default function App() {
           ) : null}
         </div>
       </div>
-      <footer>
+      <footer className="footer">
         <p className="copyright">Some copyright 2023</p>
       </footer>
       <div>

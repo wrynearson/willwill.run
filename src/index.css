@@ -17,7 +17,7 @@ ul {
 }
 
 body {
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -29,7 +29,7 @@ body {
 /* child of body, from /Users/will/DevSeed/Personal/gpx_viz/public/index.html*/
 
 #root {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -57,7 +57,7 @@ code {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 6rem;
+  height: 6vh;
   background-color: #05651b;
 }
 
@@ -87,7 +87,7 @@ code {
 
 .body-content {
   display: flex;
-  height: 80%;
+  height: 90vh;
   flex-direction: row;
   justify-content: flex-end;
 }
@@ -102,7 +102,7 @@ code {
 }
 
 .runs-block-title {
-  margin: 0;
+  margin: 1rem 0.5rem 0 0.5rem;
 }
 
 .run-filters {
@@ -111,6 +111,7 @@ code {
   flex-wrap: wrap;
   /* this part isn't great on small screens */
   justify-content: center;
+  margin: 0rem 0.5rem 0 0.5rem;
   gap: 0rem 1rem;
   width: 15rem;
   height: 3rem;
@@ -280,14 +281,18 @@ code {
   text-decoration: none;
 }
 
+/* .footer {
+  height: 4vh;
+} */
+
 .copyright {
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-content: space-between;
   align-items: center;
+  height: 4vh;
   background-color: #05661c;
-  height: 4rem;
   padding: 0 0 0 1rem;
   margin: 0;
   color: white;
