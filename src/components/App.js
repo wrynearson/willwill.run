@@ -122,6 +122,7 @@ export default function App() {
           latitude: run.feature.geometry.coordinates[0][1],
           zoom: 13,
           pitch: 30,
+          bearing: 0,
         });
       } catch (error) {
         // toast error try again
