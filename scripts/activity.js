@@ -55,7 +55,7 @@ async function streamActivity(activities) {
     } catch (error) {
       console.log(
         "An error occurred with fetching the activity stream:",
-        error,
+        error.error.message,
         "| Status code:",
         error.statusCode
       );
