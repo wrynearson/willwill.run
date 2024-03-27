@@ -16,6 +16,8 @@ import layerStyle from "./map/layerStyle";
 import RunCard from "./gpx/runCard";
 import Metadata from "./gpx/metadata";
 
+const baseurl = process.env.PUBLIC_URL || "";
+
 // convert seconds into H:MM:SS
 function secondsToTime(e) {
   const h = Math.floor(e / 3600).toString();
@@ -63,7 +65,7 @@ export default function App() {
       });
       try {
         const response = await fetch(
-          `/data/activities/transformed/${selectedRun}.json`
+          `${baseurl}/data/activities/transformed/${selectedRun}.json`
         );
 
         if (response.status >= 400) {
