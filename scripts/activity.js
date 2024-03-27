@@ -64,9 +64,10 @@ async function streamActivity(activities) {
     } catch (error) {
       console.log(
         "An error occurred with fetching the activity stream:",
-        error.error.message,
+        error.message,
         "| Status code:",
-        error.statusCode
+        error.statusCode,
+        error
       );
 
       // statusCode 429 means the rate limit was exceeded
