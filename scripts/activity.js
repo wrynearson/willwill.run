@@ -9,6 +9,8 @@ const getCredentials = require("./auth");
 const transformActivity = require("./transform");
 
 async function streamActivity(activities) {
+  await fs.ensureDir(`${__dirname}/../public/data/activities/transformed`);
+
   console.log(
     "Attempting to stream each activity from Strava that isn't already saved in the streamed folder."
   );
