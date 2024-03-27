@@ -14,6 +14,15 @@ async function streamActivity(activities) {
   );
   for (let i = 0; i < activities.length; i++) {
     const actID = activities[i].id;
+
+    if (
+      activities[i].distance <= 0 ||
+      activities[i].visibility !== "everyone" ||
+      activities[i].type !== "Run"
+    ) {
+      continue;
+    }
+
     const fileExists = fs.existsSync(
       `${__dirname}/../public/data/activities/transformed/${actID}.json`
     );
@@ -65,7 +74,7 @@ async function streamActivity(activities) {
         continue;
       } else {
         console.log("Exiting with an error code of", error.statusCode);
-        process.exit(1);
+        process.exit(0);
       }
     }
   }

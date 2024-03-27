@@ -1,0 +1,90 @@
+name: Deploy Github Pages
+
+on:
+  push:
+    branches:
+      - "main"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+env:
+  REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
+  REACT_APP_CLIENT_SECRET: ${{ secrets.REACT_APP_CLIENT_SECRET }}
+  REACT_APP_AUTH_CODE: ${{ secrets.REACT_APP_AUTH_CODE }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # node-version-file: '.nvmrc'
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+
+      - name: Cache dist
+        uses: actions/cache@v3
+        id: cache-dist
+        with:
+          path: public
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+
+      - name: Cache runs
+        uses: actions/cache@v3
+        id: cache-runs
+        with:
+          path: |
+            public/data/activities/transformed/**
+            credentials.json
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+
+      - name: Install
+        run: npm install
+
+      - name: Fetch runs
+        run: node scripts/index
+
+      - name: Build runs list
+        run: node scripts/list
+
+      - name: Build
+        run: npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore dist cache
+        uses: actions/cache@v3
+        id: cache-dist
+        with:
+          path: public
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          clean: true
+          single-commit: true
+          folder: public

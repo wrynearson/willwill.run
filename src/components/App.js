@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
 
 import allRuns from "../data/activity_list.json";
 import Map, { Source, Layer } from "react-map-gl";
@@ -17,12 +16,25 @@ import layerStyle from "./map/layerStyle";
 import RunCard from "./gpx/runCard";
 import Metadata from "./gpx/metadata";
 
+// convert seconds into H:MM:SS
+function secondsToTime(e) {
+  const h = Math.floor(e / 3600).toString();
+  const m = Math.floor((e % 3600) / 60)
+    .toString()
+    .padStart(2, "0");
+  const s = Math.floor(e % 60)
+    .toString()
+    .padStart(2, "0");
+
+  return h < 1 ? `${m}:${s}` : `${h}:${m}:${s}`;
+  //return `${h}:${m}:${s}`;
+}
+
 export default function App() {
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
   const [selectedRun, setSelectedRun] = useState();
   const [fetchedRun, setFetchedRun] = useState();
-  const [loadRunStatus, setLoadRunStatus] = useState("idle");
 
   const [viewport, setViewport] = useState({
     longitude: 6.96,
@@ -49,7 +61,6 @@ export default function App() {
         position: "bottom-right",
         autoClose: false,
       });
-      setLoadRunStatus("loading");
       try {
         const response = await fetch(
           `/data/activities/transformed/${selectedRun}.json`
@@ -57,8 +68,6 @@ export default function App() {
 
         if (response.status >= 400) {
           // wrong response. show error.
-
-          setLoadRunStatus(response.status);
 
           toast.update(toastRun, {
             type: "error",
@@ -77,8 +86,6 @@ export default function App() {
         const result = await response.json();
         console.log("result", result);
         // toast success
-
-        setLoadRunStatus(response.status);
 
         toast.update(toastRun, {
           render: (
@@ -126,7 +133,6 @@ export default function App() {
         });
       } catch (error) {
         // toast error try again
-        setLoadRunStatus(error);
         console.log("caught error: ", error);
         toast.update(toastRun, {
           type: "error",
@@ -144,22 +150,6 @@ export default function App() {
   }, [selectedRun]);
 
   const runsSorted = sortRunsByField(allRuns, sortBy, order);
-
-  // convert seconds into H:MM:SS
-  function secondsToTime(e) {
-    const h = Math.floor(e / 3600)
-        .toString()
-        .padStart(0, "0"),
-      m = Math.floor((e % 3600) / 60)
-        .toString()
-        .padStart(2, "0"),
-      s = Math.floor(e % 60)
-        .toString()
-        .padStart(2, "0");
-
-    return h < 1 ? m + ":" + s : h + ":" + m + ":" + s;
-    //return `${h}:${m}:${s}`;
-  }
 
   return (
     <>
