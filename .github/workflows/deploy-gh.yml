@@ -81,7 +81,7 @@ jobs:
         uses: actions/cache@v3
         id: cache-runs
         with:
-          path: public/data/activities/transformed/**
+          path: public/data/activities/transformed
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Cache auth
