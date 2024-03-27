@@ -74,7 +74,7 @@ jobs:
         uses: actions/cache@v3
         id: cache-dist
         with:
-          path: public
+          path: build
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       - name: Cache runs
@@ -115,7 +115,7 @@ jobs:
         uses: actions/cache@v3
         id: cache-dist
         with:
-          path: public
+          path: build
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       - name: Deploy 🚀
@@ -124,4 +124,4 @@ jobs:
           branch: gh-pages
           clean: true
           single-commit: true
-          folder: public
+          folder: build
