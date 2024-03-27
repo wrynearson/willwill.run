@@ -102,6 +102,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          PUBLIC_URL: ${{ vars.PUBLIC_URL }}
 
   deploy:
     runs-on: ubuntu-latest
