@@ -16,16 +16,6 @@ import layerStyle from "./map/layerStyle";
 import RunCard from "./gpx/runCard";
 import Metadata from "./gpx/metadata";
 
-import mapboxgl from "mapbox-gl";
-
-// The following is required to stop "npm build" from transpiling mapbox code.
-// notice the exclamation point in the import.
-// @ts-ignore
-
-mapboxgl.workerClass =
-  // eslint-disable-next-line
-  require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
-
 const baseurl = process.env.PUBLIC_URL || "";
 
 // convert seconds into H:MM:SS
@@ -217,7 +207,7 @@ export default function App() {
         </div>
         <div className="map-block">
           <Map
-            f
+            mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             {...viewport}
             initialViewState={viewport}
             onLoad={(map) => {
