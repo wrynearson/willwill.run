@@ -2,8 +2,8 @@ name: Deploy Github Pages
 
 on:
   schedule:
-    # Runs at 3:15am every day of the year (1st *), in every month (2nd *) on every day of the week (3rd *). https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
-    - cron: "15 3 * * *"
+    # Runs at 3:15am every day of the month (1st *), in every month (2nd *) on Monday (1) to Friday (5)). https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
+    - cron: "15 3 * * 1-5"
   push:
     branches:
       - "v2"
