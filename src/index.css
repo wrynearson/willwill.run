@@ -140,6 +140,7 @@ code {
   align-items: center;
   position: relative;
   margin: 1em 0rem;
+  padding: 1rem 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: white;
@@ -159,16 +160,16 @@ code {
   color: rgb(200, 200, 200);
 }
 
-.run-card .run-thumbnail {
+/* .run-card .run-thumbnail {
   width: 100px;
   border-radius: 0.5rem;
   margin: 0.5rem;
-}
+} */
 
 .run-attributes {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
   margin: 0 0 0 1rem;
 }
 
@@ -180,6 +181,7 @@ code {
 .run-attributes .run-date {
   color: rgb(150, 150, 150);
   margin: 0rem;
+  font-size: 0.75rem;
 }
 
 .run-distance {

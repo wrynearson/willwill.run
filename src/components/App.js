@@ -86,8 +86,6 @@ export default function App() {
         }
 
         const result = await response.json();
-        console.log("result", result);
-        // toast success
 
         toast.update(toastRun, {
           render: (
@@ -101,11 +99,6 @@ export default function App() {
           autoClose: 1000,
           isLoading: false,
         });
-
-        console.log(
-          "THIS IS THE RESULT distance",
-          result.features[0].properties.distance
-        );
 
         const run = {
           name: result.features[0].properties.name,

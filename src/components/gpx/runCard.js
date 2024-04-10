@@ -15,13 +15,14 @@ function RunCard(props) {
         props.setSelectedRun(props.id);
       }}
     >
-      <img
+      {/* remove images for now */
+      /* <img
         className="run-thumbnail"
         src="https://placehold.co/100x75"
         alt="Placeholder"
         width="100"
         height="75"
-      />
+      /> */}
       <div className="run-attributes">
         <h3 className="run-name">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
