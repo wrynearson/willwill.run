@@ -1,13 +1,299 @@
+@import "react-toastify/dist/ReactToastify.css";
+* {
+  padding: 0rem;
+  margin: 0rem;
+}
+
+:root {
+  --toastify-color-success: #05651b;
+  --toastify-color-warning: orange;
+  --toastify-color-error: darkred;
+}
+
+ol,
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
 body {
+  /* height: 100vh; */
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* child of body, from /Users/will/DevSeed/Personal/gpx_viz/public/index.html*/
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.button-primary {
+  border: none;
+  background: #67d27e;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.button-large {
+  border-radius: 8px;
+  padding: 16px 24px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 6vh;
+  background-color: #05651b;
+}
+
+.site-title {
+  margin: 0 1rem;
+  color: white;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+}
+
+.nav-item {
+  margin: 0 1rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.body-content {
+  display: flex;
+  height: 90vh;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.runs-block {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  margin: 0 1rem;
+  gap: 1rem;
+  height: auto;
+}
+
+.runs-block-title {
+  margin: 1rem 0.5rem 0 0.5rem;
+}
+
+.run-filters {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* this part isn't great on small screens */
+  justify-content: center;
+  margin: 0rem 0.5rem 0 0.5rem;
+  gap: 0rem 1rem;
+  width: 15rem;
+  height: 3rem;
+  text-transform: uppercase;
+}
+
+.run-filters select {
+  border-radius: 0.25rem;
+  padding: 0.1rem;
+  border-width: 2px;
+  background-color: white;
+}
+
+.runCardContainer {
+  max-height: auto;
+  overflow-y: auto;
+  padding: 0 0.5rem;
+  /* Optional: Add these for better cross-browser appearance */
+  scrollbar-width: thin;
+  scrollbar-color: darkgrey lightgrey;
+}
+
+.run-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  margin: 1em 0rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  text-decoration: none;
+}
+
+.run-card.selected {
+  background-color: #05661c;
+  transition: 150ms;
+}
+
+.run-card.selected .run-name {
+  color: white;
+}
+
+.run-card.selected .run-date {
+  color: rgb(200, 200, 200);
+}
+
+.run-card .run-thumbnail {
+  width: 100px;
+  border-radius: 0.5rem;
+  margin: 0.5rem;
+}
+
+.run-attributes {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 0 0 1rem;
+}
+
+.run-attributes .run-name {
+  color: black;
+  margin: 0rem;
+}
+
+.run-attributes .run-date {
+  color: rgb(150, 150, 150);
+  margin: 0rem;
+}
+
+.run-distance {
+  align-self: flex-end;
+  position: absolute;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0 0.5rem 0;
+  right: 0px;
+  bottom: 0;
+  color: white;
+}
+
+/* the space between defines a parent-child relationship */
+.run-distance.short {
+  background-color: green;
+}
+
+.run-distance.medium {
+  background-color: orange;
+}
+
+.run-distance.long {
+  background-color: darkred;
+}
+
+.map-block {
+  display: flex;
+  position: relative;
+  width: 66%;
+  height: 100%;
+  background-color: rgb(246, 246, 201);
+  justify-content: space-around;
+  align-items: center;
+}
+
+.metadata-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  top: 1rem;
+  margin: 1rem 0rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  text-decoration: none;
+}
+
+.metadata-field-title {
+  font-size: 1rem;
+  color: rgb(185, 184, 184);
+  margin: 0.5rem;
+}
+
+.metadata-field {
+  font-size: 1.5rem;
+  color: #05651b;
+  margin: 0.5rem;
+}
+
+.metadata-field.short {
+  color: #05651b;
+}
+
+.metadata-field.medium {
+  color: orange;
+}
+
+.metadata-field.long {
+  color: darkred;
+}
+
+.background-box {
+  width: 400px;
+  margin: 32px 0px 0px 32px;
+  padding: 16px 32px 16px 32px;
+  background-color: #f3f1f1;
+  box-shadow: 5px 5px 10px 5px #dadada;
+}
+
+.selected-runs-section {
+  border-top: 1px dashed;
+  border-color: grey;
+}
+
+.selected-runs-section p {
+  margin: 8px 0px;
+}
+
+.run-list {
+  margin: 10px 0px;
+}
+
+.run-link {
+  background-color: #1e7f8f;
+  border-radius: 2px;
+  padding: 0px 4px;
+  color: white;
+  text-decoration: none;
+}
+
+/* .footer {
+  height: 4vh;
+} */
+
+.copyright {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 4vh;
+  background-color: #05661c;
+  padding: 0 0 0 1rem;
+  margin: 0;
+  color: white;
 }
