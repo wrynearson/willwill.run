@@ -1,10 +1,12 @@
 const fs = require("fs-extra");
 const path = require("path");
 
-const activities = require(`${__dirname}/../data-prep/activities.json`);
-
 async function lookupFilesInDirectory(directoryPath) {
   try {
+    const activities = await fs.readJSON(
+      `${__dirname}/../data-prep/activities.json`
+    );
+
     const directory = await fs.readdir(directoryPath);
     let listActivities = [];
 

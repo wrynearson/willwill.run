@@ -10,6 +10,8 @@ dotenv.config({ path: `.env.local`, override: true });
 const strava = require("strava-v3");
 
 async function main() {
+  await fs.ensureDir(`${__dirname}/../data-prep`);
+
   try {
     console.log(
       "Current Strava rate limit (0-1, 1=exceeded)",
