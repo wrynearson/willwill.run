@@ -95,7 +95,7 @@ code {
 .runs-block {
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 20%;
   margin: 0 1rem;
   gap: 1rem;
   height: auto;
@@ -210,7 +210,7 @@ code {
 .map-block {
   display: flex;
   position: relative;
-  width: 66%;
+  width: 80%;
   height: 100%;
   background-color: rgb(246, 246, 201);
   justify-content: space-around;
