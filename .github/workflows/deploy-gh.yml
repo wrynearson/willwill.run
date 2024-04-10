@@ -5,8 +5,8 @@ on:
     branches:
       - "master"
   schedule:
-    # Runs at 10:45am every day of the month (1st *), in every month (2nd *) on Monday (1) to Friday (5)). https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
-    - cron: "27 */3 * * *"
+    # Runs at 3:27am every day of the month (1st *), in every month (2nd *) on Monday (1) to Friday (5)). https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
+    - cron: "27 3 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
