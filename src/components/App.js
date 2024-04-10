@@ -269,7 +269,7 @@ export default function App() {
         </div>
       </div>
       <footer className="footer">
-        <p className="copyright">Some copyright 2023</p>
+        <p className="copyright">Some copyright 2024</p>
       </footer>
       <div>
         <ToastContainer />

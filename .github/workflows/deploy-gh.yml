@@ -3,10 +3,10 @@ name: Deploy Github Pages
 on:
   push:
     branches:
-      - "v2"
+      - "master"
   schedule:
-    # Runs at 3:15am every day of the month (1st *), in every month (2nd *) on Monday (1) to Friday (5)). https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
-    - cron: "0 3 * * *"
+    # Runs at 10:45am every day of the month (1st *), in every month (2nd *) on Monday (1) to Friday (5)). https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
+    - cron: "35 10 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
