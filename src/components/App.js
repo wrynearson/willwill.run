@@ -188,7 +188,7 @@ export default function App() {
           <div className="runCardContainer">
             <ol className="runCards">
               {runsSorted.map((runsSorted) => (
-                <li key={runsSorted.id}>
+                <li key={runsSorted.id} className="runCardLI">
                   <RunCard
                     title={runsSorted.name}
                     date={runsSorted.date}

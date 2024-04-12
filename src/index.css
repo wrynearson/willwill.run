@@ -148,6 +148,11 @@ code {
   gap: 1rem;
 }
 
+.runCardLI {
+  display: flex;
+  flex-direction: column;
+}
+
 .run-card {
   display: flex;
   flex-direction: row;
@@ -324,12 +329,12 @@ code {
     flex-direction: column-reverse;
   }
   [class="runs-block"] {
-    height: 33%;
+    height: inherit;
     width: 100%;
     margin: 0;
   }
   [class="map-block"] {
-    height: 66%;
+    height: 70%;
     width: 100%;
   }
   [class="runCardContainer"] {
