@@ -186,7 +186,7 @@ export default function App() {
             </div>
           </div>
           <div className="runCardContainer">
-            <ol>
+            <ol className="runCards">
               {runsSorted.map((runsSorted) => (
                 <li key={runsSorted.id}>
                   <RunCard
