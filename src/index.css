@@ -326,27 +326,57 @@ code {
   /* For mobile phones: */
 
   [class="body-content"] {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   [class="runs-block"] {
-    height: inherit;
+    height: auto;
     width: 100%;
-    margin: 0;
+    position: absolute;
+    z-index: 7;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* bottom: 0.5rem; */
+    margin: 0rem 0rem;
+    border-radius: 1rem;
   }
   [class="map-block"] {
-    height: 70%;
+    height: 100%;
     width: 100%;
   }
   [class="runCardContainer"] {
     padding: 0;
+    max-height: 60%;
   }
   [class="runCards"] {
     padding: 0 1rem;
     gap: 0 1rem;
     flex-direction: row;
   }
+
+  [class="runs-block-title"] {
+    padding: 0 0.5rem;
+    gap: 0rem;
+    max-height: 20%;
+  }
+
+  [class="run-filters"] {
+    padding: 0 0.5rem;
+    gap: 1rem;
+    max-height: 20%;
+  }
+
   [class="runCard"] {
     margin: 0;
-    padding: 0.5rem;
+    padding: 0;
+  }
+
+  [class="run-attributes"] {
+    margin: 0;
+    padding: 0;
+    min-width: 8rem;
+    max-width: 20rem;
+  }
+  [class="runCardLI"] {
+    display: flex;
+    flex-direction: column;
   }
 }
