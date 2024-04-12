@@ -153,33 +153,37 @@ export default function App() {
         <div className="runs-block">
           <RunSelector title="Past Runs" />
           <div className="run-filters">
-            <label htmlFor="sort-by-select">Sort By</label>
-            <select
-              id="sort-by-order"
-              value={sortBy}
-              className="sort-by-select"
-              name="by"
-              onChange={(e) => {
-                console.log("Now sorting by:", e.target.value);
-                setSortBy(e.target.value);
-              }}
-            >
-              <option value="name">Name</option>
-              <option value="date">Date</option>
-            </select>
-            <label htmlFor="sort-order-select">Sort Order </label>
-            <select
-              id="sort-order-select"
-              value={order}
-              className="sort-order-select"
-              onChange={(e) => {
-                console.log("New sort order: ", e.target.value);
-                setOrder(e.target.value);
-              }}
-            >
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
-            </select>
+            <div className="run-filter">
+              <label htmlFor="sort-by-select">Sort By</label>
+              <select
+                id="sort-by-order"
+                value={sortBy}
+                className="sort-by-select"
+                name="by"
+                onChange={(e) => {
+                  console.log("Now sorting by:", e.target.value);
+                  setSortBy(e.target.value);
+                }}
+              >
+                <option value="name">Name</option>
+                <option value="date">Date</option>
+              </select>
+            </div>
+            <div className="run-filter">
+              <label htmlFor="sort-order-select">Sort Order </label>
+              <select
+                id="sort-order-select"
+                value={order}
+                className="sort-order-select"
+                onChange={(e) => {
+                  console.log("New sort order: ", e.target.value);
+                  setOrder(e.target.value);
+                }}
+              >
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </div>
           </div>
           <div className="runCardContainer">
             <ol>

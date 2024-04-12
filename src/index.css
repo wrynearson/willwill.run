@@ -99,6 +99,14 @@ code {
   margin: 0 1rem;
   gap: 1rem;
   height: auto;
+  min-width: 100px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class="runs-block"] {
+    background-color: blue;
+  }
 }
 
 .runs-block-title {
@@ -107,15 +115,20 @@ code {
 
 .run-filters {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   /* this part isn't great on small screens */
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0rem 0.5rem 0 0.5rem;
-  gap: 0rem 1rem;
-  width: 15rem;
-  height: 3rem;
+  gap: 1rem;
+
   text-transform: uppercase;
+}
+
+.run-filter {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .run-filters select {
