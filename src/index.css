@@ -64,6 +64,7 @@ code {
 .site-title {
   margin: 0 1rem;
   color: white;
+  font-size: 2vmax;
 }
 
 .navigation {
@@ -103,6 +104,7 @@ code {
 }
 
 .runs-block-title {
+  display: flex;
   margin: 1rem 0.5rem 0 0.5rem;
 }
 
@@ -356,10 +358,11 @@ code {
     padding: 0 0.5rem;
     gap: 0rem;
     max-height: 20%;
+    display: none;
   }
 
   [class="run-filters"] {
-    padding: 0 0.5rem;
+    padding: 0.5rem 0.5rem;
     gap: 1rem;
     max-height: 20%;
   }
