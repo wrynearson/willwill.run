@@ -144,7 +144,7 @@ code {
   display: flex;
   flex-wrap: nowrap;
   max-height: auto;
-  overflow-y: hidden;
+  overflow-y: scroll;
   padding: 0 0.5rem;
   /* Optional: Add these for better cross-browser appearance */
   scrollbar-width: thin;
