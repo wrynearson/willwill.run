@@ -10,6 +10,11 @@
   --toastify-color-error: darkred;
 }
 
+.Toastify__toast-container {
+  max-width: 75vw;
+  margin: 2rem 1rem;
+}
+
 ol,
 ul {
   list-style-type: none;
@@ -30,6 +35,7 @@ body {
 
 #root {
   height: 100vh;
+  max-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
 }
@@ -64,7 +70,7 @@ code {
 .site-title {
   margin: 0 1rem;
   color: white;
-  font-size: 2vmax;
+  font-size: 2rem;
 }
 
 .navigation {
@@ -80,6 +86,7 @@ code {
   color: white;
   text-decoration: none;
   text-transform: uppercase;
+  font-size: 1rem;
 }
 
 .nav-item:hover {
@@ -137,7 +144,7 @@ code {
   display: flex;
   flex-wrap: nowrap;
   max-height: auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   padding: 0 0.5rem;
   /* Optional: Add these for better cross-browser appearance */
   scrollbar-width: thin;
@@ -163,12 +170,12 @@ code {
   padding: 1rem 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.97);
   text-decoration: none;
 }
 
 .run-card.selected {
-  background-color: #05661c;
+  background-color: rgb(5, 102, 28);
   transition: 150ms;
 }
 
@@ -327,18 +334,31 @@ code {
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
 
+  [class="site-title"] {
+    font-size: 1.5rem;
+  }
+
+  [class="header"] {
+    max-height: 7.5%;
+  }
+
   [class="body-content"] {
     flex-direction: column;
+    max-height: 90%;
   }
+
+  [class="footer"] {
+    max-height: 7.5%;
+  }
+
   [class="runs-block"] {
-    height: auto;
     width: 100%;
     position: absolute;
-    z-index: 7;
-    background-color: rgba(255, 255, 255, 0.9);
-    /* bottom: 0.5rem; */
+    z-index: 2;
     margin: 0rem 0rem;
-    border-radius: 1rem;
+    margin: 0rem 0rem;
+    text-decoration: none;
+    flex-direction: column;
   }
   [class="map-block"] {
     height: 100%;
@@ -346,7 +366,7 @@ code {
   }
   [class="runCardContainer"] {
     padding: 0;
-    max-height: 60%;
+    max-height: auto;
   }
   [class="runCards"] {
     padding: 0 1rem;
@@ -355,9 +375,6 @@ code {
   }
 
   [class="runs-block-title"] {
-    padding: 0 0.5rem;
-    gap: 0rem;
-    max-height: 20%;
     display: none;
   }
 
@@ -365,9 +382,16 @@ code {
     padding: 0.5rem 0.5rem;
     gap: 1rem;
     max-height: 20%;
+    background-color: rgba(255, 255, 255, 0.97);
+    border-radius: 1rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    align-items: flex-start;
+    /* flex-direction: row;
+    flex-wrap: nowrap; */
+    justify-content: center;
   }
 
-  [class="runCard"] {
+  [class="run-card"] {
     margin: 0;
     padding: 0;
   }
@@ -381,5 +405,32 @@ code {
   [class="runCardLI"] {
     display: flex;
     flex-direction: column;
+  }
+
+  [class="metadata-box"] {
+    top: 0rem;
+    margin: 0.5rem 0rem;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.97);
+  }
+
+  [class="metadata-field-title"] {
+    font-size: 0.8rem;
+  }
+
+  [class="metadata-field"] {
+    font-size: 1rem;
+  }
+
+  [class="metadata-field short"] {
+    font-size: 1rem;
+  }
+
+  [class="metadata-field medium"] {
+    font-size: 1rem;
+  }
+
+  [class="metadata-field long"] {
+    font-size: 1rem;
   }
 }

@@ -16,6 +16,8 @@ import layerStyle from "./map/layerStyle";
 import RunCard from "./gpx/runCard";
 import Metadata from "./gpx/metadata";
 
+import { Helmet } from "react-helmet";
+
 const baseurl = process.env.PUBLIC_URL || "";
 
 // convert seconds into H:MM:SS
@@ -148,6 +150,10 @@ export default function App() {
 
   return (
     <>
+      <Helmet>
+        <title>Will will run</title>
+        <meta name="theme-color" content="#05651b" />
+      </Helmet>
       <HeaderComponent title="Will will run" />
       <div className="body-content">
         <div className="runs-block">
