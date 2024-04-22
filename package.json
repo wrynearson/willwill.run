@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/mapbox-gl": "^2.7.12",
     "axios": "^0.27.2",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.3.1",
     "fs-extra": "^11.2.0",
     "gpxparser": "^3.0.8",
