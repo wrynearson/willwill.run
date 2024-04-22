@@ -402,6 +402,15 @@ code {
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     justify-content: center;
     align-self: center;
+    flex-wrap: nowrap;
+    font-size: 0.75rem;
+  }
+
+  [class="run-filter"] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   [class="run-card"] {
@@ -455,6 +464,7 @@ code {
   [class="run-name"] {
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 1rem;
   }
 
   [class="Toastify"] {
