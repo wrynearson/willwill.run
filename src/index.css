@@ -398,7 +398,7 @@ code {
     gap: 1rem;
     max-height: 20%;
     background-color: rgba(255, 255, 255, 0.97);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
     justify-content: center;
     align-self: center;
