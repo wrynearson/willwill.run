@@ -456,4 +456,8 @@ code {
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  [class="Toastify"] {
+    display: none;
+  }
 }
