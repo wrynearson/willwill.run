@@ -107,7 +107,6 @@ code {
   margin: 0 1rem;
   gap: 1rem;
   height: auto;
-  min-width: 100px;
 }
 
 .runs-block-title {
@@ -123,7 +122,6 @@ code {
   justify-content: flex-start;
   margin: 0rem 0.5rem 0 0.5rem;
   gap: 1rem;
-
   text-transform: uppercase;
 }
 
@@ -154,12 +152,15 @@ code {
 .runCards {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   gap: 1rem;
+  max-width: 100%;
 }
 
 .runCardLI {
   display: flex;
   flex-direction: column;
+  max-width: 100%;
 }
 
 .run-card {
@@ -172,6 +173,10 @@ code {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.97);
   text-decoration: none;
+  overflow: clip;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .run-card.selected {
@@ -195,14 +200,21 @@ code {
 
 .run-attributes {
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: column;
   width: 100%;
   margin: 0 0 0 1rem;
+  overflow: clip;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .run-attributes .run-name {
   color: black;
   margin: 0rem;
+  overflow: clip;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .run-attributes .run-date {
@@ -365,13 +377,16 @@ code {
     width: 100%;
   }
   [class="runCardContainer"] {
-    padding: 0;
+    padding: 0 0 2.5rem 0;
     max-height: auto;
   }
   [class="runCards"] {
     padding: 0 1rem;
     gap: 0 1rem;
     flex-direction: row;
+    max-width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   [class="runs-block-title"] {
@@ -392,17 +407,22 @@ code {
   [class="run-card"] {
     margin: 0;
     padding: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   [class="run-attributes"] {
+    display: flex;
     margin: 0;
     padding: 0;
-    min-width: 8rem;
-    max-width: 20rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   [class="runCardLI"] {
     display: flex;
     flex-direction: column;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   [class="metadata-box"] {
@@ -430,5 +450,10 @@ code {
 
   [class="metadata-field long"] {
     font-size: 1rem;
+  }
+
+  [class="run-name"] {
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
