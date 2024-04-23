@@ -439,6 +439,9 @@ code {
     margin: 0.5rem 0rem;
     border-radius: 0.5rem;
     background-color: rgba(255, 255, 255, 0.97);
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    max-height: 25%;
   }
 
   [class="metadata-field-title"] {
