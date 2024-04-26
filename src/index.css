@@ -346,24 +346,24 @@ code {
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
 
-  [class="site-title"] {
+  .site-title {
     font-size: 1.5rem;
   }
 
-  [class="header"] {
+  .header {
     max-height: 7.5%;
   }
 
-  [class="body-content"] {
+  .body-content {
     flex-direction: column;
     max-height: 90%;
   }
 
-  [class="footer"] {
+  .footer {
     max-height: 7.5%;
   }
 
-  [class="runs-block"] {
+  .runs-block {
     width: 100%;
     position: absolute;
     z-index: 2;
@@ -372,15 +372,15 @@ code {
     text-decoration: none;
     flex-direction: column;
   }
-  [class="map-block"] {
+  .map-block {
     height: 100%;
     width: 100%;
   }
-  [class="runCardContainer"] {
+  .runCardContainer {
     padding: 0 0 2.5rem 0;
     max-height: auto;
   }
-  [class="runCards"] {
+  .runCards {
     padding: 0 1rem;
     gap: 0 1rem;
     flex-direction: row;
@@ -389,12 +389,12 @@ code {
     text-overflow: ellipsis;
   }
 
-  [class="runs-block-title"] {
+  .runs-block-title {
     display: none;
   }
 
-  [class="run-filters"] {
-    padding: 0.75rem 1rem;
+  .run-filters {
+    padding: 0.5rem;
     gap: 1rem;
     max-height: 20%;
     background-color: rgba(255, 255, 255, 0.97);
@@ -406,71 +406,71 @@ code {
     font-size: 0.75rem;
   }
 
-  [class="run-filter"] {
+  .run-filter {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
   }
 
-  [class="run-card"] {
+  .run-card {
     margin: 0;
-    padding: 0;
+    padding: 0.5rem;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
-  [class="run-attributes"] {
+  .run-attributes {
     display: flex;
     margin: 0;
     padding: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  [class="runCardLI"] {
+  .runCardLI {
     display: flex;
     flex-direction: column;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
-  [class="metadata-box"] {
+  .metadata-box {
     top: 0rem;
     margin: 0.5rem 0rem;
     border-radius: 0.5rem;
     background-color: rgba(255, 255, 255, 0.97);
     flex-wrap: wrap;
     overflow-y: scroll;
-    max-height: 25%;
+    max-height: 15%;
   }
 
-  [class="metadata-field-title"] {
+  .metadata-field-title {
     font-size: 0.8rem;
   }
 
-  [class="metadata-field"] {
+  .metadata-field {
     font-size: 1rem;
   }
 
-  [class="metadata-field short"] {
+  .metadata-field short {
     font-size: 1rem;
   }
 
-  [class="metadata-field medium"] {
+  .metadata-field medium {
     font-size: 1rem;
   }
 
-  [class="metadata-field long"] {
+  .metadata-field long {
     font-size: 1rem;
   }
 
-  [class="run-name"] {
+  .run-name {
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 1rem;
   }
 
-  [class="Toastify"] {
+  .Toastify {
     display: none;
   }
 }
