@@ -24,7 +24,7 @@ function RunCard(props) {
         height="75"
       /> */}
       <div className="run-attributes">
-        <h3 className="run-name">{props.title}</h3>
+        <h3 className="run-name truncate">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
       </div>
     </a>

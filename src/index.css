@@ -204,6 +204,9 @@ code {
   flex-direction: column;
   width: 100%;
   margin: 0 0 0 1rem;
+}
+
+.truncate {
   overflow: clip;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -212,9 +215,6 @@ code {
 .run-attributes .run-name {
   color: black;
   margin: 0rem;
-  overflow: clip;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .run-attributes .run-date {
@@ -385,8 +385,6 @@ code {
     gap: 0 1rem;
     flex-direction: row;
     max-width: 80%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   .runs-block-title {
@@ -416,22 +414,16 @@ code {
   .run-card {
     margin: 0;
     padding: 0.5rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   .run-attributes {
     display: flex;
     margin: 0;
     padding: 0;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
   .runCardLI {
     display: flex;
     flex-direction: column;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   .metadata-box {
@@ -465,8 +457,6 @@ code {
   }
 
   .run-name {
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 1rem;
   }
 
