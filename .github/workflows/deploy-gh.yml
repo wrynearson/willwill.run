@@ -105,7 +105,7 @@ jobs:
       - name: Upload Build (artifact)
         uses: actions/upload-artifact@v4
         with:
-          name: build-arifact
+          name: build-artifact
           path: build
           retention-days: 1
 
