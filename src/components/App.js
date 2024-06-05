@@ -18,6 +18,8 @@ import Metadata from "./gpx/metadata";
 
 import { Helmet } from "react-helmet";
 
+import { format } from "date-fns";
+
 const baseurl = process.env.PUBLIC_URL || "";
 
 // convert seconds into H:MM:SS
@@ -197,7 +199,7 @@ export default function App() {
                 <li key={runsSorted.id} className="runCardLI">
                   <RunCard
                     title={runsSorted.name}
-                    date={runsSorted.date}
+                    date={format(runsSorted.date, "iii, d LLL yyy")}
                     id={runsSorted.id}
                     setSelectedRun={setSelectedRun}
                     selectedRun={selectedRun}
