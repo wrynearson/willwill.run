@@ -1,8 +1,11 @@
+import { Link, useParams } from "react-router-dom";
+import selectedRun from "../App";
+
 function RunCard(props) {
   const selectedRunClass = props.selectedRun === props.id ? "selected" : "";
   return (
-    <a
-      href="https://www.developmentseed.org"
+    <Link
+      to={selectedRun}
       className={`run-card ${selectedRunClass}`}
       onClick={(e) => {
         e.preventDefault();
@@ -15,19 +18,11 @@ function RunCard(props) {
         props.setSelectedRun(props.id);
       }}
     >
-      {/* remove images for now */
-      /* <img
-        className="run-thumbnail"
-        src="https://placehold.co/100x75"
-        alt="Placeholder"
-        width="100"
-        height="75"
-      /> */}
       <div className="run-attributes truncate">
         <h3 className="run-name truncate">{props.title}</h3>
         <time className="run-date">on {props.date}</time>
       </div>
-    </a>
+    </Link>
   );
 }
 

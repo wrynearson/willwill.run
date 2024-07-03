@@ -1,18 +1,22 @@
+import { Link } from "react-router-dom";
+
 function HeaderComponent(props) {
   return (
     <header className="header">
-      <h1 className="site-title">{props.title}</h1>
+      <Link className="site-title" to="/">
+        {props.title}
+      </Link>
       <nav>
         <ul className="navigation">
           <li>
-            <a className="nav-item" href="#runs">
+            <Link className="nav-item" to="/">
               Runs
-            </a>
+            </Link>
           </li>
           <li>
-            <a className="nav-item" href="about">
+            <Link className="nav-item" to="/about">
               About
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

@@ -20,6 +20,8 @@ import { Helmet } from "react-helmet";
 
 import { format } from "date-fns";
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 const baseurl = process.env.PUBLIC_URL || "";
 
 // convert seconds into H:MM:SS
@@ -33,7 +35,6 @@ function secondsToTime(e) {
     .padStart(2, "0");
 
   return h < 1 ? `${m}:${s}` : `${h}:${m}:${s}`;
-  //return `${h}:${m}:${s}`;
 }
 
 export default function App() {
@@ -47,15 +48,6 @@ export default function App() {
     latitude: 47.02,
     zoom: 4,
   });
-
-  // console.log("selectedRun:", selectedRun);
-  // console.log("current fetched run:", fetchedRun);
-
-  // console.log("current run promise status: ", loadRunStatus);
-
-  // {
-  //   status: 'idle' | 'loading' | 'succeeded' | 'failed'
-  // }
 
   useEffect(() => {
     if (!selectedRun) return;
@@ -156,7 +148,7 @@ export default function App() {
         <title>Will will run</title>
         <meta name="theme-color" content="#05651b" />
       </Helmet>
-      <HeaderComponent title="Will will run" />
+      <HeaderComponent title={selectedRun} />
       <div className="body-content">
         <div className="runs-block">
           <RunSelector title="Past Runs" />
