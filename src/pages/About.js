@@ -4,11 +4,16 @@ import HeaderComponent from "../components/site/header";
 
 function About() {
   return (
-    <div>
+    <>
       <HeaderComponent title="Will will run" />
-      <h1>About</h1>
-      <p>This is a website.</p>
-    </div>
+      <div className="runs-block">
+        <h2 className="runs-block-title">About</h2>
+        <p>
+          This is a website. More information can be found{" "}
+          <a href="https://github.com/wrynearson/willwill.run">here</a>.
+        </p>
+      </div>
+    </>
   );
 }
 

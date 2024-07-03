@@ -20,7 +20,7 @@ import { Helmet } from "react-helmet";
 
 import { format } from "date-fns";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
 
@@ -38,10 +38,14 @@ function secondsToTime(e) {
 }
 
 export default function App() {
+  const { runId } = useParams();
+  const selectedRun = runId;
+
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
-  const [selectedRun, setSelectedRun] = useState();
   const [fetchedRun, setFetchedRun] = useState();
+
+  console.log("runId", runId, selectedRun);
 
   const [viewport, setViewport] = useState({
     longitude: 6.96,
@@ -148,7 +152,7 @@ export default function App() {
         <title>Will will run</title>
         <meta name="theme-color" content="#05651b" />
       </Helmet>
-      <HeaderComponent title={selectedRun} />
+      <HeaderComponent title="Will will run" />
       <div className="body-content">
         <div className="runs-block">
           <RunSelector title="Past Runs" />
@@ -193,9 +197,7 @@ export default function App() {
                     title={runsSorted.name}
                     date={format(runsSorted.date, "iii, d LLL yyy")}
                     id={runsSorted.id}
-                    setSelectedRun={setSelectedRun}
                     selectedRun={selectedRun}
-                    fetchedRun={fetchedRun}
                   />
                 </li>
               ))}

@@ -9,14 +9,9 @@ function HeaderComponent(props) {
       <nav>
         <ul className="navigation">
           <li>
-            <Link className="nav-item" to="/">
-              Runs
-            </Link>
-          </li>
-          <li>
-            <Link className="nav-item" to="/about">
+            {/* <Link className="nav-item" to="/about">
               About
-            </Link>
+            </Link> */}
           </li>
         </ul>
       </nav>
