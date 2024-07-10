@@ -20,6 +20,8 @@ import { Helmet } from "react-helmet";
 
 import { format } from "date-fns";
 
+import { useParams } from "react-router-dom";
+
 const baseurl = process.env.PUBLIC_URL || "";
 
 // convert seconds into H:MM:SS
@@ -33,29 +35,23 @@ function secondsToTime(e) {
     .padStart(2, "0");
 
   return h < 1 ? `${m}:${s}` : `${h}:${m}:${s}`;
-  //return `${h}:${m}:${s}`;
 }
 
 export default function App() {
+  const { runId } = useParams();
+  const selectedRun = runId;
+
   const [order, setOrder] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
-  const [selectedRun, setSelectedRun] = useState();
   const [fetchedRun, setFetchedRun] = useState();
+
+  console.log("runId", runId, selectedRun);
 
   const [viewport, setViewport] = useState({
     longitude: 6.96,
     latitude: 47.02,
     zoom: 4,
   });
-
-  // console.log("selectedRun:", selectedRun);
-  // console.log("current fetched run:", fetchedRun);
-
-  // console.log("current run promise status: ", loadRunStatus);
-
-  // {
-  //   status: 'idle' | 'loading' | 'succeeded' | 'failed'
-  // }
 
   useEffect(() => {
     if (!selectedRun) return;
@@ -201,9 +197,7 @@ export default function App() {
                     title={runsSorted.name}
                     date={format(runsSorted.date, "iii, d LLL yyy")}
                     id={runsSorted.id}
-                    setSelectedRun={setSelectedRun}
                     selectedRun={selectedRun}
-                    fetchedRun={fetchedRun}
                   />
                 </li>
               ))}

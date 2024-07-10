@@ -71,6 +71,8 @@ code {
   margin: 0 1rem;
   color: white;
   font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .navigation {

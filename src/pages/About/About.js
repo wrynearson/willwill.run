@@ -1,11 +1,18 @@
 import React from "react";
+import HeaderComponent from "../../components/site/header";
 
 function About() {
   return (
-    <div>
-      <h1>About Page!</h1>
-      <a href="/"> go home</a>
-    </div>
+    <>
+      <HeaderComponent title="Will will run" />
+      <div className="runs-block">
+        <h2 className="runs-block-title">About</h2>
+        <p>
+          This is a website. More information can be found{" "}
+          <a href="https://github.com/wrynearson/willwill.run">here</a>.
+        </p>
+      </div>
+    </>
   );
 }
 
