@@ -41,20 +41,15 @@ function secondsToTime(e) {
 export default function App() {
   const { runId } = useParams();
   const selectedRun = runId;
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [orderBy, setOrderBy] = useState("desc");
-  const [sortBy, setSortBy] = useState("date");
+  const orderBy = searchParams.get("order") || "desc";
+  const sortBy = searchParams.get("sort") || "date";
+
   const [fetchedRun, setFetchedRun] = useState();
-
-  const [searchParams, setSearchParams] = useSearchParams({
-    sort: sortBy,
-    order: orderBy,
-  });
 
   console.log("runId", runId);
   console.log("sort, order:", sortBy, orderBy);
-
-  // setSearchParams({ sort: sortBy, order: orderBy });
 
   const [viewport, setViewport] = useState({
     longitude: 6.96,
@@ -175,8 +170,8 @@ export default function App() {
                 name="by"
                 onChange={(e) => {
                   console.log("Now sorting by:", e.target.value);
-                  setSortBy(e.target.value);
-                  setSearchParams("sort", sortBy.toString());
+                  // setSortBy(e.target.value);
+                  setSearchParams({ sort: e.target.value, order: orderBy });
                 }}
               >
                 <option value="name">Name</option>
@@ -191,8 +186,8 @@ export default function App() {
                 className="sort-order-select"
                 onChange={(e) => {
                   console.log("New sort order: ", e.target.value);
-                  setOrderBy(e.target.value);
-                  setSearchParams("order", e.target.value.toString());
+                  // setOrderBy(e.target.value);
+                  setSearchParams({ sort: sortBy, order: e.target.value });
                 }}
               >
                 <option value="asc">Ascending</option>
