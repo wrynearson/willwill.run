@@ -72,14 +72,14 @@ jobs:
         id: cache-node-modules
         with:
           path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package.json') }}
 
-      - name: Cache runs
-        uses: actions/cache@v4
-        id: cache-runs
+      - name: Restore transformed runs
+        uses: actions/cache/restore@v4
+        id: cache-runs-restore
         with:
           path: public/data/activities/transformed
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          key: ${{ runner.os }}-runs
 
       - name: Cache auth
         uses: actions/cache@v4
@@ -94,6 +94,13 @@ jobs:
       - name: Fetch runs
         run: node scripts/index
 
+      - name: Save transformed runs
+        uses: actions/cache/save@v4
+        id: cache-runs-save
+        with:
+          path: public/data/activities/transformed
+          key: ${{ runner.os }}-runs
+
       - name: Build runs list
         run: node scripts/list
 
@@ -107,6 +114,22 @@ jobs:
         with:
           name: build-artifact
           path: build
+          retention-days: 1
+
+      - name: Store runs data
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: runs-data
+          path: public/data
+          retention-days: 1
+
+      - name: Store activity list
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: activity-list
+          path: src/data/activity_list.json
           retention-days: 1
 
   deploy:
