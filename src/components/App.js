@@ -21,6 +21,7 @@ import { Helmet } from "react-helmet";
 import { format } from "date-fns";
 
 import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
 
@@ -41,11 +42,19 @@ export default function App() {
   const { runId } = useParams();
   const selectedRun = runId;
 
-  const [order, setOrder] = useState("desc");
+  const [orderBy, setOrderBy] = useState("desc");
   const [sortBy, setSortBy] = useState("date");
   const [fetchedRun, setFetchedRun] = useState();
 
-  console.log("runId", runId, selectedRun);
+  const [searchParams, setSearchParams] = useSearchParams({
+    sort: sortBy,
+    order: orderBy,
+  });
+
+  console.log("runId", runId);
+  console.log("sort, order:", sortBy, orderBy);
+
+  // setSearchParams({ sort: sortBy, order: orderBy });
 
   const [viewport, setViewport] = useState({
     longitude: 6.96,
@@ -144,7 +153,7 @@ export default function App() {
     loader();
   }, [selectedRun]);
 
-  const runsSorted = sortRunsByField(allRuns, sortBy, order);
+  const runsSorted = sortRunsByField(allRuns, sortBy, orderBy);
 
   return (
     <>
@@ -167,6 +176,7 @@ export default function App() {
                 onChange={(e) => {
                   console.log("Now sorting by:", e.target.value);
                   setSortBy(e.target.value);
+                  setSearchParams("sort", sortBy.toString());
                 }}
               >
                 <option value="name">Name</option>
@@ -177,11 +187,12 @@ export default function App() {
               <label htmlFor="sort-order-select">Sort Order </label>
               <select
                 id="sort-order-select"
-                value={order}
+                value={orderBy}
                 className="sort-order-select"
                 onChange={(e) => {
                   console.log("New sort order: ", e.target.value);
-                  setOrder(e.target.value);
+                  setOrderBy(e.target.value);
+                  setSearchParams("order", e.target.value.toString());
                 }}
               >
                 <option value="asc">Ascending</option>
