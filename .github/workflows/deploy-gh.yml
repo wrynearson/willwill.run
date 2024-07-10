@@ -39,7 +39,7 @@ jobs:
         id: cache-node-modules
         with:
           path: node_modules
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package.json') }}
 
       - name: Cache auth
         uses: actions/cache@v4
@@ -75,11 +75,13 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package.json') }}
 
       - name: Restore transformed runs
-        uses: actions/cache/restore@v4
         id: cache-runs-restore
+        uses: actions/cache/restore@v4
         with:
           path: public/data/activities/transformed
-          key: ${{ runner.os }}-runs
+          key: ${{ runner.os }}-runs-v2
+          restore-keys: | 
+            ${{ runner.os }}-runs
 
       - name: Cache auth
         uses: actions/cache@v4
@@ -95,11 +97,11 @@ jobs:
         run: node scripts/index
 
       - name: Save transformed runs
-        uses: actions/cache/save@v4
         id: cache-runs-save
+        uses: actions/cache/save@v4
         with:
           path: public/data/activities/transformed
-          key: ${{ runner.os }}-runs
+          key: ${{ steps.cache-runs-restore.outputs.cache-primary-key }}
 
       - name: Build runs list
         run: node scripts/list
