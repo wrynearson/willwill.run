@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
+import orderBy from "../App";
+import sortBy from "../App";
 
 function RunCard(props) {
   const selectedRunClass =
     props.selectedRun === props.id.toString() ? "selected" : "";
 
   return (
-    <Link to={`/${props.id}`} className={`run-card ${selectedRunClass}`}>
+    <Link
+      to={`/${props.id}?sort=${props.sort}&order=${props.order}`}
+      className={`run-card ${selectedRunClass}`}
+    >
       <div className="run-attributes truncate">
         <h3 className="run-name truncate">{props.title}</h3>
         <time className="run-date">on {props.date}</time>

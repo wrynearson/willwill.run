@@ -48,7 +48,7 @@ export default function App() {
 
   const [fetchedRun, setFetchedRun] = useState();
 
-  console.log("runId", runId);
+  console.log("runId, selectedRun", runId, selectedRun);
   console.log("sort, order:", sortBy, orderBy);
 
   const [viewport, setViewport] = useState({
@@ -204,6 +204,12 @@ export default function App() {
                     date={format(runsSorted.date, "iii, d LLL yyy")}
                     id={runsSorted.id}
                     selectedRun={selectedRun}
+                    sort={sortBy}
+                    order={orderBy}
+                    onClick={(e) => {
+                      // console.log("NEWLY SELECTED RUN:", e.target.value);
+                      setSearchParams({ sort: sortBy, order: orderBy });
+                    }}
                   />
                 </li>
               ))}
