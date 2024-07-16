@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import orderBy from "../App";
 import sortBy from "../App";
+import location from "../App";
 
 function RunCard(props) {
   const selectedRunClass =
@@ -8,7 +9,7 @@ function RunCard(props) {
 
   return (
     <Link
-      to={`/${props.id}?sort=${props.sort}&order=${props.order}`}
+      to={`/${props.id}${props.location.search}`}
       className={`run-card ${selectedRunClass}`}
     >
       <div className="run-attributes truncate">

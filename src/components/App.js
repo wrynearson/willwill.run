@@ -20,7 +20,7 @@ import { Helmet } from "react-helmet";
 
 import { format } from "date-fns";
 
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
@@ -47,6 +47,9 @@ export default function App() {
   const sortBy = searchParams.get("sort") || "date";
 
   const [fetchedRun, setFetchedRun] = useState();
+
+  const location = useLocation();
+  console.log("location", location, location.search);
 
   console.log("runId, selectedRun", runId, selectedRun);
   console.log("sort, order:", sortBy, orderBy);
@@ -206,6 +209,7 @@ export default function App() {
                     selectedRun={selectedRun}
                     sort={sortBy}
                     order={orderBy}
+                    location={location}
                     onClick={(e) => {
                       // console.log("NEWLY SELECTED RUN:", e.target.value);
                       setSearchParams({ sort: sortBy, order: orderBy });
