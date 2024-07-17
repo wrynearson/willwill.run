@@ -19,8 +19,14 @@ import Metadata from "./gpx/metadata";
 import { Helmet } from "react-helmet";
 
 import { format } from "date-fns";
+import NotFound from "../pages/NotFound/NotFound";
 
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useSearchParams,
+  Navigate,
+} from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
 
@@ -152,6 +158,14 @@ export default function App() {
 
   const runsSorted = sortRunsByField(allRuns, sortBy, orderBy);
 
+  // if run.id === runID is not NotFound, returns undefined. If it's undefined, execute if statement
+
+  if (selectedRun && !runsSorted.find((run) => run.id.toString() === runId)) {
+    // This is better in this use case because any /subdomain could match /:runId, so loading the NotFound component is more direct, and it keeps the incorrect URL visible so that users can flag an issue
+    return <NotFound />;
+    // return <Navigate to="/not-found" replace={true} />;
+  }
+
   return (
     <>
       <Helmet>
@@ -197,19 +211,16 @@ export default function App() {
           </div>
           <div className="runCardContainer">
             <ol className="runCards">
-              {runsSorted.map((runsSorted) => (
-                <li key={runsSorted.id} className="runCardLI">
+              {runsSorted.map((run) => (
+                <li key={run.id} className="runCardLI">
                   <RunCard
-                    title={runsSorted.name}
-                    date={format(runsSorted.date, "iii, d LLL yyy")}
-                    id={runsSorted.id}
+                    title={run.name}
+                    date={format(run.date, "iii, d LLL yyy")}
+                    id={run.id}
                     selectedRun={selectedRun}
                     sort={sortBy}
                     order={orderBy}
                     location={location}
-                    onClick={(e) => {
-                      setSearchParams({ sort: sortBy, order: orderBy });
-                    }}
                   />
                 </li>
               ))}
