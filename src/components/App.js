@@ -20,8 +20,7 @@ import { Helmet } from "react-helmet";
 
 import { format } from "date-fns";
 
-import { useLocation, useParams } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
 
@@ -173,7 +172,6 @@ export default function App() {
                 name="by"
                 onChange={(e) => {
                   console.log("Now sorting by:", e.target.value);
-                  // setSortBy(e.target.value);
                   setSearchParams({ sort: e.target.value, order: orderBy });
                 }}
               >
@@ -189,7 +187,6 @@ export default function App() {
                 className="sort-order-select"
                 onChange={(e) => {
                   console.log("New sort order: ", e.target.value);
-                  // setOrderBy(e.target.value);
                   setSearchParams({ sort: sortBy, order: e.target.value });
                 }}
               >
@@ -211,7 +208,6 @@ export default function App() {
                     order={orderBy}
                     location={location}
                     onClick={(e) => {
-                      // console.log("NEWLY SELECTED RUN:", e.target.value);
                       setSearchParams({ sort: sortBy, order: orderBy });
                     }}
                   />

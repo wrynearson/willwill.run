@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-import orderBy from "../App";
-import sortBy from "../App";
-import location from "../App";
 
 function RunCard(props) {
   const selectedRunClass =
