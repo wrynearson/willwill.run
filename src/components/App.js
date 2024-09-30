@@ -19,8 +19,14 @@ import Metadata from "./gpx/metadata";
 import { Helmet } from "react-helmet";
 
 import { format } from "date-fns";
+import NotFound from "../pages/NotFound/NotFound";
 
-import { useParams } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useSearchParams,
+  Navigate,
+} from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
 
@@ -40,12 +46,18 @@ function secondsToTime(e) {
 export default function App() {
   const { runId } = useParams();
   const selectedRun = runId;
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [order, setOrder] = useState("desc");
-  const [sortBy, setSortBy] = useState("date");
+  const orderBy = searchParams.get("order") || "desc";
+  const sortBy = searchParams.get("sort") || "date";
+
   const [fetchedRun, setFetchedRun] = useState();
 
-  console.log("runId", runId, selectedRun);
+  const location = useLocation();
+  console.log("location", location, location.search);
+
+  console.log("runId, selectedRun", runId, selectedRun);
+  console.log("sort, order:", sortBy, orderBy);
 
   const [viewport, setViewport] = useState({
     longitude: 6.96,
@@ -144,7 +156,15 @@ export default function App() {
     loader();
   }, [selectedRun]);
 
-  const runsSorted = sortRunsByField(allRuns, sortBy, order);
+  const runsSorted = sortRunsByField(allRuns, sortBy, orderBy);
+
+  // if run.id === runID is not NotFound, returns undefined. If it's undefined, execute if statement
+
+  if (selectedRun && !runsSorted.find((run) => run.id.toString() === runId)) {
+    // This is better in this use case because any /subdomain could match /:runId, so loading the NotFound component is more direct, and it keeps the incorrect URL visible so that users can flag an issue
+    return <NotFound />;
+    // return <Navigate to="/not-found" replace={true} />;
+  }
 
   return (
     <>
@@ -166,7 +186,7 @@ export default function App() {
                 name="by"
                 onChange={(e) => {
                   console.log("Now sorting by:", e.target.value);
-                  setSortBy(e.target.value);
+                  setSearchParams({ sort: e.target.value, order: orderBy });
                 }}
               >
                 <option value="name">Name</option>
@@ -177,11 +197,11 @@ export default function App() {
               <label htmlFor="sort-order-select">Sort Order </label>
               <select
                 id="sort-order-select"
-                value={order}
+                value={orderBy}
                 className="sort-order-select"
                 onChange={(e) => {
                   console.log("New sort order: ", e.target.value);
-                  setOrder(e.target.value);
+                  setSearchParams({ sort: sortBy, order: e.target.value });
                 }}
               >
                 <option value="asc">Ascending</option>
@@ -191,13 +211,16 @@ export default function App() {
           </div>
           <div className="runCardContainer">
             <ol className="runCards">
-              {runsSorted.map((runsSorted) => (
-                <li key={runsSorted.id} className="runCardLI">
+              {runsSorted.map((run) => (
+                <li key={run.id} className="runCardLI">
                   <RunCard
-                    title={runsSorted.name}
-                    date={format(runsSorted.date, "iii, d LLL yyy")}
-                    id={runsSorted.id}
+                    title={run.name}
+                    date={format(run.date, "iii, d LLL yyy")}
+                    id={run.id}
                     selectedRun={selectedRun}
+                    sort={sortBy}
+                    order={orderBy}
+                    location={location}
                   />
                 </li>
               ))}
