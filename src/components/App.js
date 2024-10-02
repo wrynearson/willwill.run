@@ -21,12 +21,7 @@ import { Helmet } from "react-helmet";
 import { format } from "date-fns";
 import NotFound from "../pages/NotFound/NotFound";
 
-import {
-  useLocation,
-  useParams,
-  useSearchParams,
-  Navigate,
-} from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
 
