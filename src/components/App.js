@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 import allRuns from "../data/activity_list.json";
-import Map, { Source, Layer } from "react-map-gl";
+
+import Map, { Source, Layer } from "react-map-gl/maplibre";
+// import "mapbox-gl/dist/mapbox-gl.css";
+
+// import maplibregl from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "mapbox-gl/dist/mapbox-gl.css";
 
 import HeaderComponent from "./site/header";
 import sortRunsByField from "./utils/sortRunsByField.js";
@@ -229,23 +233,21 @@ export default function App() {
         </div>
         <div className="map-block">
           <Map
-            mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
             {...viewport}
             initialViewState={viewport}
-            onLoad={(map) => {
-              map.target.addSource("mapbox-dem", {
-                type: "raster-dem",
-                url: "mapbox://mapbox.mapbox-terrain-dem-v1",
-                maxzoom: 14,
-              });
-              map.target.setTerrain({
-                source: "mapbox-dem",
-                exaggeration: 1,
-              });
+            terrain={{
+              source: "terrain-source",
+              exaggeration: 1,
             }}
             onMove={(evt) => setViewport(evt.viewport)}
-            mapStyle="mapbox://styles/mapbox/outdoors-v11"
+            mapStyle="https://tiles.openfreemap.org/styles/positron"
           >
+            <Source
+              id="terrain-source"
+              type="raster-dem"
+              url="https://demotiles.maplibre.org/terrain-tiles/tiles.json"
+            />
+
             {fetchedRun !== undefined ? (
               <Source id="my-data" type="geojson" data={fetchedRun.feature}>
                 <Layer {...layerStyle} />
