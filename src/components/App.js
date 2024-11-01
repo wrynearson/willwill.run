@@ -235,18 +235,16 @@ export default function App() {
           <Map
             {...viewport}
             initialViewState={viewport}
-            terrain={{
-              source: "terrain-source",
-              exaggeration: 1,
-            }}
+            // uncomment and add terrain source below
+            // terrain={{
+            //   source: "terrain-source",
+            //   exaggeration: 1,
+            // }}
             onMove={(evt) => setViewport(evt.viewport)}
             mapStyle="https://tiles.openfreemap.org/styles/positron"
           >
-            <Source
-              id="terrain-source"
-              type="raster-dem"
-              url="https://demotiles.maplibre.org/terrain-tiles/tiles.json"
-            />
+            {/* Add source for global terrain tiles in URL below*/}
+            {/* <Source id="terrain-source" type="raster-dem" url="" /> */}
 
             {fetchedRun !== undefined ? (
               <Source id="my-data" type="geojson" data={fetchedRun.feature}>
