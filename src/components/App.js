@@ -3,9 +3,7 @@ import React, { useEffect, useState } from "react";
 import allRuns from "../data/activity_list.json";
 
 import Map, { Source, Layer } from "react-map-gl/maplibre";
-// import "mapbox-gl/dist/mapbox-gl.css";
 
-// import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -25,12 +23,7 @@ import { Helmet } from "react-helmet";
 import { format } from "date-fns";
 import NotFound from "../pages/NotFound/NotFound";
 
-import {
-  useLocation,
-  useParams,
-  useSearchParams,
-  Navigate,
-} from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 
 const baseurl = process.env.PUBLIC_URL || "";
 
