@@ -235,6 +235,7 @@ export default function App() {
             }}
             onMove={(evt) => setViewport(evt.viewport)}
             mapStyle="https://tiles.openfreemap.org/styles/positron"
+            maxPitch={75}
           >
             {/* Add source for global terrain tiles in URL below*/}
             <Source
@@ -255,6 +256,7 @@ export default function App() {
               }}
               layout={{ visibility: "visible" }}
               minzoom={10}
+              // below=
             />
 
             {fetchedRun !== undefined ? (
