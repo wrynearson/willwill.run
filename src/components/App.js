@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import allRuns from "../data/activity_list.json";
 
-import Map, { Source, Layer } from "react-map-gl/maplibre";
+import Map, {
+  Source,
+  Layer,
+  NavigationControl,
+  GeolocateControl,
+} from "react-map-gl/maplibre";
 
 import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -229,15 +234,36 @@ export default function App() {
             {...viewport}
             initialViewState={viewport}
             // uncomment and add terrain source below
-            // terrain={{
-            //   source: "terrain-source",
-            //   exaggeration: 1,
-            // }}
+            terrain={{
+              source: "terrain-source",
+              exaggeration: 0.04,
+            }}
             onMove={(evt) => setViewport(evt.viewport)}
             mapStyle="https://tiles.openfreemap.org/styles/positron"
+            maxPitch={75}
           >
             {/* Add source for global terrain tiles in URL below*/}
-            {/* <Source id="terrain-source" type="raster-dem" url="" /> */}
+            <Source
+              id="terrain-source"
+              type="raster-dem"
+              tiles={[
+                "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+              ]}
+            />
+
+            <Layer
+              id="hills"
+              type="hillshade"
+              source="terrain-source"
+              paint={{
+                "hillshade-shadow-color": "#a6a6a6",
+                "hillshade-exaggeration": 0.05,
+              }}
+              layout={{ visibility: "visible" }}
+              minzoom={10}
+            />
+
+            <NavigationControl />
 
             {fetchedRun !== undefined ? (
               <Source id="my-data" type="geojson" data={fetchedRun.feature}>
