@@ -264,7 +264,7 @@ code {
   align-items: center;
   position: absolute;
   top: 0.5rem;
-  margin: 1rem 0rem;
+  margin: 0.5rem 3rem 0.5rem 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: white;
@@ -430,7 +430,7 @@ code {
 
   .metadata-box {
     top: 0rem;
-    margin: 0.5rem 0rem;
+    margin: 0.5rem 3rem 0.5rem 0.5rem;
     border-radius: 0.5rem;
     background-color: rgba(255, 255, 255, 0.97);
     flex-wrap: wrap;

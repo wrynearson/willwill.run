@@ -228,7 +228,6 @@ export default function App() {
           <Map
             {...viewport}
             initialViewState={viewport}
-            // uncomment and add terrain source below
             terrain={{
               source: "terrain-source",
               exaggeration: 0.04,
