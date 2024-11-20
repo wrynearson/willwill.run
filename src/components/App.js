@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import allRuns from "../data/activity_list.json";
 
-import Map, { Source, Layer } from "react-map-gl/maplibre";
+import Map, {
+  Source,
+  Layer,
+  NavigationControl,
+  GeolocateControl,
+} from "react-map-gl/maplibre";
 
 import "maplibre-gl/dist/maplibre-gl.css";
 
@@ -256,8 +261,9 @@ export default function App() {
               }}
               layout={{ visibility: "visible" }}
               minzoom={10}
-              // below=
             />
+
+            <NavigationControl />
 
             {fetchedRun !== undefined ? (
               <Source id="my-data" type="geojson" data={fetchedRun.feature}>
