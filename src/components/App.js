@@ -229,15 +229,34 @@ export default function App() {
             {...viewport}
             initialViewState={viewport}
             // uncomment and add terrain source below
-            // terrain={{
-            //   source: "terrain-source",
-            //   exaggeration: 1,
-            // }}
+            terrain={{
+              source: "terrain-source",
+              exaggeration: 0.04,
+            }}
             onMove={(evt) => setViewport(evt.viewport)}
             mapStyle="https://tiles.openfreemap.org/styles/positron"
           >
             {/* Add source for global terrain tiles in URL below*/}
-            {/* <Source id="terrain-source" type="raster-dem" url="" /> */}
+            <Source
+              id="terrain-source"
+              type="raster-dem"
+              tiles={[
+                "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png",
+              ]}
+            />
+
+            <Layer
+              before="terrain-source"
+              id="hills"
+              type="hillshade"
+              source="terrain-source"
+              paint={{
+                "hillshade-shadow-color": "#474747",
+                "hillshade-exaggeration": 0.03,
+                // "hillshade-accent-color": "#FFFFFF",
+              }}
+              layout={{ visibility: "visible" }}
+            />
 
             {fetchedRun !== undefined ? (
               <Source id="my-data" type="geojson" data={fetchedRun.feature}>
