@@ -246,16 +246,15 @@ export default function App() {
             />
 
             <Layer
-              before="terrain-source"
               id="hills"
               type="hillshade"
               source="terrain-source"
               paint={{
-                "hillshade-shadow-color": "#474747",
-                "hillshade-exaggeration": 0.03,
-                // "hillshade-accent-color": "#FFFFFF",
+                "hillshade-shadow-color": "#a6a6a6",
+                "hillshade-exaggeration": 0.05,
               }}
               layout={{ visibility: "visible" }}
+              minzoom={10}
             />
 
             {fetchedRun !== undefined ? (
