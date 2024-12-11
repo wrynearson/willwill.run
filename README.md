@@ -2,7 +2,7 @@
 
 This is a React application that fetches and visualizes runs from Strava.
 
-<img width="1624" alt="image" src="https://github.com/user-attachments/assets/3e2121f9-45e0-470d-bf1a-6aeeb9d70a5a">
+<img width="1818" alt="willwillrun" src="https://github.com/user-attachments/assets/9a79c57f-5de2-4931-9b75-32bdc0d5f107">
 
 Activities of type `Run` (which include normal runs and trail runs) are fetched daily from Strava. When a listed run is selected, it is displayed on the map, along with basic information including:
 
