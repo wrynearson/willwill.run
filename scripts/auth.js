@@ -5,14 +5,8 @@ const fs = require("fs-extra");
 async function getCredentials() {
   try {
     const credentials = require(`${__dirname}/../credentials.json`);
-    // const credentials = JSON.parse(
-    //   fs.readFileSync(`${__dirname}/../credentialssjson`, "utf8")
-    // );
 
     if (credentials.expires_at * 1000 <= Date.now()) {
-      // console.log("Token expired. Fetching new refresh token...");
-      // console.log(`Current refresh token: ${credentials.refresh_token}`);
-
       const response = await fetch(
         `https://www.strava.com/oauth/token?client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&grant_type=refresh_token&refresh_token=${credentials.refresh_token}`,
         { method: "POST" }
