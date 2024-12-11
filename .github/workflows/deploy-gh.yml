@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "master"
+
   schedule:
     # Runs at 3:27am every day of the month (1st *), in every month (2nd *) on Monday (1) to Friday (5)). https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07
     - cron: "27 3 * * *"
@@ -74,14 +75,14 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package.json') }}
 
-      - name: Restore transformed runs
-        id: cache-runs-restore
-        uses: actions/cache/restore@v4
+      - name: Cache transformed runs
+        id: cache-runs
+        uses: actions/cache@v4
         with:
           path: public/data/activities/transformed
-          key: ${{ runner.os }}-runs-v2
+          key: fetched-runs-${{ github.run_id }}
           restore-keys: | 
-            ${{ runner.os }}-runs
+            fetched-runs
 
       - name: Cache auth
         uses: actions/cache@v4
@@ -90,18 +91,14 @@ jobs:
           path: credentials.json
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
+      - name: List content of public
+        run: tree public
+
       - name: Install
         run: npm install
 
       - name: Fetch runs
         run: node scripts/index
-
-      - name: Save transformed runs
-        id: cache-runs-save
-        uses: actions/cache/save@v4
-        with:
-          path: public/data/activities/transformed
-          key: ${{ steps.cache-runs-restore.outputs.cache-primary-key }}
 
       - name: Build runs list
         run: node scripts/list
@@ -137,6 +134,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Checkout
