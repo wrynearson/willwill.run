@@ -22,3 +22,8 @@ Activities of type `Run` (which include normal runs and trail runs) are fetched 
     - For local deployment, save these as `REACT_APP_CLIENT_ID`, `REACT_APP_CLIENT_SECRET`, `REACT_APP_AUTH_CODE` in the .env file in the root of the repo. **Do not commit this file publicly**.
     - For GitHub Pages deployment, save these as `REACT_APP_CLIENT_ID`, `REACT_APP_CLIENT_SECRET`, `REACT_APP_AUTH_CODE` as repository secrets in repo settings.
 4. Start the app with `npm start`.
+
+
+---
+
+_Note: The MIT license applies to the code in this repository. Usage of Strava's API may have other licensing restrictions._
