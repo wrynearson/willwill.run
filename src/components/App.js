@@ -168,6 +168,11 @@ export default function App() {
       <Helmet>
         <title>Will will run</title>
         <meta name="theme-color" content="#05651b" />
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="d17ef181-937e-4de7-baf0-04bc388b018e"
+        ></script>
       </Helmet>
       <HeaderComponent title="Will will run" />
       <div className="body-content">
