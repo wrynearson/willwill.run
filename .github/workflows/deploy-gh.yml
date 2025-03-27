@@ -47,7 +47,9 @@ jobs:
         id: cache-auth
         with:
           path: credentials.json
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          key: credentials-json-${{ github.run_id }}
+          restore-keys: |
+            credentials-json
 
       - name: Install
         run: npm install
@@ -89,7 +91,9 @@ jobs:
         id: cache-auth
         with:
           path: credentials.json
-          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          key: credentials-json-${{ github.run_id }}
+          restore-keys: |
+            credentials-json
 
       - name: List content of public
         run: tree public
