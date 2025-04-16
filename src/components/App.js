@@ -173,6 +173,11 @@ export default function App() {
           src="https://cloud.umami.is/script.js"
           data-website-id="d17ef181-937e-4de7-baf0-04bc388b018e"
         ></script>
+        <script
+          defer
+          data-domain="willwill.run"
+          src="https://plausible.ds.io/js/script.js"
+        ></script>
       </Helmet>
       <HeaderComponent title="Will will run" />
       <div className="body-content">
